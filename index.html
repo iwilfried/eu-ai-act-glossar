@@ -1074,19 +1074,58 @@ function onScroll() {
 }
 window.addEventListener("scroll", onScroll, { passive: true });
 
-/* Event Delegation: ein einziger Listener auf document fängt Klicks
-   auf ALLE Lang-Buttons ab — robust gegen DOM-Veränderungen und doppelte Buttons */
-document.addEventListener("click", e => {
-  const btn = e.target.closest(".lang-btn");
-  if (!btn) return;
-  e.preventDefault();
-  const newLang = btn.dataset.lang;
-  if (!newLang || newLang === state.lang) return;
+/* ==================================================================
+   LANG-SWITCH (mit Debug-Anzeige)
+================================================================== */
+function switchLang(newLang) {
+  if (newLang !== "de" && newLang !== "en") return;
   state.lang = newLang;
   try { localStorage.setItem("glossar-lang", state.lang); } catch (_) {}
   if (state.current) openSheet(state.current.id);
   render();
-});
+  // Debug-Toast: zeigt sichtbar an, dass der Switch ausgelöst wurde
+  showDebugToast("Sprache: " + newLang.toUpperCase());
+}
+
+function showDebugToast(msg) {
+  let toast = document.getElementById("__debug_toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "__debug_toast";
+    toast.style.cssText = `
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,.9); color: #c8a96a;
+      padding: 16px 28px; border-radius: 12px;
+      font: 600 16px "Manrope", sans-serif;
+      z-index: 9999; pointer-events: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,.4);
+      transition: opacity .3s ease;
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.opacity = "1";
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => { toast.style.opacity = "0"; }, 900);
+}
+
+// Direkter Click-Handler auf den Buttons, klassisch — keine Tricks
+function bindLangButtons() {
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    // Alten Handler entfernen, falls vorhanden
+    btn.onclick = null;
+    btn.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      switchLang(this.dataset.lang);
+    };
+  });
+}
+bindLangButtons();
+// Erneut binden nach jedem Render, weil Buttons im Cover/Compact
+// per HTML-Struktur fest sind — sicherheitshalber
+window.addEventListener("load", bindLangButtons);
 
 /* ==================================================================
    PWA · INSTALL PROMPT + SERVICE WORKER
@@ -1123,8 +1162,33 @@ window.addEventListener("appinstalled", () => {
 });
 
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch(err => console.warn("SW reg failed:", err));
+  window.addEventListener("load", async () => {
+    try {
+      const reg = await navigator.serviceWorker.register("sw.js");
+      // Wenn ein neuer SW wartet, sofort aktivieren und Seite neu laden
+      if (reg.waiting) {
+        reg.waiting.postMessage("SKIP_WAITING");
+      }
+      reg.addEventListener("updatefound", () => {
+        const nw = reg.installing;
+        if (!nw) return;
+        nw.addEventListener("statechange", () => {
+          if (nw.state === "installed" && navigator.serviceWorker.controller) {
+            // Neuer SW ist bereit
+            nw.postMessage("SKIP_WAITING");
+          }
+        });
+      });
+      // Wenn der aktive SW wechselt, einmalig nachladen
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (refreshing) return;
+        refreshing = true;
+        window.location.reload();
+      });
+    } catch (err) {
+      console.warn("SW reg failed:", err);
+    }
   });
 }
 
