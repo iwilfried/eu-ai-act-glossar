@@ -250,7 +250,12 @@
     cursor: pointer; color: rgba(240,233,216,.65);
     min-width: 40px; min-height: 32px;
     display: grid; place-items: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: background .15s ease, color .15s ease;
   }
+  .lang-btn:active { background: rgba(248,245,238,.12); }
   .lang-btn.active { background: var(--accent); color: var(--ink); }
 
 
@@ -1069,13 +1074,18 @@ function onScroll() {
 }
 window.addEventListener("scroll", onScroll, { passive: true });
 
-$$(".lang-btn").forEach(b => {
-  b.addEventListener("click", () => {
-    state.lang = b.dataset.lang;
-    localStorage.setItem("glossar-lang", state.lang);
-    if (state.current) openSheet(state.current.id);
-    render();
-  });
+/* Event Delegation: ein einziger Listener auf document fängt Klicks
+   auf ALLE Lang-Buttons ab — robust gegen DOM-Veränderungen und doppelte Buttons */
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".lang-btn");
+  if (!btn) return;
+  e.preventDefault();
+  const newLang = btn.dataset.lang;
+  if (!newLang || newLang === state.lang) return;
+  state.lang = newLang;
+  try { localStorage.setItem("glossar-lang", state.lang); } catch (_) {}
+  if (state.current) openSheet(state.current.id);
+  render();
 });
 
 /* ==================================================================
