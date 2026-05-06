@@ -6,7 +6,7 @@
  *   - Externe Fonts: Cache-First mit Fallback.
  */
 
-const CACHE_VERSION = "v1.3.0";
+const CACHE_VERSION = "v1.4.0";
 const CACHE_NAME = `ai-act-glossar-${CACHE_VERSION}`;
 
 const PRECACHE = [
