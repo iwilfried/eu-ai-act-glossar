@@ -664,7 +664,7 @@
     <p class="cover-subtitle" data-i18n="coverSubtitle">Das zweisprachige Lexikon zur Verordnung (EU) 2024/1689.</p>
     <div class="cover-meta-row">
       <span data-i18n="coverPublisher">Learning Factory</span>
-      <span class="accent"><span id="coverCount">53</span> <span data-i18n="coverCountLabel">Begriffe · DE / EN</span> · v1.3</span>
+      <span class="accent"><span id="coverCount">53</span> <span data-i18n="coverCountLabel">Begriffe · DE / EN</span> · v1.4 DIAG</span>
     </div>
   </div>
 
@@ -713,7 +713,7 @@
   <button class="install-dismiss" id="installDismiss" aria-label="Schließen">×</button>
 </div>
 
-<script src="terms.js?v=1.3"></script>
+<script src="terms.js?v=1.4"></script>
 
 <script>
 /* ==================================================================
@@ -920,8 +920,12 @@ function renderCard(x) {
     ? `<span class="risk-badge"><span class="risk-dot" data-risk="${x.risk}"></span>${t.risk[x.risk]}</span>`
     : "";
 
+  // DEBUG: zeigt sichtbar an, welche Sprachversion gerendert wird
+  const debugTag = `<span style="position:absolute;top:6px;right:6px;background:#c8a96a;color:#0a1628;font:700 9px 'JetBrains Mono',monospace;padding:2px 5px;border-radius:3px;z-index:10">${state.lang.toUpperCase()}</span>`;
+
   return `
     <article class="term-card" data-id="${x.id}">
+      ${debugTag}
       <div class="term-meta">
         <span class="cat-pill" data-cat="${x.category}">${t.cat[x.category]}</span>
         ${riskBadge}
