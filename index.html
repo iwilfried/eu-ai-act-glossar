@@ -112,40 +112,40 @@
   }
   .topbar-row {
     display: flex; align-items: center;
-    padding: 12px 16px 10px;
-    gap: 12px;
+    padding: 16px 16px 14px;
+    gap: 14px;
   }
   .brand {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 12px;
     text-decoration: none; color: var(--text);
     flex: 1; min-width: 0;
   }
   .brand-mark {
-    width: 32px; height: 32px;
+    width: 44px; height: 44px;
     background: var(--ink); color: var(--paper-warm);
     display: grid; place-items: center;
     font-family: "Fraunces", serif;
-    font-weight: 700; font-size: 15px;
-    border-radius: 6px;
+    font-weight: 700; font-size: 20px;
+    border-radius: 8px;
     flex-shrink: 0; position: relative;
   }
   .brand-mark::after {
     content: "";
-    position: absolute; top: 4px; right: 4px;
-    width: 5px; height: 5px;
+    position: absolute; top: 5px; right: 5px;
+    width: 6px; height: 6px;
     background: var(--accent); border-radius: 50%;
   }
   .brand-text { display: flex; flex-direction: column; line-height: 1.1; min-width: 0; }
   .brand-text strong {
     font-family: "Fraunces", serif;
-    font-weight: 700; font-size: 15px;
+    font-weight: 700; font-size: 19px;
     letter-spacing: -.01em;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .brand-text small {
-    font-size: 10px; color: var(--muted);
+    font-size: 11px; color: var(--muted);
     text-transform: uppercase; letter-spacing: .1em;
-    margin-top: 2px;
+    margin-top: 4px;
   }
 
   .lang-switch {
@@ -195,14 +195,21 @@
 
   /* ----------- FILTER (horizontal scroll) ----------- */
   .filter-scroll {
-    display: flex; gap: 6px;
+    display: flex; gap: 8px;
     overflow-x: auto;
-    padding: 0 16px 12px;
+    padding: 0 16px 14px;
+    scroll-padding-left: 16px;
     scroll-snap-type: x proximity;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
   .filter-scroll::-webkit-scrollbar { display: none; }
+  /* Trick: leeres Pseudo-Element nach dem letzten Chip, damit padding-right beim
+     horizontalen Scrollen nicht abgeschnitten wird */
+  .filter-scroll::after {
+    content: "";
+    flex: 0 0 4px;
+  }
   .chip {
     border: 1px solid var(--rule-strong);
     background: var(--surface);
@@ -258,13 +265,33 @@
     border-radius: 12px;
     padding: 16px 14px 14px;
     cursor: pointer;
-    transition: transform .12s ease, background .15s;
+    transition: transform .12s ease, background .15s, border-color .15s;
     -webkit-tap-highlight-color: transparent;
     position: relative;
   }
   .term-card:active {
     transform: scale(.985);
     background: var(--surface-2);
+  }
+  .term-card:hover {
+    border-color: var(--rule-strong);
+  }
+  .expand-hint {
+    position: absolute;
+    right: 12px; bottom: 12px;
+    width: 26px; height: 26px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--surface-2);
+    color: var(--accent-deep);
+    font-size: 14px;
+    line-height: 1;
+    pointer-events: none;
+    transition: all .15s ease;
+  }
+  .term-card:active .expand-hint {
+    background: var(--accent);
+    color: var(--ink);
   }
   .term-meta {
     display: flex; align-items: center; gap: 8px;
@@ -315,6 +342,7 @@
     font-size: 14px; color: var(--text-2);
     line-height: 1.45;
     margin: 0;
+    padding-right: 32px;
   }
 
   /* ----------- BOTTOM SHEET ----------- */
@@ -572,7 +600,7 @@ const I18N = {
     searchPlaceholder: "Begriff, Tag, Stichwort…",
     catAll: "Alle",
     cat: {
-      "ai-act-core": "AI Act",
+      "ai-act-core": "EU AI Act",
       "ml": "ML-Grundlagen",
       "dl": "Deep Learning",
       "llm": "LLM / GenAI",
@@ -605,7 +633,7 @@ const I18N = {
     searchPlaceholder: "Term, tag, keyword…",
     catAll: "All",
     cat: {
-      "ai-act-core": "AI Act",
+      "ai-act-core": "EU AI Act",
       "ml": "ML basics",
       "dl": "Deep learning",
       "llm": "LLM / GenAI",
@@ -676,11 +704,15 @@ function buildFilters() {
   const catCounts = TERMS.reduce((a, x) => (a[x.category] = (a[x.category]||0)+1, a), {});
   const riskCounts = TERMS.reduce((a, x) => (x.risk && (a[x.risk] = (a[x.risk]||0)+1), a), {});
 
+  // Explizite Reihenfolge: EU AI Act zuerst, dann technische Kategorien, dann Querschnitt
+  const CAT_ORDER = ["ai-act-core", "ml", "dl", "llm", "nlp", "cv", "ethics", "governance", "security"];
+
   let html = `<button class="chip ${state.cat === "all" && state.risk === "all" ? "active" : ""}" data-type="cat" data-val="all">${t.catAll} <span class="count">${TERMS.length}</span></button>`;
 
-  Object.entries(t.cat).forEach(([k, label]) => {
+  CAT_ORDER.forEach(k => {
     const c = catCounts[k] || 0;
     if (!c) return;
+    const label = t.cat[k] || k;
     html += `<button class="chip ${state.cat === k ? "active" : ""}" data-type="cat" data-val="${k}">${label} <span class="count">${c}</span></button>`;
   });
 
@@ -747,6 +779,9 @@ function renderCard(x) {
       </div>
       <h2 class="term-title">${highlight(data.term, q)}</h2>
       <p class="term-short">${highlight(data.short, q)}</p>
+      <span class="expand-hint" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
     </article>
   `;
 }
