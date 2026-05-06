@@ -3,7 +3,7 @@
  * Bei Versionsänderung: CACHE_VERSION hochzählen → neuer Cache wird angelegt, alter gelöscht.
  */
 
-const CACHE_VERSION = "v1.0.1";
+const CACHE_VERSION = "v1.1.0";
 const CACHE_NAME = `ai-act-glossar-${CACHE_VERSION}`;
 
 // Dateien, die offline verfügbar sein müssen (App-Shell + Daten)
