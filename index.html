@@ -101,99 +101,191 @@
   }
   ::selection { background: var(--accent); color: var(--ink); }
 
-  /* ----------- HEADER (kompakt) ----------- */
+  /* ----------- HEADER (B+D Hybrid) -----------
+     Aufbau: 
+     - .topbar ist sticky am oberen Rand
+     - .cover ist der große Magazin-Cover-Block (sichtbar am Anfang)
+     - .compact ist die kompakte Verlagswappen-Variante (erscheint beim Scrollen)
+     - .topbar.scrolled blendet cover aus und compact ein
+  */
   .topbar {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: var(--bg);
-    border-bottom: 1px solid var(--rule);
+    background: var(--ink);
+    color: var(--paper-warm);
     padding-top: var(--safe-top);
+    transition: background .3s ease;
+    box-shadow: 0 2px 0 var(--accent);
   }
-  .topbar-row {
-    display: flex; align-items: center;
-    padding: 16px 16px 14px;
-    gap: 14px;
-  }
-  .brand {
-    display: flex; align-items: center; gap: 12px;
-    text-decoration: none; color: var(--text);
-    flex: 1; min-width: 0;
-  }
-  .brand-mark {
-    width: 44px; height: 44px;
-    background: var(--ink); color: var(--paper-warm);
-    display: grid; place-items: center;
-    font-family: "Fraunces", serif;
-    font-weight: 700; font-size: 20px;
-    border-radius: 8px;
-    flex-shrink: 0; position: relative;
-  }
-  .brand-mark::after {
+  .topbar::before {
+    /* Subtile Tiefe: Verlauf von tiefem ins normale Navy */
     content: "";
-    position: absolute; top: 5px; right: 5px;
-    width: 6px; height: 6px;
-    background: var(--accent); border-radius: 50%;
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 0% 0%, rgba(200,169,106,.12) 0%, transparent 45%),
+      radial-gradient(ellipse at 100% 100%, rgba(200,169,106,.06) 0%, transparent 50%);
+    pointer-events: none;
+    transition: opacity .3s ease;
   }
-  .brand-text { display: flex; flex-direction: column; line-height: 1.1; min-width: 0; }
-  .brand-text strong {
+  .topbar.scrolled::before { opacity: .35; }
+
+  /* ----------- COVER (initial, D-Stil) ----------- */
+  .cover {
+    position: relative; z-index: 1;
+    padding: 18px 16px 14px;
+    overflow: hidden;
+    max-height: 260px;
+    transition: max-height .35s cubic-bezier(.32,.72,0,1),
+                padding .3s ease,
+                opacity .25s ease;
+  }
+  .topbar.scrolled .cover {
+    max-height: 0;
+    padding-top: 0; padding-bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .cover-top-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 14px;
+  }
+  .cover-edition {
+    font: 700 10px/1 "Manrope", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--accent);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .cover-edition::before {
+    content: ""; width: 14px; height: 1px; background: var(--accent);
+  }
+  .cover-title {
     font-family: "Fraunces", serif;
-    font-weight: 700; font-size: 19px;
+    font-weight: 700;
+    font-size: clamp(28px, 8.5vw, 36px);
+    line-height: .95;
+    letter-spacing: -.025em;
+    color: var(--paper);
+    margin: 0;
+  }
+  .cover-title em {
+    font-style: italic; font-weight: 500;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font: 500 13.5px/1.4 "Manrope", sans-serif;
+    color: rgba(240, 233, 216, .68);
+    margin: 8px 0 14px;
+    max-width: 32ch;
+  }
+  .cover-meta-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(200,169,106,.28);
+    font: 700 10px/1 "Manrope", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: rgba(240,233,216,.55);
+  }
+  .cover-meta-row .accent { color: var(--accent); }
+
+  /* ----------- COMPACT (beim Scrollen, B-Stil) ----------- */
+  .compact {
+    position: relative; z-index: 1;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height .35s cubic-bezier(.32,.72,0,1),
+                padding .3s ease,
+                opacity .25s ease .05s;
+  }
+  .topbar.scrolled .compact {
+    max-height: 80px;
+    opacity: 1;
+  }
+  .compact-row {
+    display: flex; align-items: center;
+    padding: 12px 16px 12px;
+    gap: 12px;
+  }
+  .compact-eyebrow {
+    font: 700 9px/1 "Manrope", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 2px;
+  }
+  .compact-eyebrow::before {
+    content: ""; width: 12px; height: 1px; background: var(--accent);
+  }
+  .compact-brand {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column;
+  }
+  .compact-title {
+    font-family: "Fraunces", serif;
+    font-weight: 700; font-size: 16px;
+    color: var(--paper);
+    line-height: 1.1;
     letter-spacing: -.01em;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .brand-text small {
-    font-size: 11px; color: var(--muted);
-    text-transform: uppercase; letter-spacing: .1em;
-    margin-top: 4px;
-  }
+  .compact-title em { font-style: italic; font-weight: 500; color: var(--accent); }
 
+  /* ----------- LANG-SWITCH (für beide Modi gleich) ----------- */
   .lang-switch {
     display: flex;
-    border: 1px solid var(--rule-strong);
+    border: 1px solid rgba(248, 245, 238, .22);
     border-radius: 8px; overflow: hidden;
-    flex-shrink: 0; height: 36px;
+    flex-shrink: 0; height: 32px;
   }
   .lang-btn {
     border: 0; background: transparent;
     padding: 0 12px;
     font-family: inherit; font-size: 11px;
     font-weight: 700; letter-spacing: .08em;
-    cursor: pointer; color: var(--muted);
-    min-width: 44px; min-height: 44px;
+    cursor: pointer; color: rgba(240,233,216,.65);
+    min-width: 40px; min-height: 32px;
     display: grid; place-items: center;
   }
-  .lang-btn.active { background: var(--ink); color: var(--paper-warm); }
+  .lang-btn.active { background: var(--accent); color: var(--ink); }
 
-  /* ----------- SEARCH (sticky) ----------- */
+
+  /* ----------- SEARCH (sticky, im dunklen Header) ----------- */
   .search-wrap {
     padding: 0 16px 10px;
     position: relative;
+    z-index: 1;
   }
   .search-wrap svg {
     position: absolute;
     left: 28px; top: 50%;
     transform: translateY(-50%);
-    color: var(--muted); pointer-events: none;
+    color: rgba(240,233,216,.55); pointer-events: none;
   }
   #searchInput {
     width: 100%;
     padding: 12px 14px 12px 42px;
-    border: 1px solid var(--rule-strong);
-    background: var(--surface);
-    color: var(--text);
+    border: 1px solid rgba(248, 245, 238, .18);
+    background: rgba(248, 245, 238, .08);
+    color: var(--paper);
     border-radius: 10px;
-    font-family: inherit; font-size: 16px;  /* 16px = kein iOS-Zoom */
+    font-family: inherit; font-size: 16px;
     -webkit-appearance: none;
     height: 44px;
   }
   #searchInput:focus {
-    outline: none; border-color: var(--ink);
-    box-shadow: 0 0 0 3px rgba(200,169,106,.25);
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(248, 245, 238, .12);
+    box-shadow: 0 0 0 3px rgba(200,169,106,.2);
   }
-  #searchInput::placeholder { color: var(--muted-2); }
+  #searchInput::placeholder { color: rgba(240,233,216,.45); }
 
-  /* ----------- FILTER (horizontal scroll) ----------- */
+  /* ----------- FILTER (horizontal scroll, im dunklen Header) ----------- */
   .filter-scroll {
     display: flex; gap: 8px;
     overflow-x: auto;
@@ -202,18 +294,18 @@
     scroll-snap-type: x proximity;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    position: relative;
+    z-index: 1;
   }
   .filter-scroll::-webkit-scrollbar { display: none; }
-  /* Trick: leeres Pseudo-Element nach dem letzten Chip, damit padding-right beim
-     horizontalen Scrollen nicht abgeschnitten wird */
   .filter-scroll::after {
     content: "";
     flex: 0 0 4px;
   }
   .chip {
-    border: 1px solid var(--rule-strong);
-    background: var(--surface);
-    color: var(--text);
+    border: 1px solid rgba(248, 245, 238, .18);
+    background: rgba(248, 245, 238, .06);
+    color: var(--paper-warm);
     padding: 0 12px;
     font-family: inherit; font-size: 13px;
     font-weight: 500;
@@ -224,8 +316,16 @@
     height: 34px;
     display: inline-flex; align-items: center; gap: 6px;
     scroll-snap-align: start;
+    transition: all .15s ease;
   }
-  .chip.active { background: var(--ink); color: var(--paper-warm); border-color: var(--ink); }
+  .chip:active {
+    background: rgba(248, 245, 238, .12);
+  }
+  .chip.active {
+    background: var(--accent);
+    color: var(--ink);
+    border-color: var(--accent);
+  }
   .chip .count { font-size: 11px; opacity: .65; font-weight: 400; }
   .chip-risk { padding-left: 10px; }
   .chip-risk::before {
@@ -541,18 +641,36 @@
 </head>
 <body>
 
-<header class="topbar">
-  <div class="topbar-row">
-    <a href="#" class="brand">
-      <div class="brand-mark">LF</div>
-      <div class="brand-text">
-        <strong data-i18n="brandTitle">EU AI Act Glossar</strong>
-        <small data-i18n="brandSub">Edition 2026</small>
+<header class="topbar" id="topbar">
+
+  <!-- COVER: großer Magazin-Cover-Block, sichtbar beim Start -->
+  <div class="cover">
+    <div class="cover-top-row">
+      <span class="cover-edition" data-i18n="coverEdition">EDITION 2026 · BAND I</span>
+      <div class="lang-switch" role="group" aria-label="Sprache">
+        <button class="lang-btn" data-lang="de">DE</button>
+        <button class="lang-btn" data-lang="en">EN</button>
       </div>
-    </a>
-    <div class="lang-switch" role="group">
-      <button class="lang-btn" data-lang="de">DE</button>
-      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <h1 class="cover-title" data-i18n-html="coverTitle">EU AI Act<br/><em>Glossar</em></h1>
+    <p class="cover-subtitle" data-i18n="coverSubtitle">Das zweisprachige Lexikon zur Verordnung (EU) 2024/1689.</p>
+    <div class="cover-meta-row">
+      <span data-i18n="coverPublisher">Learning Factory</span>
+      <span class="accent"><span id="coverCount">53</span> <span data-i18n="coverCountLabel">Begriffe · DE / EN</span></span>
+    </div>
+  </div>
+
+  <!-- COMPACT: kompakte Verlagsleiste, erscheint beim Scrollen -->
+  <div class="compact">
+    <div class="compact-row">
+      <div class="compact-brand">
+        <span class="compact-eyebrow" data-i18n="compactEyebrow">VO (EU) 2024/1689</span>
+        <span class="compact-title" data-i18n-html="compactTitle">EU AI Act <em>Glossar</em></span>
+      </div>
+      <div class="lang-switch" role="group" aria-label="Sprache">
+        <button class="lang-btn" data-lang="de">DE</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
     </div>
   </div>
 
@@ -597,6 +715,13 @@ const I18N = {
   de: {
     brandTitle: "EU AI Act Glossar",
     brandSub: "Edition 2026",
+    coverEdition: "EDITION 2026 · BAND I",
+    coverTitle: 'EU AI Act<br/><em>Glossar</em>',
+    coverSubtitle: "Das zweisprachige Lexikon zur Verordnung (EU) 2024/1689.",
+    coverPublisher: "Learning Factory",
+    coverCountLabel: "Begriffe · DE / EN",
+    compactEyebrow: "VO (EU) 2024/1689",
+    compactTitle: 'EU AI Act <em>Glossar</em>',
     searchPlaceholder: "Begriff, Tag, Stichwort…",
     catAll: "Alle",
     cat: {
@@ -630,6 +755,13 @@ const I18N = {
   en: {
     brandTitle: "EU AI Act Glossary",
     brandSub: "Edition 2026",
+    coverEdition: "EDITION 2026 · VOLUME I",
+    coverTitle: 'EU AI Act<br/><em>Glossary</em>',
+    coverSubtitle: "The bilingual lexicon to Regulation (EU) 2024/1689.",
+    coverPublisher: "Learning Factory",
+    coverCountLabel: "terms · DE / EN",
+    compactEyebrow: "Reg. (EU) 2024/1689",
+    compactTitle: 'EU AI Act <em>Glossary</em>',
     searchPlaceholder: "Term, tag, keyword…",
     catAll: "All",
     cat: {
@@ -690,12 +822,21 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
 function applyI18n() {
   const t = I18N[state.lang];
   document.documentElement.lang = state.lang;
+  // textContent für reine Texte
   $$("[data-i18n]").forEach(el => {
     const key = el.dataset.i18n;
     if (t[key] != null) el.textContent = t[key];
   });
+  // innerHTML für Texte mit Markup (z. B. <em>, <br>)
+  $$("[data-i18n-html]").forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (t[key] != null) el.innerHTML = t[key];
+  });
   $("#searchInput").placeholder = t.searchPlaceholder;
   $$(".lang-btn").forEach(b => b.classList.toggle("active", b.dataset.lang === state.lang));
+  // Live-Begriffszähler im Cover
+  const cc = $("#coverCount");
+  if (cc) cc.textContent = TERMS.length;
 }
 
 function buildFilters() {
@@ -905,6 +1046,28 @@ $("#searchInput").addEventListener("input", e => {
     render();
   }, 120);
 });
+
+/* ==================================================================
+   SCROLL-COLLAPSE HEADER (Cover → Compact)
+================================================================== */
+const topbarEl = $("#topbar");
+let lastScrolled = false;
+let ticking = false;
+function onScroll() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    // Schwellwert: Cover ist ca. 200-260px hoch — bei 60px scroll bereits einklappen
+    const scrolled = y > 60;
+    if (scrolled !== lastScrolled) {
+      topbarEl.classList.toggle("scrolled", scrolled);
+      lastScrolled = scrolled;
+    }
+    ticking = false;
+  });
+}
+window.addEventListener("scroll", onScroll, { passive: true });
 
 $$(".lang-btn").forEach(b => {
   b.addEventListener("click", () => {
