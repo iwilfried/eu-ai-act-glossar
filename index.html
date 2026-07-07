@@ -564,6 +564,53 @@
     content: "↗"; opacity: .5;
     flex-shrink: 0;
   }
+
+  /* ----------- SIEHE AUCH · verwandte Begriffe ----------- */
+  .sheet-related {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .related-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px 10px 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.25;
+    cursor: pointer;
+    min-height: 40px;
+    transition: border-color .15s ease, background .15s ease, transform .1s ease;
+    touch-action: manipulation;
+  }
+  .related-chip:active {
+    transform: scale(.97);
+    background: var(--paper-deep);
+  }
+  .related-chip:hover { border-color: var(--accent); }
+  .related-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--ink);
+  }
+  .related-dot[data-cat="ai-act-core"] { background: var(--cat-act); }
+  .related-dot[data-cat="ml"]          { background: var(--cat-ml); }
+  .related-dot[data-cat="dl"]          { background: var(--cat-dl); }
+  .related-dot[data-cat="llm"]         { background: var(--cat-llm); }
+  .related-dot[data-cat="nlp"]         { background: var(--cat-nlp); }
+  .related-dot[data-cat="cv"]          { background: var(--cat-cv); }
+  .related-dot[data-cat="ethics"]      { background: var(--cat-ethics); }
+  .related-dot[data-cat="governance"]  { background: var(--cat-gov); }
+  .related-dot[data-cat="security"]    { background: var(--cat-sec); }
+
   .sheet-close {
     position: absolute; top: 16px; right: 16px;
     width: 32px; height: 32px;
@@ -713,7 +760,7 @@
   <button class="install-dismiss" id="installDismiss" aria-label="Schließen">×</button>
 </div>
 
-<script src="terms.js?v=1.6"></script>
+<script src="terms.js?v=1.7"></script>
 
 <script>
 /* ==================================================================
@@ -754,6 +801,7 @@ const I18N = {
     detailKurz: "Kurzdefinition",
     detailLang: "Im Detail",
     detailLinks: "Quellen",
+    detailRelated: "Siehe auch",
     emptyTitle: "Keine Treffer",
     emptyText: "Versuche es mit einem anderen Suchbegriff oder setze die Filter zurück.",
     installTitle: "App installieren",
@@ -794,6 +842,7 @@ const I18N = {
     detailKurz: "Summary",
     detailLang: "In depth",
     detailLinks: "Sources",
+    detailRelated: "See also",
     emptyTitle: "No matches",
     emptyText: "Try a different keyword or reset the filters.",
     installTitle: "Install app",
@@ -991,6 +1040,22 @@ function openSheet(id) {
        </div>`
     : "";
 
+  // "Siehe auch" – verwandte Begriffe als anklickbare Chips
+  const relatedTerms = (x.related || [])
+    .map(rid => TERMS.find(tt => tt.id === rid))
+    .filter(Boolean);
+  const relatedHtml = relatedTerms.length
+    ? `<div class="sheet-section-label" style="margin-top:22px">${t.detailRelated}</div>
+       <div class="sheet-related">
+         ${relatedTerms.map(rt => {
+           const rd = rt[state.lang] || rt.de;
+           return `<button class="related-chip" data-goto="${rt.id}">
+             <span class="related-dot" data-cat="${rt.category}"></span>${rd.term}
+           </button>`;
+         }).join("")}
+       </div>`
+    : "";
+
   $("#sheetBody").innerHTML = `
     <div class="sheet-section-label">${t.detailKurz}</div>
     <p class="sheet-short">${data.short}</p>
@@ -998,6 +1063,7 @@ function openSheet(id) {
     <p class="sheet-long">${data.long || data.short}</p>
     <div class="sheet-tags">${tagsHtml}</div>
     ${linksHtml}
+    ${relatedHtml}
   `;
 
   $("#sheetBody").querySelectorAll(".tag").forEach(tg => {
@@ -1006,6 +1072,16 @@ function openSheet(id) {
       state.tag = state.tag === tag ? null : tag;
       closeSheet();
       render();
+    });
+  });
+
+  // Klick auf verwandten Begriff → direkt dorthin navigieren
+  $("#sheetBody").querySelectorAll(".related-chip").forEach(rc => {
+    rc.addEventListener("click", () => {
+      const goto = rc.dataset.goto;
+      // Sheet-Body nach oben scrollen und neuen Begriff laden
+      openSheet(goto);
+      $("#sheetBody").scrollTop = 0;
     });
   });
 

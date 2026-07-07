@@ -1,17 +1,14 @@
 /* ==================================================================
    EU AI ACT GLOSSAR · DATENDATEI
    ------------------------------------------------------------------
-   So fügst du neue Begriffe hinzu:
-   1. Kopiere ein bestehendes Objekt und passe es an
-   2. Pflichtfelder: id, category, tags[], de{term,short,long}, en{term,short,long}
-   3. Optional: risk, links[], related[]
-   4. category: ai-act-core | ml | dl | llm | nlp | cv | ethics | governance | security
-   5. risk: prohibited | high | limited | minimal | systemic | null
+   103 Begriffe · bilingual DE/EN
+   Schema: { id, category, risk, tags[], de{term,short,long},
+            en{term,short,long}, links[], related[] }
+   Kategorien: ai-act-core | ml | dl | llm | nlp | cv | ethics | governance | security
+   Risiko: prohibited | high | limited | minimal | systemic | null
 ================================================================== */
 
 const TERMS = [
-
-  /* =================== EU AI ACT CORE =================== */
 
   { id: "eu-ai-act", category: "ai-act-core", risk: null,
     tags: ["#KIVO", "#Regulation", "#EU2024-1689", "#Horizontal"],
@@ -23,11 +20,8 @@ const TERMS = [
       term: "EU AI Act",
       short: "World's first comprehensive horizontal AI regulation (Regulation (EU) 2024/1689). Risk-based, phased application from February 2025.",
       long: "The EU AI Act establishes uniform rules for the development, placing on the market and use of AI systems in the EU single market. Four risk tiers (prohibited, high, limited, minimal) plus a dedicated chapter for GPAI with systemic risk. Applies to providers and deployers inside and outside the EU whenever the output is used in the EU (market location principle). In force since 1 Aug 2024, phased: prohibitions from 2 Feb 2025, GPAI from 2 Aug 2025, most high-risk from 2 Aug 2026, fully applicable from 2 Aug 2027." },
-    links: [
-      { label: "EUR-Lex Volltext", url: "https://eur-lex.europa.eu/eli/reg/2024/1689/oj" },
-      { label: "AI Act Explorer", url: "https://artificialintelligenceact.eu/" }
-    ]
-  },
+    links: [ { label: "EUR-Lex Volltext", url: "https://eur-lex.europa.eu/eli/reg/2024/1689/oj" }, { label: "AI Act Explorer", url: "https://artificialintelligenceact.eu/" } ],
+    related: ["ki-system", "hochrisiko-ki", "gpai", "fristen-anwendung"] },
 
   { id: "ki-system", category: "ai-act-core", risk: null,
     tags: ["#KIVO", "#Definition", "#Art3", "#OECD"],
@@ -39,11 +33,8 @@ const TERMS = [
       term: "AI System",
       short: "Machine-based system with varying degrees of autonomy that infers from inputs how to generate outputs (predictions, recommendations, decisions) influencing environments (Art. 3(1)).",
       long: "The definition mirrors the OECD definition (2023). Three features: (1) machine-based with varying autonomy, (2) potential adaptiveness after deployment, (3) inference from inputs to outputs for explicit or implicit objectives. Traditional rule-based software is excluded if no genuine inference occurs. Commission guidelines (February 2025) clarify scope." },
-    links: [
-      { label: "Art. 3 AI Act", url: "https://artificialintelligenceact.eu/article/3/" },
-      { label: "OECD AI Definition", url: "https://oecd.ai/en/ai-principles" }
-    ]
-  },
+    links: [ { label: "Art. 3 AI Act", url: "https://artificialintelligenceact.eu/article/3/" }, { label: "OECD AI Definition", url: "https://oecd.ai/en/ai-principles" } ],
+    related: ["eu-ai-act", "ki", "gpai"] },
 
   { id: "gpai", category: "ai-act-core", risk: "systemic",
     tags: ["#GPAI", "#FoundationModel", "#Art51", "#Compute"],
@@ -55,11 +46,8 @@ const TERMS = [
       term: "General-Purpose AI Model (GPAI)",
       short: "Model capable of competently performing a wide range of distinct tasks and integrable into downstream systems (Art. 3(63)).",
       long: "GPAI covers in particular large language and multimodal models such as GPT-4o, Claude, Llama, or Gemini. Obligations from Art. 53 et seq.: technical documentation, information for downstream providers, copyright compliance, training-data summary. Models trained with more than 10^25 FLOPs are presumed \"GPAI with systemic risk\" (Art. 51), triggering enhanced duties: model evaluation, adversarial testing, incident reporting, cybersecurity." },
-    links: [
-      { label: "Kapitel V AI Act", url: "https://artificialintelligenceact.eu/chapter/5/" },
-      { label: "GPAI Code of Practice", url: "https://digital-strategy.ec.europa.eu/en/policies/ai-code-practice" }
-    ]
-  },
+    links: [ { label: "Kapitel V AI Act", url: "https://artificialintelligenceact.eu/chapter/5/" }, { label: "GPAI Code of Practice", url: "https://digital-strategy.ec.europa.eu/en/policies/ai-code-practice" } ],
+    related: ["foundation-model", "systemisches-risiko", "downstream-anbieter", "bussgeld-gpai", "eu-ai-act"] },
 
   { id: "anbieter", category: "ai-act-core", risk: null,
     tags: ["#Provider", "#Akteur", "#Art3", "#Art16"],
@@ -71,11 +59,8 @@ const TERMS = [
       term: "Provider",
       short: "Person who develops, or has developed, an AI system or GPAI model and places it on the market under its own name (Art. 3(3)).",
       long: "The provider bears the principal burden, especially for high-risk systems: conformity assessment, technical documentation, risk management, CE marking, registration in the EU database, post-market monitoring. The role can shift: substantial modification or rebranding of a high-risk system makes the actor a provider (Art. 25 — the \"provider flip\")." },
-    links: [
-      { label: "Art. 3 AI Act", url: "https://artificialintelligenceact.eu/article/3/" },
-      { label: "Art. 25 AI Act", url: "https://artificialintelligenceact.eu/article/25/" }
-    ]
-  },
+    links: [ { label: "Art. 3 AI Act", url: "https://artificialintelligenceact.eu/article/3/" }, { label: "Art. 25 AI Act", url: "https://artificialintelligenceact.eu/article/25/" } ],
+    related: ["betreiber", "einfuehrer", "haendler", "provider-flip", "ki-kompetenz"] },
 
   { id: "betreiber", category: "ai-act-core", risk: null,
     tags: ["#Deployer", "#Akteur", "#Art26"],
@@ -87,11 +72,8 @@ const TERMS = [
       term: "Deployer",
       short: "Person using an AI system under its own authority, excluding personal non-professional use (Art. 3(4)).",
       long: "The deployer (formerly \"user\") operates the AI system in real-world settings. Duties: use in accordance with instructions (Art. 26), human oversight, monitoring, informing affected persons, cooperation on incidents. For high-risk AI in the public sector and certain private contexts: mandatory Fundamental Rights Impact Assessment (FRIA, Art. 27)." },
-    links: [
-      { label: "Art. 26 AI Act", url: "https://artificialintelligenceact.eu/article/26/" },
-      { label: "Art. 27 AI Act – FRIA", url: "https://artificialintelligenceact.eu/article/27/" }
-    ]
-  },
+    links: [ { label: "Art. 26 AI Act", url: "https://artificialintelligenceact.eu/article/26/" }, { label: "Art. 27 AI Act – FRIA", url: "https://artificialintelligenceact.eu/article/27/" } ],
+    related: ["anbieter", "fria", "menschliche-aufsicht", "erklaerungsrecht", "ki-kompetenz"] },
 
   { id: "verbotene-praktiken", category: "ai-act-core", risk: "prohibited",
     tags: ["#Prohibited", "#Art5", "#Grundrechte"],
@@ -103,10 +85,8 @@ const TERMS = [
       term: "Prohibited AI Practices",
       short: "Eight practices fully banned in the EU from 2 Feb 2025 — social scoring, subliminal manipulation, real-time facial recognition in public spaces (Art. 5).",
       long: "Art. 5 AI Act sets the top risk tier: (a) subliminal manipulation, (b) exploitation of vulnerability, (c) public-authority social scoring, (d) predictive policing based solely on profiling, (e) untargeted facial-image scraping, (f) emotion recognition in workplaces and education (medical/safety exceptions), (g) biometric categorisation of sensitive traits, (h) real-time remote biometric identification in public for law enforcement (narrow exceptions with judicial authorisation). Sanctions: up to €35 million or 7% of global annual turnover." },
-    links: [
-      { label: "Art. 5 AI Act", url: "https://artificialintelligenceact.eu/article/5/" }
-    ]
-  },
+    links: [ { label: "Art. 5 AI Act", url: "https://artificialintelligenceact.eu/article/5/" } ],
+    related: ["hochrisiko-ki", "gesichtserkennung", "anhang-ii"] },
 
   { id: "hochrisiko-ki", category: "ai-act-core", risk: "high",
     tags: ["#HighRisk", "#AnnexIII", "#Art6", "#Compliance"],
@@ -118,11 +98,8 @@ const TERMS = [
       term: "High-Risk AI System",
       short: "AI system listed in Annex III or used as a safety component of a regulated product (Art. 6). Strictest obligations apart from outright bans.",
       long: "Two routes: (1) safety component or product under Union harmonisation acts in Annex I (machinery, medical devices, toys), (2) use cases in Annex III: biometrics, critical infrastructure, education, employment, essential services, law enforcement, migration, justice/democracy. Duties: risk management (Art. 9), data governance (Art. 10), technical documentation (Art. 11), record-keeping (Art. 12), transparency (Art. 13), human oversight (Art. 14), accuracy/robustness (Art. 15), conformity assessment, CE marking, registration." },
-    links: [
-      { label: "Art. 6 AI Act", url: "https://artificialintelligenceact.eu/article/6/" },
-      { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" }
-    ]
-  },
+    links: [ { label: "Art. 6 AI Act", url: "https://artificialintelligenceact.eu/article/6/" }, { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["anhang-iii", "konformitaetsbewertung", "risikomanagementsystem", "ce-kennzeichnung", "eu-ai-act"] },
 
   { id: "begrenztes-risiko", category: "ai-act-core", risk: "limited",
     tags: ["#LimitedRisk", "#Transparency", "#Art50"],
@@ -134,10 +111,8 @@ const TERMS = [
       term: "Limited Risk",
       short: "Risk tier for systems subject to transparency obligations — chatbots, deepfakes, emotion recognition, biometric categorisation (Art. 50).",
       long: "Providers must ensure persons are informed they are interacting with AI (chatbot disclosure) and that AI-generated synthetic content (image, audio, video, text) is marked machine-readably. Deployers must disclose deepfakes as artificially generated (except artistic/satirical) and label public-interest texts. Sanctions: up to €15 million or 3% of global annual turnover." },
-    links: [
-      { label: "Art. 50 AI Act", url: "https://artificialintelligenceact.eu/article/50/" }
-    ]
-  },
+    links: [ { label: "Art. 50 AI Act", url: "https://artificialintelligenceact.eu/article/50/" } ],
+    related: ["transparenzpflichten", "deepfake", "hochrisiko-ki", "minimales-risiko"] },
 
   { id: "minimales-risiko", category: "ai-act-core", risk: "minimal",
     tags: ["#MinimalRisk", "#VoluntaryCode", "#Art95"],
@@ -149,10 +124,8 @@ const TERMS = [
       term: "Minimal Risk",
       short: "Default AI without specific AI Act obligations — spam filters, recommender systems, AI in video games.",
       long: "The vast majority of AI in use today falls into this tier. No direct AI Act duties, but voluntary codes of conduct (Art. 95) to promote trustworthy AI principles. Existing frameworks such as GDPR, consumer protection, and competition law continue to apply in full." },
-    links: [
-      { label: "Art. 95 AI Act", url: "https://artificialintelligenceact.eu/article/95/" }
-    ]
-  },
+    links: [ { label: "Art. 95 AI Act", url: "https://artificialintelligenceact.eu/article/95/" } ],
+    related: ["begrenztes-risiko", "hochrisiko-ki"] },
 
   { id: "systemisches-risiko", category: "ai-act-core", risk: "systemic",
     tags: ["#SystemicRisk", "#GPAI", "#Art51", "#FLOP"],
@@ -164,11 +137,8 @@ const TERMS = [
       term: "Systemic Risk",
       short: "Risk with significant impact on the EU internal market caused by high-impact GPAI. Threshold: training compute > 10^25 FLOPs (Art. 3(65)).",
       long: "Classification is automatic when the FLOP threshold is crossed but the Commission may also designate models on additional Annex XIII criteria: parameter count, dataset quality, reach, registered end users. Consequence: Art. 55 duties — model evaluation with standardised protocols, adversarial testing, incident reports, adequate cybersecurity. Providers notify the Commission within two weeks of meeting the threshold." },
-    links: [
-      { label: "Art. 51 AI Act", url: "https://artificialintelligenceact.eu/article/51/" },
-      { label: "Art. 55 AI Act", url: "https://artificialintelligenceact.eu/article/55/" }
-    ]
-  },
+    links: [ { label: "Art. 51 AI Act", url: "https://artificialintelligenceact.eu/article/51/" }, { label: "Art. 55 AI Act", url: "https://artificialintelligenceact.eu/article/55/" } ],
+    related: ["gpai", "ai-red-teaming", "bussgeld-gpai"] },
 
   { id: "konformitaetsbewertung", category: "ai-act-core", risk: null,
     tags: ["#Conformity", "#CE", "#Art43"],
@@ -180,10 +150,8 @@ const TERMS = [
       term: "Conformity Assessment",
       short: "Procedure demonstrating that a high-risk AI system complies with Chapter III requirements (Art. 43).",
       long: "Two routes: (1) internal control (Annex VI) — provider self-assessment, default for Annex III systems. (2) Assessment with a notified body (Annex VII) — mandatory for remote biometric identification and safety components of regulated products. Output: EU declaration of conformity (Art. 47), CE marking (Art. 48), registration in the EU database (Art. 49). Substantial modifications trigger re-assessment." },
-    links: [
-      { label: "Art. 43 AI Act", url: "https://artificialintelligenceact.eu/article/43/" }
-    ]
-  },
+    links: [ { label: "Art. 43 AI Act", url: "https://artificialintelligenceact.eu/article/43/" } ],
+    related: ["ce-kennzeichnung", "notifizierte-stelle", "technische-dokumentation", "eu-konformitaetserklaerung", "hochrisiko-ki"] },
 
   { id: "ce-kennzeichnung", category: "ai-act-core", risk: null,
     tags: ["#CEMarking", "#Art48", "#Compliance"],
@@ -195,10 +163,8 @@ const TERMS = [
       term: "CE Marking",
       short: "Visible conformity mark on high-risk AI systems. Declares compliance with the AI Act and other Union acts (Art. 48).",
       long: "Before placing the system on the market, the provider must affix the CE mark — physically or digitally for software-only systems. Where a notified body is involved, its four-digit identification number is added. Precondition for free movement in the EU single market and for publication in the high-risk AI database." },
-    links: [
-      { label: "Art. 48 AI Act", url: "https://artificialintelligenceact.eu/article/48/" }
-    ]
-  },
+    links: [ { label: "Art. 48 AI Act", url: "https://artificialintelligenceact.eu/article/48/" } ],
+    related: ["konformitaetsbewertung", "eu-konformitaetserklaerung", "hochrisiko-ki", "notifizierte-stelle"] },
 
   { id: "menschliche-aufsicht", category: "ai-act-core", risk: null,
     tags: ["#HumanOversight", "#Art14", "#HumanInTheLoop"],
@@ -210,10 +176,8 @@ const TERMS = [
       term: "Human Oversight",
       short: "High-risk AI must be designed so natural persons can effectively oversee it (Art. 14). Human in/on the loop or in command.",
       long: "Providers must build appropriate human-machine interfaces; deployers must actually exercise oversight. Overseers must understand capabilities and limits, detect automation bias, correctly interpret output, retain ability to intervene (\"stop\" function), ignore or override AI recommendations. For real-time remote biometric identification: two-person rule with two independent persons (Art. 14(5))." },
-    links: [
-      { label: "Art. 14 AI Act", url: "https://artificialintelligenceact.eu/article/14/" }
-    ]
-  },
+    links: [ { label: "Art. 14 AI Act", url: "https://artificialintelligenceact.eu/article/14/" } ],
+    related: ["betreiber", "hochrisiko-ki", "gebrauchsanweisung", "xai"] },
 
   { id: "ki-kompetenz", category: "ai-act-core", risk: null,
     tags: ["#AILiteracy", "#Art4", "#Schulung"],
@@ -225,11 +189,8 @@ const TERMS = [
       term: "AI Literacy",
       short: "Duty for providers and deployers to ensure sufficient AI literacy among relevant staff (Art. 4) — applicable since 2 Feb 2025.",
       long: "One of the first applicable obligations. Risk-based: operating high-risk AI requires deeper understanding than using a chatbot. Content: how AI works, opportunities, risks, potential harms, technical knowledge, experience, context of use. Training must be documented — the Commission publishes good-practice examples (the AI Office's \"Living Repository\")." },
-    links: [
-      { label: "Art. 4 AI Act", url: "https://artificialintelligenceact.eu/article/4/" },
-      { label: "AI Literacy Repository", url: "https://digital-strategy.ec.europa.eu/en/library/living-repository-foster-learning-and-exchange-ai-literacy" }
-    ]
-  },
+    links: [ { label: "Art. 4 AI Act", url: "https://artificialintelligenceact.eu/article/4/" }, { label: "AI Literacy Repository", url: "https://digital-strategy.ec.europa.eu/en/library/living-repository-foster-learning-and-exchange-ai-literacy" } ],
+    related: ["anbieter", "betreiber"] },
 
   { id: "ai-office", category: "ai-act-core", risk: null,
     tags: ["#AIOffice", "#Governance", "#Commission"],
@@ -241,10 +202,8 @@ const TERMS = [
       term: "AI Office",
       short: "Central EU unit within the Commission (DG CNECT) responsible for GPAI oversight, coordination, standards, and Code of Practice.",
       long: "Established February 2024, operational since mid-2024. Tasks: oversight and enforcement of GPAI providers (especially with systemic risk), drafting the GPAI Code of Practice, supporting the AI Board, advancing research, sandboxes, standards. Unlike data protection's national authorities, GPAI supervision is centralised at EU level." },
-    links: [
-      { label: "European AI Office", url: "https://digital-strategy.ec.europa.eu/en/policies/ai-office" }
-    ]
-  },
+    links: [ { label: "European AI Office", url: "https://digital-strategy.ec.europa.eu/en/policies/ai-office" } ],
+    related: ["bussgeld-gpai", "gpai", "marktueberwachung", "reallabor"] },
 
   { id: "fria", category: "ai-act-core", risk: null,
     tags: ["#FRIA", "#Art27", "#Grundrechte", "#DPIA"],
@@ -256,10 +215,8 @@ const TERMS = [
       term: "Fundamental Rights Impact Assessment (FRIA)",
       short: "Mandatory impact assessment for certain deployers of high-risk AI: public bodies and private actors using Annex III systems with citizen-rights effects (Art. 27).",
       long: "FRIA content: description of processes using AI, period/frequency, categories of affected persons, specific risks to fundamental rights, human oversight measures, harm mitigation. Results notified to the market surveillance authority. Overlap with GDPR DPIA: where a DPIA already exists, complement — not replace. Providers support deployers with information." },
-    links: [
-      { label: "Art. 27 AI Act", url: "https://artificialintelligenceact.eu/article/27/" }
-    ]
-  },
+    links: [ { label: "Art. 27 AI Act", url: "https://artificialintelligenceact.eu/article/27/" } ],
+    related: ["betreiber", "dsgvo-schnittstelle", "betroffene-person", "dsgvo", "arbeitsrecht-schnittstelle"] },
 
   { id: "reallabor", category: "ai-act-core", risk: null,
     tags: ["#Sandbox", "#Innovation", "#Art57", "#KMU"],
@@ -271,10 +228,8 @@ const TERMS = [
       term: "Regulatory Sandbox",
       short: "Controlled testing environment under regulatory supervision in which innovative AI systems can be developed and tested before market entry (Art. 57 et seq.).",
       long: "Each Member State must establish at least one national sandbox by 2 Aug 2026. Benefits: priority access for SMEs and start-ups, free participation, regulatory guidance, conditional use of personal data for public-interest AI (Art. 59). Spain's pilot sandbox (2022) served as a blueprint." },
-    links: [
-      { label: "Art. 57 AI Act", url: "https://artificialintelligenceact.eu/article/57/" }
-    ]
-  },
+    links: [ { label: "Art. 57 AI Act", url: "https://artificialintelligenceact.eu/article/57/" } ],
+    related: ["kmu", "ai-office"] },
 
   { id: "transparenzpflichten", category: "ai-act-core", risk: "limited",
     tags: ["#Transparency", "#Art13", "#Art50"],
@@ -286,13 +241,8 @@ const TERMS = [
       term: "Transparency Obligations",
       short: "Providers and deployers must disclose AI use and label AI-generated content (Art. 13, Art. 50).",
       long: "Two layers: (1) High-risk (Art. 13) — instructions for use covering purpose, accuracy, known limitations, foreseeable misuse, oversight measures, intervention options, maintenance. (2) Limited risk (Art. 50) — chatbot disclosure, machine-readable labelling of synthetic content, deepfake disclosure. GDPR transparency (Art. 13/14) and AI Act transparency overlap but protect different interests." },
-    links: [
-      { label: "Art. 13 AI Act", url: "https://artificialintelligenceact.eu/article/13/" },
-      { label: "Art. 50 AI Act", url: "https://artificialintelligenceact.eu/article/50/" }
-    ]
-  },
-
-  /* =================== ML / KI-GRUNDLAGEN =================== */
+    links: [ { label: "Art. 13 AI Act", url: "https://artificialintelligenceact.eu/article/13/" }, { label: "Art. 50 AI Act", url: "https://artificialintelligenceact.eu/article/50/" } ],
+    related: ["begrenztes-risiko", "deepfake", "image-generation", "eu-datenbank", "gebrauchsanweisung"] },
 
   { id: "ki", category: "ml", risk: null,
     tags: ["#KI", "#AI", "#Foundations", "#1956"],
@@ -304,10 +254,8 @@ const TERMS = [
       term: "Artificial Intelligence (AI)",
       short: "Umbrella term for systems performing tasks typically requiring human intelligence — perceiving, reasoning, learning, planning.",
       long: "Coined by John McCarthy (Dartmouth Conference, 1956). Classical split: symbolic AI (expert systems, logic) vs. subsymbolic AI (machine learning, neural networks). Current renaissance since ~2012 (deep learning) and 2017 (transformers). The AI Act uses a narrower, OECD-aligned definition (\"AI system\") to avoid blanket coverage of all symbolic software." },
-    links: [
-      { label: "OECD AI Principles", url: "https://oecd.ai/en/ai-principles" }
-    ]
-  },
+    links: [ { label: "OECD AI Principles", url: "https://oecd.ai/en/ai-principles" } ],
+    related: ["ki-system", "ml", "deep-learning"] },
 
   { id: "ml", category: "ml", risk: null,
     tags: ["#ML", "#Foundations", "#Mitchell"],
@@ -319,10 +267,8 @@ const TERMS = [
       term: "Machine Learning",
       short: "Subfield of AI where algorithms learn patterns from data rather than being explicitly programmed (Tom Mitchell, 1997).",
       long: "Three main paradigms: supervised, unsupervised, reinforcement learning. Classical methods: linear/logistic regression, decision trees, random forest, SVM, k-NN, clustering. Modern methods: gradient boosting (XGBoost, LightGBM), deep learning. The AI Act lists ML as one of three methodological approaches potentially falling under \"AI system\", alongside logic-based and statistical approaches." },
-    links: [
-      { label: "Mitchell, Machine Learning (1997)", url: "https://www.cs.cmu.edu/~tom/mlbook.html" }
-    ]
-  },
+    links: [ { label: "Mitchell, Machine Learning (1997)", url: "https://www.cs.cmu.edu/~tom/mlbook.html" } ],
+    related: ["ki", "ueberwacht", "unueberwacht", "rl", "overfitting"] },
 
   { id: "ueberwacht", category: "ml", risk: null,
     tags: ["#Supervised", "#Labels", "#Classification"],
@@ -333,8 +279,8 @@ const TERMS = [
     en: {
       term: "Supervised Learning",
       short: "Learning from labelled data (input → target output). Classical tasks: classification and regression.",
-      long: "The algorithm receives training examples with known answers and seeks a function mapping new examples as accurately as possible. Examples: spam classification, image categorisation, house price prediction. Data quality is decisive — label bias transfers directly to the model. Datasets are typically split into training, validation, and test sets (e.g. 70/15/15)." }
-  },
+      long: "The algorithm receives training examples with known answers and seeks a function mapping new examples as accurately as possible. Examples: spam classification, image categorisation, house price prediction. Data quality is decisive — label bias transfers directly to the model. Datasets are typically split into training, validation, and test sets (e.g. 70/15/15)." },
+    related: ["ml", "unueberwacht", "trainingsdaten"] },
 
   { id: "unueberwacht", category: "ml", risk: null,
     tags: ["#Unsupervised", "#Clustering", "#PCA"],
@@ -345,8 +291,8 @@ const TERMS = [
     en: {
       term: "Unsupervised Learning",
       short: "Learning from unlabelled data — goal: discover structure such as clusters, latent factors, or anomalies.",
-      long: "Tasks: clustering (k-Means, DBSCAN, hierarchical), dimensionality reduction (PCA, t-SNE, UMAP), anomaly detection, association rules. Applications: customer segmentation, data exploration, preprocessing. Evaluation is harder than supervised learning since no ground truth exists — metrics include Silhouette Score, Davies-Bouldin, or domain-specific validation." }
-  },
+      long: "Tasks: clustering (k-Means, DBSCAN, hierarchical), dimensionality reduction (PCA, t-SNE, UMAP), anomaly detection, association rules. Applications: customer segmentation, data exploration, preprocessing. Evaluation is harder than supervised learning since no ground truth exists — metrics include Silhouette Score, Davies-Bouldin, or domain-specific validation." },
+    related: ["ml", "ueberwacht"] },
 
   { id: "rl", category: "ml", risk: null,
     tags: ["#RL", "#Reward", "#PPO", "#AlphaGo"],
@@ -358,10 +304,8 @@ const TERMS = [
       term: "Reinforcement Learning (RL)",
       short: "An agent learns by trial and error from reward signals — formalised as a Markov Decision Process.",
       long: "Key concepts: state, action, reward, policy, value function. Classical algorithms: Q-learning, SARSA, policy gradients, actor-critic. Modern successes: AlphaGo (deep RL + Monte Carlo tree search), DQN for Atari, RLHF for chat models. Challenges: sample efficiency, exploration vs. exploitation, reward hacking, reward specification — central to alignment research." },
-    links: [
-      { label: "Sutton & Barto, RL Book", url: "http://incompleteideas.net/book/the-book.html" }
-    ]
-  },
+    links: [ { label: "Sutton & Barto, RL Book", url: "http://incompleteideas.net/book/the-book.html" } ],
+    related: ["ml", "rlhf"] },
 
   { id: "trainingsdaten", category: "ml", risk: null,
     tags: ["#TrainingData", "#Quality", "#Splits"],
@@ -373,10 +317,8 @@ const TERMS = [
       term: "Training Data",
       short: "Dataset used to learn an ML model's parameters. Quality, representativeness, and bias-freeness are critical.",
       long: "Classical split: training (learn parameters), validation (tune hyperparameters, model selection), test (final unbiased evaluation). Common pitfalls: sampling bias, label noise, distribution drift, leakage between splits. The AI Act sets specific quality requirements for high-risk AI in Art. 10." },
-    links: [
-      { label: "Art. 10 AI Act", url: "https://artificialintelligenceact.eu/article/10/" }
-    ]
-  },
+    links: [ { label: "Art. 10 AI Act", url: "https://artificialintelligenceact.eu/article/10/" } ],
+    related: ["daten-governance", "overfitting", "bias", "ueberwacht"] },
 
   { id: "overfitting", category: "ml", risk: null,
     tags: ["#Overfitting", "#Regularization", "#Generalization"],
@@ -387,10 +329,8 @@ const TERMS = [
     en: {
       term: "Overfitting",
       short: "Model memorises training data plus noise and generalises poorly to unseen data.",
-      long: "Symptoms: train accuracy far above test accuracy. Causes: model too complex, too few data, training too long. Remedies: regularisation (L1/L2, dropout), early stopping, data augmentation, more/diverse data, simpler architectures, cross-validation. Counterpart: underfitting — model too simple to fit even training data." }
-  },
-
-  /* =================== DEEP LEARNING =================== */
+      long: "Symptoms: train accuracy far above test accuracy. Causes: model too complex, too few data, training too long. Remedies: regularisation (L1/L2, dropout), early stopping, data augmentation, more/diverse data, simpler architectures, cross-validation. Counterpart: underfitting — model too simple to fit even training data." },
+    related: ["trainingsdaten", "ml"] },
 
   { id: "deep-learning", category: "dl", risk: null,
     tags: ["#DeepLearning", "#GPU", "#AlexNet"],
@@ -402,10 +342,8 @@ const TERMS = [
       term: "Deep Learning",
       short: "ML subfield using deep neural networks (many layers). Learns hierarchical representations directly from raw data.",
       long: "Breakthroughs since 2012 (AlexNet on ImageNet). Scales exceptionally with data and compute. Key architectures: CNNs for images, RNNs/LSTMs for sequences, transformers as universal default since 2017. Prerequisites: GPUs/TPUs, large datasets, frameworks (PyTorch, TensorFlow, JAX). Trade-off: high accuracy vs. black-box character, data hunger, energy footprint." },
-    links: [
-      { label: "Goodfellow et al., Deep Learning Book", url: "https://www.deeplearningbook.org/" }
-    ]
-  },
+    links: [ { label: "Goodfellow et al., Deep Learning Book", url: "https://www.deeplearningbook.org/" } ],
+    related: ["nn", "cnn", "transformer", "ki"] },
 
   { id: "nn", category: "dl", risk: null,
     tags: ["#NeuralNet", "#Perceptron", "#ReLU"],
@@ -416,8 +354,8 @@ const TERMS = [
     en: {
       term: "Neural Network",
       short: "Model composed of artificial neurons, loosely inspired by the biological brain. Layers of nodes transform inputs into outputs.",
-      long: "Building block: artificial neuron with weighted inputs, bias, activation function (ReLU, sigmoid, tanh). Topology: input, hidden, output layers; \"deep\" means multiple hidden layers. Training: forward pass, loss computation, backpropagation, weight update via gradient descent. Universal Approximation Theorem: a single hidden layer can in principle approximate any continuous function — depth improves representational power in practice." }
-  },
+      long: "Building block: artificial neuron with weighted inputs, bias, activation function (ReLU, sigmoid, tanh). Topology: input, hidden, output layers; \"deep\" means multiple hidden layers. Training: forward pass, loss computation, backpropagation, weight update via gradient descent. Universal Approximation Theorem: a single hidden layer can in principle approximate any continuous function — depth improves representational power in practice." },
+    related: ["deep-learning", "cnn", "transformer"] },
 
   { id: "cnn", category: "dl", risk: null,
     tags: ["#CNN", "#Convolution", "#ResNet"],
@@ -428,8 +366,8 @@ const TERMS = [
     en: {
       term: "Convolutional Neural Network (CNN)",
       short: "Specialised for grid-like data (images, audio spectrograms) via local filters and spatial hierarchy.",
-      long: "Core ideas: local connectivity, weight sharing, translation invariance. Layer types: convolution, pooling, fully connected. Milestones: LeNet (1998), AlexNet (2012), VGG, ResNet (skip connections), EfficientNet. Partly displaced by Vision Transformers (ViT), but still standard for many practical tasks due to efficiency and lower data requirements." }
-  },
+      long: "Core ideas: local connectivity, weight sharing, translation invariance. Layer types: convolution, pooling, fully connected. Milestones: LeNet (1998), AlexNet (2012), VGG, ResNet (skip connections), EfficientNet. Partly displaced by Vision Transformers (ViT), but still standard for many practical tasks due to efficiency and lower data requirements." },
+    related: ["deep-learning", "computer-vision", "nn"] },
 
   { id: "transformer", category: "dl", risk: null,
     tags: ["#Transformer", "#Attention", "#Vaswani2017"],
@@ -441,10 +379,8 @@ const TERMS = [
       term: "Transformer",
       short: "Architecture using self-attention (Vaswani et al. 2017, \"Attention is All You Need\"). Today dominant across NLP, vision, multimodal, audio.",
       long: "Eliminates recurrence and parallelises across sequence positions. Building blocks: multi-head self-attention, feed-forward networks, layer normalization, residual connections, positional encoding. Variants: encoder-only (BERT), decoder-only (GPT), encoder-decoder (T5, BART). Scaling with data and parameters yields emergent capabilities — foundation of modern LLMs and foundation models." },
-    links: [
-      { label: "Attention Is All You Need", url: "https://arxiv.org/abs/1706.03762" }
-    ]
-  },
+    links: [ { label: "Attention Is All You Need", url: "https://arxiv.org/abs/1706.03762" } ],
+    related: ["llm", "embedding", "deep-learning", "nn"] },
 
   { id: "embedding", category: "dl", risk: null,
     tags: ["#Embedding", "#Vectors", "#Word2Vec"],
@@ -455,8 +391,8 @@ const TERMS = [
     en: {
       term: "Embedding",
       short: "Dense vector representation of discrete objects (words, images, users) in a semantic space where similarity is measurable.",
-      long: "NLP pioneers: Word2Vec (2013), GloVe, FastText. Modern: contextual embeddings from BERT, Sentence-Transformers, multimodal embeddings (CLIP). Applications: search, recommendation, clustering, RAG pipelines. Vector databases (Pinecone, Weaviate, Milvus, pgvector) store embeddings for fast nearest-neighbour search." }
-  },
+      long: "NLP pioneers: Word2Vec (2013), GloVe, FastText. Modern: contextual embeddings from BERT, Sentence-Transformers, multimodal embeddings (CLIP). Applications: search, recommendation, clustering, RAG pipelines. Vector databases (Pinecone, Weaviate, Milvus, pgvector) store embeddings for fast nearest-neighbour search." },
+    related: ["transformer", "rag", "nlp", "tokenization"] },
 
   { id: "diffusion", category: "dl", risk: null,
     tags: ["#Diffusion", "#StableDiffusion", "#Generative"],
@@ -467,10 +403,8 @@ const TERMS = [
     en: {
       term: "Diffusion Model",
       short: "Generative model class iteratively reversing noise into structured data — state of the art for image generation.",
-      long: "Forward process adds Gaussian noise; the model learns the reverse denoising process. Notable models: Stable Diffusion, Midjourney, DALL-E, Sora (video). Competing with GANs, often more stable to train and qualitatively superior. Latent diffusion (on VAE latents) drastically reduces compute. Control via text embeddings (CLIP) and conditioning (ControlNet, IP-Adapter)." }
-  },
-
-  /* =================== LLM / GENERATIVE AI =================== */
+      long: "Forward process adds Gaussian noise; the model learns the reverse denoising process. Notable models: Stable Diffusion, Midjourney, DALL-E, Sora (video). Competing with GANs, often more stable to train and qualitatively superior. Latent diffusion (on VAE latents) drastically reduces compute. Control via text embeddings (CLIP) and conditioning (ControlNet, IP-Adapter)." },
+    related: ["image-generation", "generative-ai"] },
 
   { id: "llm", category: "llm", risk: null,
     tags: ["#LLM", "#GPT", "#FoundationModel"],
@@ -481,8 +415,8 @@ const TERMS = [
     en: {
       term: "Large Language Model (LLM)",
       short: "Transformer-based model with billions of parameters, trained on vast text corpora, that understands and generates language.",
-      long: "Examples: GPT-4o, Claude, Llama, Gemini, Mistral, Qwen. Training: self-supervised on web corpora (pretraining), followed by fine-tuning and RLHF/DPO. Capabilities scale with parameters, data, and compute (scaling laws). Limitations: hallucinations, no real-time knowledge, context window. Under the AI Act, typically classified as GPAI; above 10^25 FLOPs as GPAI with systemic risk." }
-  },
+      long: "Examples: GPT-4o, Claude, Llama, Gemini, Mistral, Qwen. Training: self-supervised on web corpora (pretraining), followed by fine-tuning and RLHF/DPO. Capabilities scale with parameters, data, and compute (scaling laws). Limitations: hallucinations, no real-time knowledge, context window. Under the AI Act, typically classified as GPAI; above 10^25 FLOPs as GPAI with systemic risk." },
+    related: ["foundation-model", "gpai", "transformer", "prompt-engineering", "generative-ai"] },
 
   { id: "foundation-model", category: "llm", risk: null,
     tags: ["#FoundationModel", "#Stanford", "#Multimodal"],
@@ -494,10 +428,8 @@ const TERMS = [
       term: "Foundation Model",
       short: "Large pre-trained model adapted via fine-tuning to many downstream tasks (Bommasani et al., Stanford 2021).",
       long: "Coined by Stanford CRFM. Characteristics: scale (data, compute), versatility, emergence. Modalities: text (LLMs), vision (CLIP, SAM), multimodal (GPT-4o, Gemini), audio (Whisper), code (Codex). Overlaps with the AI Act's GPAI definition — not every foundation model is GPAI per the AI Act, but all GPAI models are foundation models broadly." },
-    links: [
-      { label: "Bommasani et al. (Stanford CRFM)", url: "https://arxiv.org/abs/2108.07258" }
-    ]
-  },
+    links: [ { label: "Bommasani et al. (Stanford CRFM)", url: "https://arxiv.org/abs/2108.07258" } ],
+    related: ["llm", "gpai", "generative-ai", "fine-tuning", "downstream-anbieter"] },
 
   { id: "generative-ai", category: "llm", risk: null,
     tags: ["#GenAI", "#ChatGPT", "#Generation"],
@@ -508,8 +440,8 @@ const TERMS = [
     en: {
       term: "Generative AI",
       short: "AI systems that produce new content — text, image, audio, video, code — based on learned data distributions.",
-      long: "Current wave since ChatGPT (Nov 2022). Key technologies: LLMs for text/code, diffusion for image/video, flow-matching/AR for audio. Economic disruption: marketing, software, design, education, research. Legal hot topics: training-data copyright, output protectability, liability, transparency duties (Art. 50 AI Act, AI-generated labels)." }
-  },
+      long: "Current wave since ChatGPT (Nov 2022). Key technologies: LLMs for text/code, diffusion for image/video, flow-matching/AR for audio. Economic disruption: marketing, software, design, education, research. Legal hot topics: training-data copyright, output protectability, liability, transparency duties (Art. 50 AI Act, AI-generated labels)." },
+    related: ["llm", "diffusion", "deepfake", "image-generation", "foundation-model"] },
 
   { id: "prompt-engineering", category: "llm", risk: null,
     tags: ["#PromptEngineering", "#FewShot", "#CoT"],
@@ -521,10 +453,8 @@ const TERMS = [
       term: "Prompt Engineering",
       short: "The craft of phrasing inputs (prompts) so a model reliably produces desired answers.",
       long: "Techniques: clear instructions, exemplar pairs (few-shot), role prompts, chain-of-thought (\"Think step by step\"), structured outputs (JSON, XML), ReAct, tool calling. Limits: robustness against prompt injection, distribution shift, hallucinations remain risks regardless of prompt design. Now a standard skill but no substitute for fine-tuning when deeper adaptation is needed." },
-    links: [
-      { label: "Anthropic Prompting Docs", url: "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" }
-    ]
-  },
+    links: [ { label: "Anthropic Prompting Docs", url: "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" } ],
+    related: ["llm", "prompt-injection", "rag"] },
 
   { id: "rag", category: "llm", risk: null,
     tags: ["#RAG", "#Retrieval", "#VectorDB"],
@@ -536,10 +466,8 @@ const TERMS = [
       term: "Retrieval-Augmented Generation (RAG)",
       short: "Architecture pattern: at answer time, an LLM retrieves relevant documents and uses them as context.",
       long: "Pipeline: ingestion (chunking, embedding, indexing in a vector DB) → retrieval (query embedding, top-k search, optional re-ranker) → augmentation (context into prompt) → generation. Benefits: up-to-date data without re-training, source attribution, fewer hallucinations. Extensions: HyDE, multi-query, GraphRAG, agentic RAG. Standard for enterprise chatbots and knowledge management." },
-    links: [
-      { label: "Original RAG Paper", url: "https://arxiv.org/abs/2005.11401" }
-    ]
-  },
+    links: [ { label: "Original RAG Paper", url: "https://arxiv.org/abs/2005.11401" } ],
+    related: ["embedding", "llm", "halluzination", "prompt-engineering"] },
 
   { id: "fine-tuning", category: "llm", risk: null,
     tags: ["#FineTuning", "#LoRA", "#PEFT"],
@@ -551,10 +479,8 @@ const TERMS = [
       term: "Fine-Tuning",
       short: "Continued training of a pre-trained model on domain-specific data to improve performance on specific tasks.",
       long: "Variants: full fine-tuning (all weights), parameter-efficient fine-tuning (PEFT) such as LoRA, QLoRA, adapters. Special forms: instruction tuning, DPO (Direct Preference Optimization), RLHF. AI Act implications: substantial fine-tuning of a GPAI model marketed under one's own name can make the actor a provider — Recital 109 indicates > 1/3 of original training FLOPs as a threshold." },
-    links: [
-      { label: "LoRA paper", url: "https://arxiv.org/abs/2106.09685" }
-    ]
-  },
+    links: [ { label: "LoRA paper", url: "https://arxiv.org/abs/2106.09685" } ],
+    related: ["llm", "rlhf", "foundation-model"] },
 
   { id: "rlhf", category: "llm", risk: null,
     tags: ["#RLHF", "#Alignment", "#PPO", "#DPO"],
@@ -566,10 +492,8 @@ const TERMS = [
       term: "RLHF (Reinforcement Learning from Human Feedback)",
       short: "Method aligning a language model to helpfulness, truthfulness, and harmlessness via human preferences.",
       long: "Classical pipeline: (1) supervised fine-tuning on demonstrations, (2) reward model trained on pairwise preferences, (3) policy optimisation via PPO. Without RLHF, LLMs often appear unhelpful or toxic. Modern alternatives: Direct Preference Optimization (DPO), KTO, Constitutional AI (Anthropic). Risks: reward hacking, sycophancy, reduced diversity — active alignment frontier." },
-    links: [
-      { label: "InstructGPT paper", url: "https://arxiv.org/abs/2203.02155" }
-    ]
-  },
+    links: [ { label: "InstructGPT paper", url: "https://arxiv.org/abs/2203.02155" } ],
+    related: ["fine-tuning", "rl", "llm"] },
 
   { id: "halluzination", category: "llm", risk: null,
     tags: ["#Hallucination", "#Truthfulness", "#Risk"],
@@ -580,10 +504,8 @@ const TERMS = [
     en: {
       term: "Hallucination",
       short: "Plausible but factually wrong or fabricated statements from an AI model — a core risk of generative AI.",
-      long: "Causes: models optimise probability, not truth; training-data gaps; query-time distribution shift; user pressure (sycophancy). Classes: factual hallucinations, fake citations, math errors, hallucinated tool calls. Mitigations: RAG with citations, tool use, confidence scores, external verification, RLHF, output constraints. Dangerous in legal, medical, financial use — law firms have already been sanctioned." }
-  },
-
-  /* =================== NLP =================== */
+      long: "Causes: models optimise probability, not truth; training-data gaps; query-time distribution shift; user pressure (sycophancy). Classes: factual hallucinations, fake citations, math errors, hallucinated tool calls. Mitigations: RAG with citations, tool use, confidence scores, external verification, RLHF, output constraints. Dangerous in legal, medical, financial use — law firms have already been sanctioned." },
+    related: ["rag", "llm"] },
 
   { id: "nlp", category: "nlp", risk: null,
     tags: ["#NLP", "#Language", "#BERT"],
@@ -594,8 +516,8 @@ const TERMS = [
     en: {
       term: "Natural Language Processing (NLP)",
       short: "AI subfield for machines to understand, generate, and translate human language.",
-      long: "Classical tasks: tokenisation, POS tagging, parsing, named entity recognition, sentiment analysis, machine translation, question answering, summarisation. Paradigm shifts: rule-based → statistical (HMM, CRF) → neural (Word2Vec, LSTM) → transformers (BERT, GPT). Today's default: pre-trained language models solving most tasks via prompting or light fine-tuning." }
-  },
+      long: "Classical tasks: tokenisation, POS tagging, parsing, named entity recognition, sentiment analysis, machine translation, question answering, summarisation. Paradigm shifts: rule-based → statistical (HMM, CRF) → neural (Word2Vec, LSTM) → transformers (BERT, GPT). Today's default: pre-trained language models solving most tasks via prompting or light fine-tuning." },
+    related: ["tokenization", "embedding", "llm"] },
 
   { id: "tokenization", category: "nlp", risk: null,
     tags: ["#Tokenization", "#BPE", "#Subword"],
@@ -607,12 +529,8 @@ const TERMS = [
       term: "Tokenization",
       short: "Splitting text into smaller units (tokens) for a model to process — words, subwords, or characters.",
       long: "Modern LLMs use subword tokenisation (Byte-Pair Encoding, WordPiece, SentencePiece). Benefits: vocabulary efficiency, handling of unknown words, cross-lingual coverage. Note: models \"see\" tokens, not words — \"strawberry\" often splits into several tokens, complicating character tasks. Tokenizer bias can disadvantage low-resource languages (more tokens per word = more expensive)." },
-    links: [
-      { label: "OpenAI Tokenizer", url: "https://platform.openai.com/tokenizer" }
-    ]
-  },
-
-  /* =================== COMPUTER VISION =================== */
+    links: [ { label: "OpenAI Tokenizer", url: "https://platform.openai.com/tokenizer" } ],
+    related: ["nlp", "embedding", "llm"] },
 
   { id: "computer-vision", category: "cv", risk: null,
     tags: ["#CV", "#Vision", "#ViT"],
@@ -623,8 +541,8 @@ const TERMS = [
     en: {
       term: "Computer Vision",
       short: "AI subfield enabling machines to interpret visual content — images, video, 3D.",
-      long: "Classical tasks: image classification, object detection, segmentation, tracking, pose estimation, OCR. Architectures: CNNs (long-standing default), Vision Transformers (ViT, since 2020), multimodal (CLIP, SAM). Applications: autonomous driving, medicine (radiology), industry (quality control), agriculture. AI Act focal points: biometric identification, facial recognition, emotion recognition." }
-  },
+      long: "Classical tasks: image classification, object detection, segmentation, tracking, pose estimation, OCR. Architectures: CNNs (long-standing default), Vision Transformers (ViT, since 2020), multimodal (CLIP, SAM). Applications: autonomous driving, medicine (radiology), industry (quality control), agriculture. AI Act focal points: biometric identification, facial recognition, emotion recognition." },
+    related: ["cnn", "gesichtserkennung", "image-generation"] },
 
   { id: "gesichtserkennung", category: "cv", risk: "prohibited",
     tags: ["#FacialRecognition", "#Biometric", "#Art5"],
@@ -635,8 +553,8 @@ const TERMS = [
     en: {
       term: "Facial Recognition",
       short: "Biometric identification or verification of persons by their face. Heavily regulated or banned under the AI Act depending on mode.",
-      long: "Three modes: (1) real-time remote identification in public spaces for law enforcement — generally prohibited (Art. 5(1)(h)), narrow exceptions with judicial authorisation. (2) Post-remote identification — high-risk under Annex III(1). (3) Verification (1:1, e.g. phone unlock) — mostly high-risk depending on context. Untargeted scraping to build facial databases (Clearview AI) is also prohibited." }
-  },
+      long: "Three modes: (1) real-time remote identification in public spaces for law enforcement — generally prohibited (Art. 5(1)(h)), narrow exceptions with judicial authorisation. (2) Post-remote identification — high-risk under Annex III(1). (3) Verification (1:1, e.g. phone unlock) — mostly high-risk depending on context. Untargeted scraping to build facial databases (Clearview AI) is also prohibited." },
+    related: ["verbotene-praktiken", "computer-vision", "anhang-iii", "anhang-ii"] },
 
   { id: "image-generation", category: "cv", risk: "limited",
     tags: ["#ImageGen", "#Diffusion", "#Art50"],
@@ -647,10 +565,8 @@ const TERMS = [
     en: {
       term: "Image Generation",
       short: "Producing new images via generative models, predominantly diffusion. Subject to transparency duties and copyright questions.",
-      long: "Methods: diffusion (Stable Diffusion, FLUX, Imagen), GANs (StyleGAN), VAE-based. Control: text prompts, ControlNet, IP-Adapter, inpainting, outpainting, LoRA styles. Ethical and legal questions: training-data licensing (Getty vs. Stability), style mimicry of living artists, copyright of generated images, deepfakes. AI Act duty: machine-readable labelling of AI-generated content (Art. 50(2))." }
-  },
-
-  /* =================== ETHIK & FAIRNESS =================== */
+      long: "Methods: diffusion (Stable Diffusion, FLUX, Imagen), GANs (StyleGAN), VAE-based. Control: text prompts, ControlNet, IP-Adapter, inpainting, outpainting, LoRA styles. Ethical and legal questions: training-data licensing (Getty vs. Stability), style mimicry of living artists, copyright of generated images, deepfakes. AI Act duty: machine-readable labelling of AI-generated content (Art. 50(2))." },
+    related: ["diffusion", "generative-ai", "transparenzpflichten", "computer-vision"] },
 
   { id: "bias", category: "ethics", risk: null,
     tags: ["#Bias", "#Fairness", "#COMPAS"],
@@ -661,8 +577,8 @@ const TERMS = [
     en: {
       term: "Algorithmic Bias",
       short: "Systematic distortion in an AI system's predictions or decisions that disproportionately disadvantages specific groups.",
-      long: "Sources: historical bias (data reflect discrimination), representation bias (subgroups underrepresented), measurement bias (mislabelled data), aggregation bias, evaluation bias, deployment bias. Notable cases: COMPAS (criminal justice), Amazon recruiting (penalising women), Apple Card (gender credit limits). Mitigations: diverse datasets, reweighting, adversarial debiasing, fairness constraints, audits, post-deployment monitoring." }
-  },
+      long: "Sources: historical bias (data reflect discrimination), representation bias (subgroups underrepresented), measurement bias (mislabelled data), aggregation bias, evaluation bias, deployment bias. Notable cases: COMPAS (criminal justice), Amazon recruiting (penalising women), Apple Card (gender credit limits). Mitigations: diverse datasets, reweighting, adversarial debiasing, fairness constraints, audits, post-deployment monitoring." },
+    related: ["fairness", "daten-governance", "trainingsdaten"] },
 
   { id: "fairness", category: "ethics", risk: null,
     tags: ["#Fairness", "#Equity", "#Impossibility"],
@@ -674,10 +590,8 @@ const TERMS = [
       term: "Fairness",
       short: "Property of an AI system to decide without unjustified discrimination. Multiple mathematically incompatible definitions.",
       long: "Three main criteria: demographic parity (equal positive rate across groups), equalized odds (equal TPR/FPR), predictive parity (equal precision). Impossibility theorem (Chouldechova, Kleinberg): with different base rates the three cannot all hold simultaneously — the choice is normative. Tools: AIF360 (IBM), Fairlearn (Microsoft), What-If Tool. Legal frame: anti-discrimination law, AI Act Art. 10, EU Charter Art. 21." },
-    links: [
-      { label: "Fairlearn", url: "https://fairlearn.org/" }
-    ]
-  },
+    links: [ { label: "Fairlearn", url: "https://fairlearn.org/" } ],
+    related: ["bias", "xai"] },
 
   { id: "xai", category: "ethics", risk: null,
     tags: ["#XAI", "#Interpretability", "#SHAP"],
@@ -688,8 +602,8 @@ const TERMS = [
     en: {
       term: "Explainable AI (XAI)",
       short: "Methods to make AI model decisions intelligible to humans.",
-      long: "Two approaches: (1) interpretable models (linear regression, decision trees) — explanation is intrinsic; (2) post-hoc explanations for black-box models: SHAP (Shapley values), LIME, counterfactuals, saliency maps, integrated gradients. The AI Act requires transparency and interpretability for high-risk AI (Art. 13). GDPR Art. 22 requires \"meaningful information about the logic\" of automated decisions." }
-  },
+      long: "Two approaches: (1) interpretable models (linear regression, decision trees) — explanation is intrinsic; (2) post-hoc explanations for black-box models: SHAP (Shapley values), LIME, counterfactuals, saliency maps, integrated gradients. The AI Act requires transparency and interpretability for high-risk AI (Art. 13). GDPR Art. 22 requires \"meaningful information about the logic\" of automated decisions." },
+    related: ["fairness", "menschliche-aufsicht"] },
 
   { id: "deepfake", category: "ethics", risk: "limited",
     tags: ["#Deepfake", "#Disinformation", "#Art50"],
@@ -701,12 +615,8 @@ const TERMS = [
       term: "Deepfake",
       short: "Synthetic image, audio, or video that appears real but was generated or manipulated by generative models (GAN, diffusion).",
       long: "Applications: film (de-aging, dubbing), satire, education — but also disinformation, election interference, non-consensual pornography, identity fraud. AI Act Art. 50(4): deployers must disclose deepfakes as artificially generated, with adapted disclosure for artistic/satirical works. Detection: forensic analysis, watermarking (C2PA, SynthID). Criminal law: e.g. German §§ 22, 33 KunstUrhG, § 201a StGB." },
-    links: [
-      { label: "C2PA Standard", url: "https://c2pa.org/" }
-    ]
-  },
-
-  /* =================== GOVERNANCE =================== */
+    links: [ { label: "C2PA Standard", url: "https://c2pa.org/" } ],
+    related: ["generative-ai", "transparenzpflichten", "begrenztes-risiko", "dsa-schnittstelle"] },
 
   { id: "dsgvo", category: "governance", risk: null,
     tags: ["#GDPR", "#DSGVO", "#Privacy", "#Art22"],
@@ -718,10 +628,8 @@ const TERMS = [
       term: "GDPR",
       short: "General Data Protection Regulation (Regulation (EU) 2016/679). The EU's core regime for processing personal data — also in AI contexts.",
       long: "Intersections with the AI Act: (1) Art. 22 GDPR — right not to be subject to solely automated decisions with legal effect; (2) Data Protection Impact Assessment (DPIA, Art. 35) complements FRIA; (3) legal bases for training-data processing (Art. 6); (4) Privacy by Design (Art. 25); (5) data subject rights (access, erasure, objection). Data protection authorities actively act against LLM providers (Italy vs. ChatGPT 2023, Garante)." },
-    links: [
-      { label: "EUR-Lex DSGVO", url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj" }
-    ]
-  },
+    links: [ { label: "EUR-Lex DSGVO", url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj" } ],
+    related: ["dsgvo-schnittstelle", "fria", "erklaerungsrecht"] },
 
   { id: "iso-42001", category: "governance", risk: null,
     tags: ["#ISO42001", "#AIMS", "#Standard"],
@@ -733,12 +641,8 @@ const TERMS = [
       term: "ISO/IEC 42001",
       short: "International standard for AI Management Systems (AIMS), published December 2023. Counterpart to ISO 9001 / 27001 for AI.",
       long: "Specifies requirements to establish, implement, maintain, and continually improve an AI management system. Certifiable. Contents: organisational context, leadership, planning, support, operation, evaluation, improvement. Likely foundation for harmonised standards under the AI Act (CEN/CENELEC JTC 21 standardisation request). A practical path to demonstrable AI Act compliance." },
-    links: [
-      { label: "ISO/IEC 42001", url: "https://www.iso.org/standard/81230.html" }
-    ]
-  },
-
-  /* =================== SICHERHEIT =================== */
+    links: [ { label: "ISO/IEC 42001", url: "https://www.iso.org/standard/81230.html" } ],
+    related: ["harmonisierte-normen", "konformitaetsbewertung", "risikomanagementsystem"] },
 
   { id: "prompt-injection", category: "security", risk: null,
     tags: ["#PromptInjection", "#OWASP", "#Security"],
@@ -750,10 +654,8 @@ const TERMS = [
       term: "Prompt Injection",
       short: "Attack where manipulative instructions in inputs or external data trick an LLM into ignoring original directives.",
       long: "Two main classes: (1) direct injection — user sends malicious prompt; (2) indirect injection — instructions hidden in data the model reads (web page, email, PDF). Consequences: data exfiltration, unauthorised tool use, reputational damage. Top risk in OWASP LLM Top 10. Mitigations: privilege separation, output filtering, tool allowlists, confirmation dialogues, robust system-prompt design — no complete protection." },
-    links: [
-      { label: "OWASP LLM Top 10", url: "https://genai.owasp.org/" }
-    ]
-  },
+    links: [ { label: "OWASP LLM Top 10", url: "https://genai.owasp.org/" } ],
+    related: ["prompt-engineering", "adversarial", "ai-red-teaming"] },
 
   { id: "adversarial", category: "security", risk: null,
     tags: ["#AdversarialAttack", "#Robustness"],
@@ -764,8 +666,8 @@ const TERMS = [
     en: {
       term: "Adversarial Attack",
       short: "Specifically crafted inputs that trick an ML model into wrong outputs — often imperceptible to humans.",
-      long: "Classes: evasion (inference-time, FGSM, PGD), poisoning (training-time), model extraction, membership inference, model inversion. Example: minimally modified stop sign classified as speed limit. Defences: adversarial training, input preprocessing, certified robustness, ensembles. AI Act Art. 15 requires high-risk AI to be appropriately robust against such attacks." }
-  },
+      long: "Classes: evasion (inference-time, FGSM, PGD), poisoning (training-time), model extraction, membership inference, model inversion. Example: minimally modified stop sign classified as speed limit. Defences: adversarial training, input preprocessing, certified robustness, ensembles. AI Act Art. 15 requires high-risk AI to be appropriately robust against such attacks." },
+    related: ["prompt-injection", "ai-red-teaming", "genauigkeit-robustheit"] },
 
   { id: "ai-red-teaming", category: "security", risk: null,
     tags: ["#RedTeaming", "#GPAI", "#Art55"],
@@ -776,12 +678,8 @@ const TERMS = [
     en: {
       term: "AI Red Teaming",
       short: "Structured adversarial testing of AI systems to surface vulnerabilities, misuse potential, and safety issues.",
-      long: "Originating in cybersecurity, transferred to AI models. Methods: manual probing, automated jailbreaking, multi-turn attacks, data-extraction tests, capability evaluations. Mandatory for GPAI with systemic risk (Art. 55 AI Act). Established at OpenAI, Anthropic, Google DeepMind, Meta. External red teams (e.g. NIST, ARC, Apollo Research) complement internal testing." }
-  }
-
-,
-
-  /* =================== AKTEURE & WERTSCHÖPFUNGSKETTE =================== */
+      long: "Originating in cybersecurity, transferred to AI models. Methods: manual probing, automated jailbreaking, multi-turn attacks, data-extraction tests, capability evaluations. Mandatory for GPAI with systemic risk (Art. 55 AI Act). Established at OpenAI, Anthropic, Google DeepMind, Meta. External red teams (e.g. NIST, ARC, Apollo Research) complement internal testing." },
+    related: ["systemisches-risiko", "adversarial", "prompt-injection"] },
 
   { id: "einfuehrer", category: "ai-act-core", risk: null,
     tags: ["#Importer", "#Akteur", "#Art23", "#Wertschoepfungskette"],
@@ -793,8 +691,8 @@ const TERMS = [
       term: "Importer",
       short: "Person established in the EU placing on the market an AI system that bears the name or trademark of a person established outside the EU (Art. 3(6)).",
       long: "The importer must verify before placing on the market that the third-country provider performed conformity assessment, that technical documentation and CE marking are in place, and that an authorised representative has been designated. Duties in Art. 23: retain documentation for 10 years, identify itself on the system, cooperate with market surveillance authorities. Systems suspected of non-conformity must not be placed on the market; serious risks must be reported." },
-    links: [ { label: "Art. 23 AI Act", url: "https://artificialintelligenceact.eu/article/23/" } ]
-  },
+    links: [ { label: "Art. 23 AI Act", url: "https://artificialintelligenceact.eu/article/23/" } ],
+    related: ["haendler", "bevollmaechtigter", "anbieter"] },
 
   { id: "haendler", category: "ai-act-core", risk: null,
     tags: ["#Distributor", "#Akteur", "#Art24"],
@@ -806,8 +704,8 @@ const TERMS = [
       term: "Distributor",
       short: "Natural or legal person in the supply chain (other than provider or importer) that makes an AI system available on the EU market (Art. 3(7)).",
       long: "Distributors must verify before making available that CE marking, EU declaration of conformity and instructions for use are in place and that provider and importer duties are fulfilled (Art. 24). On suspicion of non-conformity: suspend availability, inform provider/importer and authorities. Substantial modification or rebranding of a high-risk system makes the actor a provider (Art. 25 — the \"provider flip\")." },
-    links: [ { label: "Art. 24 AI Act", url: "https://artificialintelligenceact.eu/article/24/" } ]
-  },
+    links: [ { label: "Art. 24 AI Act", url: "https://artificialintelligenceact.eu/article/24/" } ],
+    related: ["einfuehrer", "anbieter", "provider-flip"] },
 
   { id: "bevollmaechtigter", category: "ai-act-core", risk: null,
     tags: ["#AuthRepresentative", "#Akteur", "#Art22", "#Drittland"],
@@ -819,8 +717,8 @@ const TERMS = [
       term: "Authorised Representative",
       short: "Person established in the EU designated in writing by a third-country provider to carry out obligations under the AI Act (Art. 3(5), Art. 22).",
       long: "An authorised representative must be designated by non-EU providers before placing systems on the market. Tasks: verify EU declaration of conformity and technical documentation, keep records for 10 years, cooperate with authorities, terminate mandate if non-conformity is suspected. Comparable to the GDPR Art. 27 representative but with wider verification and reporting duties." },
-    links: [ { label: "Art. 22 AI Act", url: "https://artificialintelligenceact.eu/article/22/" } ]
-  },
+    links: [ { label: "Art. 22 AI Act", url: "https://artificialintelligenceact.eu/article/22/" } ],
+    related: ["einfuehrer", "anbieter"] },
 
   { id: "provider-flip", category: "ai-act-core", risk: null,
     tags: ["#ProviderFlip", "#Art25", "#Wertschoepfungskette", "#SubstantialModification"],
@@ -832,8 +730,8 @@ const TERMS = [
       term: "Provider Flip",
       short: "An actor becomes the provider when it substantially modifies a high-risk AI system, markets it under its own name, or changes its intended purpose (Art. 25).",
       long: "Three triggers: (a) marketing under own name or trademark; (b) substantial modification of a high-risk system already placed on the market; (c) change of intended purpose such that a system becomes high-risk. Consequence: all provider duties fall on the new provider. The original provider must cooperate and share relevant information (Art. 25(4)). A key compliance point for downstream developers and system integrators." },
-    links: [ { label: "Art. 25 AI Act", url: "https://artificialintelligenceact.eu/article/25/" } ]
-  },
+    links: [ { label: "Art. 25 AI Act", url: "https://artificialintelligenceact.eu/article/25/" } ],
+    related: ["wesentliche-aenderung", "anbieter", "downstream-anbieter", "haendler"] },
 
   { id: "wesentliche-aenderung", category: "ai-act-core", risk: null,
     tags: ["#SubstantialModification", "#Art3", "#Requalification"],
@@ -845,8 +743,8 @@ const TERMS = [
       term: "Substantial Modification",
       short: "Change to an AI system after placing on the market that may affect its compliance with the AI Act or alter its intended purpose (Art. 3(23)).",
       long: "Pre-planned and documented changes, especially those within continuous learning, do not qualify as substantial (Recital 128). Substantial modifications trigger new conformity assessment (Art. 43(4)) and can cause a provider flip (Art. 25). Examples: change to the training dataset beyond the originally planned scope, functional extension to new use cases, broadening of purpose. Guidelines and harmonised standards are expected to clarify." },
-    links: [ { label: "Art. 3 AI Act", url: "https://artificialintelligenceact.eu/article/3/" } ]
-  },
+    links: [ { label: "Art. 3 AI Act", url: "https://artificialintelligenceact.eu/article/3/" } ],
+    related: ["provider-flip", "konformitaetsbewertung"] },
 
   { id: "downstream-anbieter", category: "ai-act-core", risk: null,
     tags: ["#Downstream", "#GPAI", "#Wertschoepfungskette", "#Art53"],
@@ -858,8 +756,8 @@ const TERMS = [
       term: "Downstream Provider",
       short: "Provider that develops and places on the market an AI system based on a GPAI model provided by another provider (Art. 3(68)).",
       long: "Downstream providers depend on technical information from the GPAI provider. Art. 53(1)(b) requires GPAI providers to share information and documentation per Annex XII with downstream providers: technical capabilities, limitations, acceptable-use terms, training-data summary. For GPAI with systemic risk this is complemented by model evaluations and risk-mitigation strategies. Contractual pass-through of compliance is common but does not release the downstream provider from its own duties." },
-    links: [ { label: "Art. 53 AI Act", url: "https://artificialintelligenceact.eu/article/53/" } ]
-  },
+    links: [ { label: "Art. 53 AI Act", url: "https://artificialintelligenceact.eu/article/53/" } ],
+    related: ["gpai", "provider-flip", "foundation-model"] },
 
   { id: "betroffene-person", category: "ai-act-core", risk: null,
     tags: ["#AffectedPerson", "#Grundrechte", "#Art85", "#Art86"],
@@ -871,8 +769,8 @@ const TERMS = [
       term: "Affected Person",
       short: "Natural person whose rights and freedoms are affected by an AI system. Beneficiary of information and complaint rights.",
       long: "The AI Act recognises affected persons as a category, though without the full rights catalogue of the GDPR. Key rights: complaint to the market surveillance authority (Art. 85), explanation of individual decision-making by high-risk systems with legal or similarly significant effect (Art. 86), information when subject to certain systems (Art. 26(11) — emotion recognition, biometric categorisation, deepfakes). Rights apply without prejudice to the GDPR." },
-    links: [ { label: "Art. 85 AI Act", url: "https://artificialintelligenceact.eu/article/85/" }, { label: "Art. 86 AI Act", url: "https://artificialintelligenceact.eu/article/86/" } ]
-  },
+    links: [ { label: "Art. 85 AI Act", url: "https://artificialintelligenceact.eu/article/85/" }, { label: "Art. 86 AI Act", url: "https://artificialintelligenceact.eu/article/86/" } ],
+    related: ["beschwerderecht", "erklaerungsrecht", "fria"] },
 
   { id: "kmu", category: "ai-act-core", risk: null,
     tags: ["#SME", "#Startup", "#Art62", "#Foerderung"],
@@ -884,8 +782,8 @@ const TERMS = [
       term: "SMEs and Start-ups",
       short: "Small and medium enterprises, microenterprises and start-ups, for whom the AI Act provides specific relief and support (Art. 62 et seq.).",
       long: "Definition follows Commission Recommendation 2003/361/EC (< 250 employees, < €50m turnover). Reliefs: simplified technical documentation (Art. 11(1)), priority sandbox access (Art. 62(2)(a)), reduced notified-body fees for conformity assessment (Art. 62(2)(c)), dedicated communication channels with the AI Office. Fines are proportionate: SMEs pay the lower of absolute amount or turnover percentage (Art. 99(6))." },
-    links: [ { label: "Art. 62 AI Act", url: "https://artificialintelligenceact.eu/article/62/" } ]
-  },
+    links: [ { label: "Art. 62 AI Act", url: "https://artificialintelligenceact.eu/article/62/" } ],
+    related: ["reallabor", "bussgeld-art99"] },
 
   { id: "marktueberwachung", category: "governance", risk: null,
     tags: ["#MarketSurveillance", "#Enforcement", "#Art70", "#VO2019-1020"],
@@ -897,8 +795,8 @@ const TERMS = [
       term: "Market Surveillance Authority",
       short: "National authority monitoring and enforcing AI system compliance under the AI Act (Art. 3(26), Art. 70).",
       long: "Each Member State designates at least one market surveillance authority and at least one notifying authority (Art. 70). The framework of Regulation (EU) 2019/1020 (Market Surveillance Regulation) applies. Powers: examine technical documentation, access training data, test the system, order recall, market withdrawal, fines. For GPAI models supervision is centralised with the AI Office (Art. 88), not national authorities. In Germany the BNetzA acts as coordinating authority (as of 2025)." },
-    links: [ { label: "Art. 70 AI Act", url: "https://artificialintelligenceact.eu/article/70/" } ]
-  },
+    links: [ { label: "Art. 70 AI Act", url: "https://artificialintelligenceact.eu/article/70/" } ],
+    related: ["notifizierende-behoerde", "ai-office", "schwerwiegender-vorfall", "whistleblower"] },
 
   { id: "notifizierende-behoerde", category: "governance", risk: null,
     tags: ["#NotifyingAuthority", "#NotifiedBody", "#Art28"],
@@ -910,8 +808,8 @@ const TERMS = [
       term: "Notifying Authority",
       short: "National authority designating, monitoring and notifying to the Commission the notified bodies (Art. 3(19), Art. 28).",
       long: "Responsible for assessing whether a conformity assessment body meets AI Act requirements (independence, competence, procedures — Art. 31), for its designation and ongoing supervision. Notifying authority and market surveillance authority may be separated or combined; smaller Member States often merge them. The Commission maintains the NANDO database of notified bodies." },
-    links: [ { label: "Art. 28 AI Act", url: "https://artificialintelligenceact.eu/article/28/" } ]
-  },
+    links: [ { label: "Art. 28 AI Act", url: "https://artificialintelligenceact.eu/article/28/" } ],
+    related: ["notifizierte-stelle", "marktueberwachung"] },
 
   { id: "notifizierte-stelle", category: "ai-act-core", risk: null,
     tags: ["#NotifiedBody", "#Art29", "#Conformity"],
@@ -923,8 +821,8 @@ const TERMS = [
       term: "Notified Body",
       short: "Independent conformity assessment body designated by a notifying authority and notified to the Commission (Art. 3(22), Art. 29 et seq.).",
       long: "For high-risk systems whose conformity assessment requires third-party involvement (notably remote biometric identification under Annex VII), a notified body must be involved. Requirements: legal separation, independence, AI technical competence, professional liability insurance, confidentiality (Art. 31). Certificates are valid for up to five years, renewable (Art. 44). The Commission may suspend or withdraw certificates in case of non-conformity." },
-    links: [ { label: "Art. 29 AI Act", url: "https://artificialintelligenceact.eu/article/29/" } ]
-  },
+    links: [ { label: "Art. 29 AI Act", url: "https://artificialintelligenceact.eu/article/29/" } ],
+    related: ["konformitaetsbewertung", "notifizierende-behoerde", "ce-kennzeichnung"] },
 
   { id: "eu-datenbank", category: "governance", risk: null,
     tags: ["#EUDatabase", "#Registration", "#Art71", "#Transparency"],
@@ -936,10 +834,8 @@ const TERMS = [
       term: "EU Database for High-Risk AI Systems",
       short: "Public database managed by the Commission where providers must register high-risk systems before placing on the market (Art. 71, Annex VIII).",
       long: "Registration duties apply to providers for all Annex III high-risk systems (exception: critical infrastructure — not public) and to public-sector deployers. Content per Annex VIII: information on provider/deployer, system name, purpose, summary of essential elements. Purpose: transparency for affected persons, civil society, authorities. Publicly accessible while safeguarding trade secrets. A central pillar of European AI governance." },
-    links: [ { label: "Art. 71 AI Act", url: "https://artificialintelligenceact.eu/article/71/" } ]
-  },
-
-  /* =================== ANHÄNGE =================== */
+    links: [ { label: "Art. 71 AI Act", url: "https://artificialintelligenceact.eu/article/71/" } ],
+    related: ["hochrisiko-ki", "transparenzpflichten"] },
 
   { id: "anhang-i", category: "ai-act-core", risk: null,
     tags: ["#AnnexI", "#UnionHarmonisation", "#Produktrecht"],
@@ -951,8 +847,8 @@ const TERMS = [
       term: "Annex I (Union Harmonisation Legislation)",
       short: "List of 20 EU product laws whose safety components using AI automatically qualify as high-risk systems (Art. 6(1)).",
       long: "Annex I has two sections: Section A (12 New Legislative Framework acts) — including the Machinery Regulation, Toy Directive, recreational craft, lifts, ATEX, radio equipment, pressure equipment, cableways, PPE, gas appliances, MDR and IVDR. Section B (8 Old Approach acts) — aviation, motor vehicles, agricultural machinery, marine equipment, railways, motor vehicle type approval, civil aviation EASA. Where an AI system is a safety component of one of these products, the AI Act applies alongside the sectoral rules." },
-    links: [ { label: "Anhang I", url: "https://artificialintelligenceact.eu/annex/1/" } ]
-  },
+    links: [ { label: "Anhang I", url: "https://artificialintelligenceact.eu/annex/1/" } ],
+    related: ["hochrisiko-ki", "mdr-schnittstelle", "anhang-iii"] },
 
   { id: "anhang-iii", category: "ai-act-core", risk: "high",
     tags: ["#AnnexIII", "#HighRisk", "#UseCases"],
@@ -964,8 +860,8 @@ const TERMS = [
       term: "Annex III (High-Risk Use Cases)",
       short: "Catalogue of eight areas where AI systems qualify as high-risk (Art. 6(2)). Extensible by Commission delegated acts (Art. 7).",
       long: "The eight areas: (1) biometrics — remote identification, categorisation, emotion recognition; (2) critical infrastructure — transport, water, gas, electricity, digital infrastructure; (3) education and vocational training — access, assessment, proctoring; (4) employment, workers management — recruitment, promotion, allocation, performance evaluation; (5) access to essential private and public services — creditworthiness (except fraud detection), social benefits, emergency services, life and health insurance; (6) law enforcement; (7) migration, asylum, border control; (8) administration of justice and democratic processes. Exception in Art. 6(3): not high-risk if the system only performs narrowly defined procedural tasks." },
-    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ]
-  },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["hochrisiko-ki", "anhang-i", "arbeitsrecht-schnittstelle", "gesichtserkennung", "delegierte-rechtsakte"] },
 
   { id: "anhang-iv", category: "ai-act-core", risk: null,
     tags: ["#AnnexIV", "#TechnicalDocumentation", "#Art11"],
@@ -977,8 +873,8 @@ const TERMS = [
       term: "Annex IV (Technical Documentation)",
       short: "Minimum content of technical documentation for high-risk systems (Art. 11). Nine thematic blocks.",
       long: "Annex IV structures the mandatory documentation: (1) general description of the AI system, (2) detailed description of elements and development stages including datasets, training/validation/testing procedures, (3) information on monitoring, functioning and control, (4) description of fitness for purpose, accuracy, robustness, cybersecurity, (5) risk management system, (6) intended substantial modifications, (7) list of harmonised standards applied, (8) EU declaration of conformity, (9) description of the post-market monitoring plan. SMEs may use a simplified form per Commission template." },
-    links: [ { label: "Anhang IV", url: "https://artificialintelligenceact.eu/annex/4/" } ]
-  },
+    links: [ { label: "Anhang IV", url: "https://artificialintelligenceact.eu/annex/4/" } ],
+    related: ["technische-dokumentation", "konformitaetsbewertung"] },
 
   { id: "anhang-ii", category: "ai-act-core", risk: "prohibited",
     tags: ["#AnnexII", "#LawEnforcement", "#Art5"],
@@ -990,10 +886,8 @@ const TERMS = [
       term: "Annex II (Offences for Exceptions to Prohibitions)",
       short: "Catalogue of 16 serious offences for which narrowly limited exceptions from the ban on real-time remote biometric identification in public may apply (Art. 5(1)(h)).",
       long: "Exceptions require judicial authorisation, necessity and proportionality. The 16 offences track the EU Framework Decision on the European Arrest Warrant and include terrorism, trafficking in human beings, sexual exploitation of children, illicit trafficking in drugs, weapons, ammunition, explosives, murder, grievous bodily injury, illicit trafficking in human organs, kidnapping, racism and xenophobia, organised or armed robbery, environmental crime, offences against the financial interests of the Union, rape, offences within the jurisdiction of the ICC, hijacking of aircraft/ships, sabotage." },
-    links: [ { label: "Anhang II", url: "https://artificialintelligenceact.eu/annex/2/" } ]
-  },
-
-  /* =================== KONFORMITÄT & GRUNDPFLICHTEN =================== */
+    links: [ { label: "Anhang II", url: "https://artificialintelligenceact.eu/annex/2/" } ],
+    related: ["verbotene-praktiken", "gesichtserkennung"] },
 
   { id: "risikomanagementsystem", category: "ai-act-core", risk: null,
     tags: ["#RiskManagement", "#Art9", "#ISO23894"],
@@ -1005,8 +899,8 @@ const TERMS = [
       term: "Risk Management System",
       short: "Continuous iterative process across the full lifecycle of a high-risk system for identifying, evaluating and mitigating risks (Art. 9).",
       long: "Duty in five steps: (a) identify known and reasonably foreseeable risks to health, safety, fundamental rights; (b) evaluate risks under intended use and foreseeable misuse; (c) evaluate other risks from post-market monitoring; (d) adopt appropriate, targeted mitigation measures. Specific attention to children and vulnerable groups (Art. 9(9)). The harmonised standardisation draft for Art. 9 tracks ISO/IEC 23894 (AI risk management) and ISO 31000." },
-    links: [ { label: "Art. 9 AI Act", url: "https://artificialintelligenceact.eu/article/9/" } ]
-  },
+    links: [ { label: "Art. 9 AI Act", url: "https://artificialintelligenceact.eu/article/9/" } ],
+    related: ["hochrisiko-ki", "iso-42001", "daten-governance", "post-market-monitoring"] },
 
   { id: "daten-governance", category: "ai-act-core", risk: null,
     tags: ["#DataGovernance", "#Art10", "#TrainingData"],
@@ -1018,8 +912,8 @@ const TERMS = [
       term: "Data Governance and Data Quality",
       short: "Requirements for training, validation and testing data of high-risk systems (Art. 10). A central provision for data-driven AI.",
       long: "Data must be relevant, representative, free of errors and complete (Art. 10(3)). Data management procedures must cover: relevant design choices, data collection, preparation, examination for bias and possible discriminatory effects, identification of data gaps. An explicit exception allows processing of special categories of personal data (Art. 9 GDPR) for bias detection — subject to strict safeguards such as pseudonymisation, access restrictions and deletion duties (Art. 10(5)). Highly relevant for fairness audits." },
-    links: [ { label: "Art. 10 AI Act", url: "https://artificialintelligenceact.eu/article/10/" } ]
-  },
+    links: [ { label: "Art. 10 AI Act", url: "https://artificialintelligenceact.eu/article/10/" } ],
+    related: ["trainingsdaten", "bias", "dsgvo-schnittstelle", "risikomanagementsystem", "datenverordnung-schnittstelle"] },
 
   { id: "technische-dokumentation", category: "ai-act-core", risk: null,
     tags: ["#TechnicalDocumentation", "#Art11", "#AnnexIV"],
@@ -1031,8 +925,8 @@ const TERMS = [
       term: "Technical Documentation",
       short: "Providers must draw up and keep up-to-date the technical documentation per Annex IV before placing a high-risk system on the market (Art. 11).",
       long: "Documentation evidences conformity to authorities. Retention: 10 years after placing on the market (Art. 18). SMEs may use a simplified template published by the Commission (Art. 11(1) subpara. 3). For safety components under Annex I Section A the documentation may be integrated into existing sectoral documentation (Art. 11(2)). Documentation must be updated on every substantial modification." },
-    links: [ { label: "Art. 11 AI Act", url: "https://artificialintelligenceact.eu/article/11/" } ]
-  },
+    links: [ { label: "Art. 11 AI Act", url: "https://artificialintelligenceact.eu/article/11/" } ],
+    related: ["anhang-iv", "konformitaetsbewertung", "eu-konformitaetserklaerung"] },
 
   { id: "aufzeichnungspflicht", category: "ai-act-core", risk: null,
     tags: ["#Logging", "#Art12", "#Traceability"],
@@ -1044,8 +938,8 @@ const TERMS = [
       term: "Record-Keeping (Logging)",
       short: "High-risk systems must be technically designed to automatically log events during their operation (Art. 12).",
       long: "Purpose: traceability of system behaviour, risk detection, post-market monitoring, official investigations. Minimum content: period of each use (date, start/end time), reference database against which checks were performed, input data leading to a match, identity of natural persons involved in human review (Art. 12(3)). Special rules for remote biometric identification in Art. 26(6): retention at least six months. Deployer-side logging duties complemented in Art. 26(6), 27." },
-    links: [ { label: "Art. 12 AI Act", url: "https://artificialintelligenceact.eu/article/12/" } ]
-  },
+    links: [ { label: "Art. 12 AI Act", url: "https://artificialintelligenceact.eu/article/12/" } ],
+    related: ["hochrisiko-ki", "post-market-monitoring"] },
 
   { id: "genauigkeit-robustheit", category: "ai-act-core", risk: null,
     tags: ["#Accuracy", "#Robustness", "#Cybersecurity", "#Art15"],
@@ -1057,8 +951,8 @@ const TERMS = [
       term: "Accuracy, Robustness and Cybersecurity",
       short: "High-risk systems must achieve appropriate levels of accuracy, robustness and cybersecurity throughout their lifecycle (Art. 15).",
       long: "Providers must declare accuracy metrics (e.g. accuracy, precision, recall, F1) in the instructions for use (Art. 15(3)). Robustness covers resilience to errors, environmental variation, disturbances; for learning systems feedback loops must be controlled. Cybersecurity covers resistance to manipulation such as data poisoning, model poisoning, model evasion, model extraction, adversarial examples. The Commission supports benchmark development; the Cyber Resilience Act (CRA) applies alongside." },
-    links: [ { label: "Art. 15 AI Act", url: "https://artificialintelligenceact.eu/article/15/" } ]
-  },
+    links: [ { label: "Art. 15 AI Act", url: "https://artificialintelligenceact.eu/article/15/" } ],
+    related: ["adversarial", "cra-schnittstelle", "nis2-schnittstelle", "produkthaftung-schnittstelle"] },
 
   { id: "gebrauchsanweisung", category: "ai-act-core", risk: null,
     tags: ["#InstructionsForUse", "#Art13", "#UserManual"],
@@ -1070,8 +964,8 @@ const TERMS = [
       term: "Instructions for Use",
       short: "Providers must include digital or printed instructions with high-risk systems providing deployers with clear, comprehensive and accessible information (Art. 13).",
       long: "Minimum content: identity and contact details of the provider, system characteristics, capabilities and performance limitations (purpose, accuracy, robustness, known circumstances leading to risks), changes envisaged by the provider, technical measures for human oversight, required computational resources, expected maintenance, description of logging mechanisms. Language: Member States may require use of national language. A prerequisite for proper operation by the deployer (Art. 26(1))." },
-    links: [ { label: "Art. 13 AI Act", url: "https://artificialintelligenceact.eu/article/13/" } ]
-  },
+    links: [ { label: "Art. 13 AI Act", url: "https://artificialintelligenceact.eu/article/13/" } ],
+    related: ["menschliche-aufsicht", "betreiber", "transparenzpflichten"] },
 
   { id: "post-market-monitoring", category: "ai-act-core", risk: null,
     tags: ["#PostMarket", "#Monitoring", "#Art72"],
@@ -1083,8 +977,8 @@ const TERMS = [
       term: "Post-Market Monitoring",
       short: "Providers must establish and document a system that systematically monitors performance of high-risk systems in operation (Art. 72).",
       long: "The monitoring plan (Art. 72(3)) describes collection, analysis and evaluation of relevant data throughout the system's lifetime. Purpose: ongoing assessment of continued compliance with Chapter III requirements and detection of trends or incidents. Findings feed back into the risk management system (Art. 9). Complemented by the duty to report serious incidents under Art. 73 (deadlines 15 days, in critical cases 2 days or immediately). Commission implementing acts specify format and content of the monitoring plan." },
-    links: [ { label: "Art. 72 AI Act", url: "https://artificialintelligenceact.eu/article/72/" } ]
-  },
+    links: [ { label: "Art. 72 AI Act", url: "https://artificialintelligenceact.eu/article/72/" } ],
+    related: ["schwerwiegender-vorfall", "risikomanagementsystem", "aufzeichnungspflicht"] },
 
   { id: "schwerwiegender-vorfall", category: "ai-act-core", risk: null,
     tags: ["#SeriousIncident", "#Art73", "#IncidentReporting"],
@@ -1096,8 +990,8 @@ const TERMS = [
       term: "Serious Incident",
       short: "Malfunction or misuse of a high-risk system directly or indirectly leading to death, serious harm to health, breach of fundamental rights, or disruption of critical infrastructure (Art. 3(49), Art. 73).",
       long: "Providers must report every serious incident to the competent market surveillance authority. Standard deadline: 15 days after becoming aware. For incidents resulting in death or disruption of critical infrastructure: without delay, at the latest 2 days; for widespread fundamental rights infringement: immediately, at the latest 15 days. Follow-up: investigation, risk assessment, corrective measures. Complementary incident reporting for GPAI with systemic risk under Art. 55(1)(c)." },
-    links: [ { label: "Art. 73 AI Act", url: "https://artificialintelligenceact.eu/article/73/" } ]
-  },
+    links: [ { label: "Art. 73 AI Act", url: "https://artificialintelligenceact.eu/article/73/" } ],
+    related: ["post-market-monitoring", "marktueberwachung"] },
 
   { id: "harmonisierte-normen", category: "governance", risk: null,
     tags: ["#HarmonisedStandards", "#CEN", "#CENELEC", "#JTC21", "#Art40"],
@@ -1109,11 +1003,8 @@ const TERMS = [
       term: "Harmonised Standards",
       short: "European standards whose application triggers presumption of conformity with AI Act requirements (Art. 40).",
       long: "The Commission tasked CEN and CENELEC via Standardisation Request M/593 in May 2023. Responsible: Joint Technical Committee CEN/CENELEC JTC 21 \"Artificial Intelligence\". The work programme covers ten areas: risk management, governance and data quality, record-keeping, transparency, human oversight, accuracy-robustness-cybersecurity, quality management, conformity assessment, AI management system (based on ISO/IEC 42001). Publication in the EU Official Journal triggers presumption of conformity. Alternative: Commission common specifications (Art. 41) where harmonised standards are not timely or adequate." },
-    links: [ { label: "Art. 40 AI Act", url: "https://artificialintelligenceact.eu/article/40/" }, { label: "CEN/CENELEC JTC 21", url: "https://www.cencenelec.eu/areas-of-work/cen-cenelec-topics/artificial-intelligence/" } ]
-  }
-,
-
-  /* =================== BUßGELDER & SANKTIONEN =================== */
+    links: [ { label: "Art. 40 AI Act", url: "https://artificialintelligenceact.eu/article/40/" }, { label: "CEN/CENELEC JTC 21", url: "https://www.cencenelec.eu/areas-of-work/cen-cenelec-topics/artificial-intelligence/" } ],
+    related: ["gemeinsame-spezifikationen", "iso-42001", "konformitaetsbewertung", "leitlinien-kommission"] },
 
   { id: "bussgeld-art99", category: "governance", risk: null,
     tags: ["#Fines", "#Art99", "#Sanktionen"],
@@ -1125,8 +1016,8 @@ const TERMS = [
       term: "Fines Regime (Art. 99)",
       short: "Three-tier penalty regime under the AI Act with fines up to €35 million or 7% of global annual turnover, whichever is higher.",
       long: "The three tiers: (1) violations of prohibitions under Art. 5 — up to €35 million or 7% turnover; (2) violations of other provider or deployer obligations (high-risk, transparency, GPAI etc.) — up to €15 million or 3%; (3) supply of incorrect, incomplete or misleading information to authorities — up to €7.5 million or 1%. For SMEs and start-ups the lower amount applies (Art. 99(6)). Calibration follows a set of criteria (Art. 99(7)): nature, gravity and duration of the infringement, number of affected persons, intention or negligence, previous infringements, remedial measures taken." },
-    links: [ { label: "Art. 99 AI Act", url: "https://artificialintelligenceact.eu/article/99/" } ]
-  },
+    links: [ { label: "Art. 99 AI Act", url: "https://artificialintelligenceact.eu/article/99/" } ],
+    related: ["sanktionsbemessung", "bussgeld-gpai", "bussgeld-behoerden", "kmu"] },
 
   { id: "bussgeld-gpai", category: "governance", risk: null,
     tags: ["#Fines", "#GPAI", "#Art101", "#AIOffice"],
@@ -1138,8 +1029,8 @@ const TERMS = [
       term: "Fines against GPAI Providers (Art. 101)",
       short: "Special sanction regime for providers of GPAI models: fines up to €15 million or 3% of global annual turnover, imposed centrally by the Commission.",
       long: "Unlike general fines (national authorities), GPAI fines are imposed centrally by the AI Office at Commission level (Art. 101). Triggers: intentional or negligent breaches of GPAI duties (Art. 53 et seq.), failure to comply with requests or refusal of access, failure to implement ordered measures. Before imposition: statement of objections, right to be heard, access to file. The Commission cannot impose fines before end of 2025 (Art. 113(a) transitional rule for GPAI: application from 2 Aug 2025). Judicial review by the General Court/CJEU." },
-    links: [ { label: "Art. 101 AI Act", url: "https://artificialintelligenceact.eu/article/101/" } ]
-  },
+    links: [ { label: "Art. 101 AI Act", url: "https://artificialintelligenceact.eu/article/101/" } ],
+    related: ["gpai", "ai-office", "bussgeld-art99", "systemisches-risiko"] },
 
   { id: "bussgeld-behoerden", category: "governance", risk: null,
     tags: ["#Fines", "#PublicSector", "#Art99"],
@@ -1151,8 +1042,8 @@ const TERMS = [
       term: "Fines against Public Bodies (Art. 99(8))",
       short: "Member States may decide whether and to what extent fines may be imposed on public authorities and bodies.",
       long: "The AI Act leaves the design to Member States: some jurisdictions (e.g. Germany) are reluctant to impose fines on public bodies, others do so. Alternative sanctions: directives, ministerial decisions, disciplinary consequences, public acknowledgement of the violation. Highly relevant in practice as much high-risk AI is deployed in the public sector (social benefits, migration, law enforcement, justice) where Fundamental Rights Impact Assessments (FRIA) are mandatory." },
-    links: [ { label: "Art. 99 AI Act", url: "https://artificialintelligenceact.eu/article/99/" } ]
-  },
+    links: [ { label: "Art. 99 AI Act", url: "https://artificialintelligenceact.eu/article/99/" } ],
+    related: ["bussgeld-art99", "sanktionsbemessung"] },
 
   { id: "sanktionsbemessung", category: "governance", risk: null,
     tags: ["#Sanctions", "#Proportionality", "#Art99"],
@@ -1164,8 +1055,8 @@ const TERMS = [
       term: "Calibration of Sanctions",
       short: "Catalogue of criteria in Art. 99(7) for calibrating penalty amount and appropriateness — effective, proportionate, dissuasive.",
       long: "Twelve criteria: nature, gravity, duration and consequences of the infringement; size and market share of the economic operator; whether infringement was intentional or negligent; actions taken to mitigate damage; degree of cooperation with authorities; previous infringements; manner in which the authority became aware; whether and to what extent financial benefits were gained or losses avoided; vulnerability of affected persons; any other aggravating or mitigating circumstances. Complemented by national administrative offence law (in Germany: OWiG)." },
-    links: [ { label: "Art. 99 AI Act", url: "https://artificialintelligenceact.eu/article/99/" } ]
-  },
+    links: [ { label: "Art. 99 AI Act", url: "https://artificialintelligenceact.eu/article/99/" } ],
+    related: ["bussgeld-art99", "bussgeld-behoerden"] },
 
   { id: "beschwerderecht", category: "governance", risk: null,
     tags: ["#Complaint", "#Art85", "#AffectedPerson"],
@@ -1177,8 +1068,8 @@ const TERMS = [
       term: "Right to Lodge a Complaint (Art. 85)",
       short: "Any natural or legal person may lodge a complaint with a market surveillance authority if they suspect an infringement of the AI Act.",
       long: "A low-threshold path to enforcement. Complainants need not demonstrate direct concern — NGOs, journalists and competitors can also file complaints. The authority decides on investigation at its discretion, informs the complainant per national procedural law. Complaints complement the right to explanation of individual decisions (Art. 86) and other remedies under the GDPR, unfair competition law or anti-discrimination law. For GPAI: complaints to the AI Office." },
-    links: [ { label: "Art. 85 AI Act", url: "https://artificialintelligenceact.eu/article/85/" } ]
-  },
+    links: [ { label: "Art. 85 AI Act", url: "https://artificialintelligenceact.eu/article/85/" } ],
+    related: ["betroffene-person", "erklaerungsrecht", "whistleblower"] },
 
   { id: "erklaerungsrecht", category: "governance", risk: null,
     tags: ["#RightToExplanation", "#Art86", "#Grundrechte"],
@@ -1190,8 +1081,8 @@ const TERMS = [
       term: "Right to Explanation (Art. 86)",
       short: "Affected persons are entitled to a clear and meaningful explanation when a high-risk AI takes an individual decision with legal or similarly significant effect on them.",
       long: "The claim is against the deployer (not the provider) and complements GDPR Art. 22. Covers: role of the AI system in the decision process and main elements of the decision. Not covered: decisions without legal or similar effect; systems under Annex III(2) (critical infrastructure); exemptions under Member State law possible. Practical relevance: interplay with GDPR (Art. 13, 14, 22), consumer protection and anti-discrimination law." },
-    links: [ { label: "Art. 86 AI Act", url: "https://artificialintelligenceact.eu/article/86/" } ]
-  },
+    links: [ { label: "Art. 86 AI Act", url: "https://artificialintelligenceact.eu/article/86/" } ],
+    related: ["betroffene-person", "beschwerderecht", "dsgvo-schnittstelle", "betreiber", "dsgvo"] },
 
   { id: "whistleblower", category: "governance", risk: null,
     tags: ["#Whistleblower", "#Art87", "#RichtlinieEU2019-1937"],
@@ -1203,10 +1094,8 @@ const TERMS = [
       term: "Whistleblower Protection (Art. 87)",
       short: "AI Act infringements fall within the scope of EU Whistleblower Directive 2019/1937 — whistleblowers are protected against retaliation.",
       long: "Employees, contractors, applicants and others may report infringements internally or externally without fear of employment, criminal or civil consequences. Companies with 50+ employees must set up internal reporting channels, authorities external ones. Transposed in Germany via the Whistleblower Protection Act (HinSchG, in force since 2023). Practical relevance: technical breaches of AI compliance duties are often only visible to insiders." },
-    links: [ { label: "Art. 87 AI Act", url: "https://artificialintelligenceact.eu/article/87/" }, { label: "RL 2019/1937", url: "https://eur-lex.europa.eu/eli/dir/2019/1937/oj" } ]
-  },
-
-  /* =================== FRISTEN & ÜBERGANG =================== */
+    links: [ { label: "Art. 87 AI Act", url: "https://artificialintelligenceact.eu/article/87/" }, { label: "RL 2019/1937", url: "https://eur-lex.europa.eu/eli/dir/2019/1937/oj" } ],
+    related: ["beschwerderecht", "marktueberwachung"] },
 
   { id: "fristen-anwendung", category: "ai-act-core", risk: null,
     tags: ["#Timeline", "#Art113", "#Uebergang"],
@@ -1218,8 +1107,8 @@ const TERMS = [
       term: "Application Timeline (Art. 113)",
       short: "Phased applicability of the AI Act between 2 Feb 2025 and 2 Aug 2027 to allow actors to prepare.",
       long: "Milestones: (1) 1 Aug 2024 — Regulation (EU) 2024/1689 enters into force; (2) 2 Feb 2025 — Art. 5 prohibitions and Art. 4 AI literacy duty applicable; (3) 2 Aug 2025 — GPAI duties (Arts. 53, 55), governance chapter (AI Office, AI Board, notifying authorities), sanctions (with exceptions); (4) 2 Aug 2026 — most high-risk rules (Annex III), transparency duties (Art. 50), sandboxes; (5) 2 Aug 2027 — high-risk rules for safety components in Annex I products. GPAI models placed on the market before 2 Aug 2025 have until 2 Aug 2027 to adapt." },
-    links: [ { label: "Art. 113 AI Act", url: "https://artificialintelligenceact.eu/article/113/" } ]
-  },
+    links: [ { label: "Art. 113 AI Act", url: "https://artificialintelligenceact.eu/article/113/" } ],
+    related: ["uebergangsvorschriften", "eu-ai-act"] },
 
   { id: "uebergangsvorschriften", category: "ai-act-core", risk: null,
     tags: ["#Transitional", "#Art111", "#Bestandssysteme"],
@@ -1231,8 +1120,8 @@ const TERMS = [
       term: "Transitional Provisions (Art. 111)",
       short: "Legacy protection for AI systems and GPAI models placed on the market before the relevant application dates — with limits and adaptation deadlines.",
       long: "Principle: systems placed on the market before applicability of specific duties are not retroactively covered. Exceptions: (1) substantial modifications after the cut-off trigger full applicability; (2) high-risk systems in the public sector must be adapted by 2 Aug 2030; (3) GPAI models placed on the market before 2 Aug 2025 must demonstrate full compliance by 2 Aug 2027; (4) large-scale IT systems in the Area of Freedom, Security and Justice (SIS, VIS, Eurodac etc.) must be adapted by 31 Dec 2030. For providers and deployers: adapting legacy systems earlier than required can be a competitive advantage and trust signal." },
-    links: [ { label: "Art. 111 AI Act", url: "https://artificialintelligenceact.eu/article/111/" } ]
-  },
+    links: [ { label: "Art. 111 AI Act", url: "https://artificialintelligenceact.eu/article/111/" } ],
+    related: ["fristen-anwendung", "gpai"] },
 
   { id: "leitlinien-kommission", category: "governance", risk: null,
     tags: ["#Guidelines", "#Commission", "#Art96", "#SoftLaw"],
@@ -1244,8 +1133,8 @@ const TERMS = [
       term: "Commission Guidelines (Art. 96)",
       short: "The Commission issues ongoing guidelines for consistent interpretation and application of the AI Act — not legally binding, but influential in practice.",
       long: "Already published or announced: guidelines on the definition of AI system (Feb 2025), guidelines on prohibited practices under Art. 5 (Feb 2025), template for training data summary for GPAI (summer 2025), guidelines on practical implementation of Art. 6 (high-risk classification), template for post-market monitoring plan, guidelines on the relation between AI Act and Union harmonisation law. Legal nature: soft law — not binding, but typically followed by authorities and courts. Drafted with AI Board and stakeholder involvement." },
-    links: [ { label: "Art. 96 AI Act", url: "https://artificialintelligenceact.eu/article/96/" } ]
-  },
+    links: [ { label: "Art. 96 AI Act", url: "https://artificialintelligenceact.eu/article/96/" } ],
+    related: ["delegierte-rechtsakte", "harmonisierte-normen"] },
 
   { id: "delegierte-rechtsakte", category: "governance", risk: null,
     tags: ["#DelegatedActs", "#Art97", "#Comitology"],
@@ -1257,10 +1146,8 @@ const TERMS = [
       term: "Delegated Acts (Art. 97)",
       short: "The Commission may adjust certain technical or supplementary aspects of the AI Act via delegated acts — subject to objection by Council and Parliament.",
       long: "Areas covered: adjustment of the GPAI threshold for systemic risk (Art. 51(3)), updates to Annexes III and IV, criteria for Annex XI (technical documentation for GPAI), criteria for Annex XII (information for downstream providers), criteria for Annex XIII (systemic risk criteria). Council and Parliament may object within three months by qualified majority. This mechanism enables swift adaptation to technical developments without a new legislative procedure." },
-    links: [ { label: "Art. 97 AI Act", url: "https://artificialintelligenceact.eu/article/97/" } ]
-  },
-
-  /* =================== RECHTSAKT-INTERFACES =================== */
+    links: [ { label: "Art. 97 AI Act", url: "https://artificialintelligenceact.eu/article/97/" } ],
+    related: ["leitlinien-kommission", "anhang-iii"] },
 
   { id: "dsgvo-schnittstelle", category: "governance", risk: null,
     tags: ["#GDPR", "#DSGVO", "#Datenschutz", "#Art22DSGVO"],
@@ -1272,8 +1159,8 @@ const TERMS = [
       term: "Interface AI Act ↔ GDPR",
       short: "The AI Act and GDPR apply in parallel — the AI Act regulates AI systems as products, the GDPR regulates the processing of personal data.",
       long: "Key overlaps: (1) legal bases for training data processing (Art. 6 GDPR, Art. 10 AI Act — special exception for bias detection); (2) automated individual decisions: Art. 22 GDPR vs. Art. 86 AI Act; (3) impact assessments: DPIA (Art. 35 GDPR) and FRIA (Art. 27 AI Act) may be combined; (4) competencies: data protection authorities remain competent for GDPR, market surveillance authorities for AI Act; close coordination foreseen (Art. 74 AI Act). The EDPB has published several opinions on AI and data protection (web scraping, LLMs)." },
-    links: [ { label: "EDSA Opinion 28/2024", url: "https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-282024-certain-data-protection-aspects_en" } ]
-  },
+    links: [ { label: "EDSA Opinion 28/2024", url: "https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-282024-certain-data-protection-aspects_en" } ],
+    related: ["dsgvo", "fria", "erklaerungsrecht", "daten-governance", "produkthaftung-schnittstelle"] },
 
   { id: "dsa-schnittstelle", category: "governance", risk: null,
     tags: ["#DSA", "#DigitalServicesAct", "#Plattformen"],
@@ -1285,8 +1172,8 @@ const TERMS = [
       term: "Interface AI Act ↔ Digital Services Act (DSA)",
       short: "The AI Act and DSA regulate different objects — AI systems vs. intermediary services — but overlap on algorithmic recommender systems, deepfakes and generative AI.",
       long: "Overlaps: (1) recommender systems of large platforms are subject to DSA transparency duties (Art. 27 DSA) and potentially high-risk AI under Annex III AI Act; (2) systemic risks of Very Large Online Platforms (VLOPs) under Art. 34 DSA include AI-generated disinformation; (3) deepfake labelling: Art. 50 AI Act at the AI system level, DSA Code of Practice on Disinformation at platform level; (4) competencies: Digital Services Coordinators vs. market surveillance authorities — coordination required. Both acts share a philosophy of risk-based, proportionate regulation." },
-    links: [ { label: "DSA (VO 2022/2065)", url: "https://eur-lex.europa.eu/eli/reg/2022/2065/oj" } ]
-  },
+    links: [ { label: "DSA (VO 2022/2065)", url: "https://eur-lex.europa.eu/eli/reg/2022/2065/oj" } ],
+    related: ["dma-schnittstelle", "deepfake", "transparenzpflichten", "verbraucherschutz-schnittstelle"] },
 
   { id: "dma-schnittstelle", category: "governance", risk: null,
     tags: ["#DMA", "#DigitalMarketsAct", "#Gatekeeper"],
@@ -1298,8 +1185,8 @@ const TERMS = [
       term: "Interface AI Act ↔ Digital Markets Act (DMA)",
       short: "The DMA regulates gatekeeper platforms, which extensively deploy AI systems — creating interactions with AI Act duties.",
       long: "Touch points: (1) prohibition of self-preferencing (Art. 6 DMA) affects AI ranking and recommender systems; (2) interoperability duties (Art. 7 DMA) can complicate the use of proprietary AI; (3) data access rights (Art. 6 DMA) touch training-data use; (4) prohibition of cross-service data combination without consent affects AI training pipelines; (5) competence: Commission (DG COMP) for DMA, AI Office/national authorities for AI Act. Explicit \"without prejudice\" clauses in both regulations." },
-    links: [ { label: "DMA (VO 2022/1925)", url: "https://eur-lex.europa.eu/eli/reg/2022/1925/oj" } ]
-  },
+    links: [ { label: "DMA (VO 2022/1925)", url: "https://eur-lex.europa.eu/eli/reg/2022/1925/oj" } ],
+    related: ["dsa-schnittstelle", "wettbewerbsrecht-schnittstelle"] },
 
   { id: "mdr-schnittstelle", category: "governance", risk: "high",
     tags: ["#MDR", "#IVDR", "#Medizinprodukte"],
@@ -1311,8 +1198,8 @@ const TERMS = [
       term: "Interface AI Act ↔ Medical Device Regulation (MDR/IVDR)",
       short: "AI-based medical devices are subject to both the MDR/IVDR and the AI Act — conformity assessment is conducted in an integrated manner.",
       long: "The MDR (Regulation 2017/745) and IVDR (Regulation 2017/746) are listed in Annex I Section A of the AI Act; AI safety components thus automatically qualify as high-risk AI. Practical consequences: (1) integrated conformity assessment following MDR/IVDR modules (typically class IIa and above: notified body); (2) Chapter III AI Act requirements (risk management, data quality, oversight) must additionally be met — often integrable into existing QMS; (3) notified bodies need AI-specific competence; (4) clinical evaluation under MDR covers AI-specific aspects such as accuracy, robustness, bias. Transition until 2 Aug 2027 (Art. 111(2))." },
-    links: [ { label: "MDR (VO 2017/745)", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" } ]
-  },
+    links: [ { label: "MDR (VO 2017/745)", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" } ],
+    related: ["anhang-i", "konformitaetsbewertung", "hochrisiko-ki"] },
 
   { id: "nis2-schnittstelle", category: "security", risk: null,
     tags: ["#NIS2", "#Cybersecurity", "#KritischeInfrastruktur"],
@@ -1324,8 +1211,8 @@ const TERMS = [
       term: "Interface AI Act ↔ NIS 2 Directive",
       short: "The NIS 2 Cybersecurity Directive complements AI Act requirements on accuracy, robustness and cybersecurity for high-risk AI in critical infrastructure.",
       long: "NIS 2 (Directive 2022/2555) obliges operators of essential and important entities to cybersecurity measures. Overlap with the AI Act notably at: (1) high-risk AI in critical infrastructure (Annex III(2)); (2) incident reporting: NIS 2 requires early warning within 24 h, initial report within 72 h — in addition to AI Act incident reporting under Art. 73; (3) risk management measures: NIS 2 Art. 21 overlaps with AI Act Art. 15. Transposed in Germany via NIS2UmsuCG (2025). Recommendation: integrated management system rather than parallel silos." },
-    links: [ { label: "NIS-2 (RL 2022/2555)", url: "https://eur-lex.europa.eu/eli/dir/2022/2555/oj" } ]
-  },
+    links: [ { label: "NIS-2 (RL 2022/2555)", url: "https://eur-lex.europa.eu/eli/dir/2022/2555/oj" } ],
+    related: ["cra-schnittstelle", "genauigkeit-robustheit"] },
 
   { id: "cra-schnittstelle", category: "security", risk: null,
     tags: ["#CRA", "#CyberResilienceAct", "#Software"],
@@ -1337,8 +1224,8 @@ const TERMS = [
       term: "Interface AI Act ↔ Cyber Resilience Act (CRA)",
       short: "The Cyber Resilience Act (Regulation 2024/2847) sets horizontal cybersecurity requirements for products with digital elements — including many AI systems.",
       long: "Applies to products with digital elements from late 2027, including software (embedded and stand-alone). AI systems may fall under both AI Act (as AI) and CRA (as software product). To avoid double compliance, Art. 12(3) CRA provides: for AI systems meeting AI Act cybersecurity requirements (Art. 15), those are deemed to fulfil the corresponding CRA requirements. Practice: harmonised standards are being developed in coordination. CRA additionally brings: mandatory reporting of exploited vulnerabilities to ENISA, mandatory support period, security by design and by default." },
-    links: [ { label: "CRA (VO 2024/2847)", url: "https://eur-lex.europa.eu/eli/reg/2024/2847/oj" } ]
-  },
+    links: [ { label: "CRA (VO 2024/2847)", url: "https://eur-lex.europa.eu/eli/reg/2024/2847/oj" } ],
+    related: ["nis2-schnittstelle", "genauigkeit-robustheit"] },
 
   { id: "produkthaftung-schnittstelle", category: "governance", risk: null,
     tags: ["#ProductLiability", "#PLD", "#Haftung"],
@@ -1350,8 +1237,8 @@ const TERMS = [
       term: "Interface AI Act ↔ Product Liability Directive (PLD)",
       short: "The new Product Liability Directive (Directive 2024/2853) expressly covers AI systems and software as products — complementing public-law AI Act regulation.",
       long: "The recast (in force since December 2024, transposition by December 2026) modernises the 1985 PLD regime for the digital era. Key changes: (1) AI systems and software are products within the meaning of the directive; (2) the notion of defect covers errors from self-learning, data quality, cybersecurity; (3) evidentiary reliefs for the injured, especially for complex AI systems (disclosure duties, presumptions); (4) manufacturer liability also for subsequent software updates; (5) extended limitation periods. Relation to AI Act: compliance with provider duties (esp. Arts. 9, 10, 15) reduces liability exposure but does not exempt from it." },
-    links: [ { label: "PLD (RL 2024/2853)", url: "https://eur-lex.europa.eu/eli/dir/2024/2853/oj" } ]
-  },
+    links: [ { label: "PLD (RL 2024/2853)", url: "https://eur-lex.europa.eu/eli/dir/2024/2853/oj" } ],
+    related: ["dsgvo-schnittstelle", "genauigkeit-robustheit"] },
 
   { id: "urheberrecht-schnittstelle", category: "governance", risk: null,
     tags: ["#Copyright", "#Urheberrecht", "#TDM", "#GPAI"],
@@ -1363,8 +1250,8 @@ const TERMS = [
       term: "Interface AI Act ↔ Copyright",
       short: "The AI Act obliges GPAI providers to copyright compliance (Art. 53(1)(c)) and to publish a summary of training data (Art. 53(1)(d)).",
       long: "Key touch points: (1) text and data mining exception (TDM) under Arts. 3, 4 DSM Directive 2019/790 — commercial use only permitted if rightholders have not made a machine-readable reservation (\"robots.txt\", \"noai\"); (2) training data summary (Annex XI) must be sufficiently detailed to allow rightholders to exercise their rights; Commission template pending; (3) GPAI providers must implement a compliance strategy including respect for opt-outs. Case law in Germany (LAION judgment of the Hamburg Regional Court 2024) and internationally reveals significant legal uncertainty." },
-    links: [ { label: "DSM-RL (RL 2019/790)", url: "https://eur-lex.europa.eu/eli/dir/2019/790/oj" } ]
-  },
+    links: [ { label: "DSM-RL (RL 2019/790)", url: "https://eur-lex.europa.eu/eli/dir/2019/790/oj" } ],
+    related: ["gpai", "generative-ai"] },
 
   { id: "verbraucherschutz-schnittstelle", category: "governance", risk: null,
     tags: ["#ConsumerProtection", "#UCPD", "#Verbraucher"],
@@ -1376,8 +1263,8 @@ const TERMS = [
       term: "Interface AI Act ↔ Consumer Protection",
       short: "The AI Act and consumer protection law complement each other — especially in generative AI, personalised advertising and manipulation.",
       long: "Key touch points: (1) unfair commercial practices (UCPD 2005/29/EC): misleading or aggressive AI use can be prohibited; (2) price transparency for personalisation (Directive 2019/2161 — Omnibus): dynamic AI pricing must be disclosed; (3) Representative Actions Directive 2020/1828 enables consumer associations to bring collective actions for AI Act violations; (4) Digital Fairness Act (announced for 2025) will address dark patterns, personalisation and manipulation; (5) modernisation of the UCPD discusses inclusion of AI deepfakes. Competencies: consumer protection authorities vs. AI Act market surveillance — coordination via the CPC network." },
-    links: [ { label: "UGP-RL 2005/29/EG", url: "https://eur-lex.europa.eu/eli/dir/2005/29/oj" } ]
-  },
+    links: [ { label: "UGP-RL 2005/29/EG", url: "https://eur-lex.europa.eu/eli/dir/2005/29/oj" } ],
+    related: ["dsa-schnittstelle", "transparenzpflichten"] },
 
   { id: "arbeitsrecht-schnittstelle", category: "governance", risk: "high",
     tags: ["#Employment", "#Arbeitsrecht", "#PlatformWork"],
@@ -1389,8 +1276,8 @@ const TERMS = [
       term: "Interface AI Act ↔ Employment Law",
       short: "AI in employment contexts is generally high-risk under Annex III(4) and is complemented by national and European employment law.",
       long: "Relevant acts: (1) GDPR — processing of employee data, Art. 88 GDPR and §26 BDSG (Germany); (2) Platform Work Directive (Directive 2024/2831) — transparency and human oversight of algorithmic management; (3) works council law: §87 BetrVG (co-determination on technical monitoring), §90 (consultation on AI-supported HR planning); (4) anti-discrimination law (AGG, Directive 2000/78/EC); (5) OSH Framework Directive 89/391/EEC extended to psychosocial risks from algorithmic management. Practice: works agreements on AI use are often mandatory, FRIA under Art. 27 AI Act recommended." },
-    links: [ { label: "Plattformarbeits-RL", url: "https://eur-lex.europa.eu/eli/dir/2024/2831/oj" } ]
-  },
+    links: [ { label: "Plattformarbeits-RL", url: "https://eur-lex.europa.eu/eli/dir/2024/2831/oj" } ],
+    related: ["anhang-iii", "dsgvo-schnittstelle", "fria"] },
 
   { id: "wettbewerbsrecht-schnittstelle", category: "governance", risk: null,
     tags: ["#CompetitionLaw", "#Antitrust", "#Kartellrecht"],
@@ -1402,8 +1289,8 @@ const TERMS = [
       term: "Interface AI Act ↔ Competition Law",
       short: "The AI Act does not replace antitrust and merger control law — AI market concentration and algorithmic collusion remain competition law issues.",
       long: "Touch points: (1) market definition and power: what role do foundation models, compute capacity, training data play? Commission inquiries into OpenAI/Microsoft and Google/Anthropic since 2024; (2) access to essential facilities such as cloud infrastructure, large datasets; (3) algorithmic collusion — autonomous price coordination through self-learning systems; (4) DMA gatekeeper rules (see separate entry); (5) merger control on AI start-up acquisitions. The Commission's policy paper on competition aspects of generative AI (2024) outlines areas for action." },
-    links: [ { label: "Commission Policy Brief on GenAI", url: "https://competition-policy.ec.europa.eu/document/download/f6ed1a1b-4326-45fe-a44a-5230b1b5d5ec_en" } ]
-  },
+    links: [ { label: "Commission Policy Brief on GenAI", url: "https://competition-policy.ec.europa.eu/document/download/f6ed1a1b-4326-45fe-a44a-5230b1b5d5ec_en" } ],
+    related: ["dma-schnittstelle", "gpai"] },
 
   { id: "datenverordnung-schnittstelle", category: "governance", risk: null,
     tags: ["#DataAct", "#Datenverordnung", "#IoT"],
@@ -1415,10 +1302,8 @@ const TERMS = [
       term: "Interface AI Act ↔ Data Act",
       short: "The Data Act (Regulation 2023/2854) governs access to and use of data — important for training data availability and B2B data sharing in the AI context.",
       long: "Applicable since 12 September 2025. Core elements with AI relevance: (1) access rights to connected products (IoT) and their data — potential training data source; (2) fair contractual terms for data sharing between businesses; (3) data availability to public bodies in exceptional situations; (4) interoperability requirements for data intermediation services. Relevant for AI providers: access to data from connected products (cars, machines, sensors) can become a training foundation. Complements EU data space initiatives (European Health Data Space, mobility data space etc.). Data Governance Act (Regulation 2022/868) regulates trustworthy data intermediation." },
-    links: [ { label: "Data Act (VO 2023/2854)", url: "https://eur-lex.europa.eu/eli/reg/2023/2854/oj" } ]
-  },
-
-  /* =================== ZUSÄTZLICHE COMPLIANCE-KERNBEGRIFFE =================== */
+    links: [ { label: "Data Act (VO 2023/2854)", url: "https://eur-lex.europa.eu/eli/reg/2023/2854/oj" } ],
+    related: ["daten-governance", "dsgvo-schnittstelle"] },
 
   { id: "eu-konformitaetserklaerung", category: "ai-act-core", risk: null,
     tags: ["#DeclarationOfConformity", "#Art47", "#AnnexV"],
@@ -1430,8 +1315,8 @@ const TERMS = [
       term: "EU Declaration of Conformity",
       short: "Formal declaration by the provider that a high-risk system complies with AI Act requirements (Art. 47, Annex V).",
       long: "The EU declaration of conformity is a precondition for CE marking and placing on the market. Annex V lists minimum content: name and contact details of the provider or authorised representative, AI system identification, statement of sole responsibility, statement of compliance with the AI Act and other Union acts, reference to harmonised standards or common specifications applied, where applicable name and identification number of the notified body, date and place of issue, signature. Retention: 10 years. For multiple applicable acts: a single declaration referencing all acts is permitted (Art. 47(3))." },
-    links: [ { label: "Art. 47 AI Act", url: "https://artificialintelligenceact.eu/article/47/" } ]
-  },
+    links: [ { label: "Art. 47 AI Act", url: "https://artificialintelligenceact.eu/article/47/" } ],
+    related: ["ce-kennzeichnung", "konformitaetsbewertung", "technische-dokumentation"] },
 
   { id: "gemeinsame-spezifikationen", category: "governance", risk: null,
     tags: ["#CommonSpecifications", "#Art41", "#Fallback"],
@@ -1443,9 +1328,7 @@ const TERMS = [
       term: "Common Specifications",
       short: "Technical specifications adopted by the Commission via implementing act as an alternative to harmonised standards (Art. 41).",
       long: "Trigger: where harmonised standards for the AI Act are not timely, adequate or sufficient, the Commission may adopt common specifications. Prior consultation of AI Board, affected Member States, stakeholders. Legal effect: providers meeting the specifications also benefit from a presumption of conformity. Withdrawal by the Commission is possible once harmonised standards become available. Practical relevance: a safety net in case CEN/CENELEC JTC 21 does not deliver in time — with an eye on first application on 2 Aug 2026 (high-risk rules)." },
-    links: [ { label: "Art. 41 AI Act", url: "https://artificialintelligenceact.eu/article/41/" } ]
-  }
-
-
+    links: [ { label: "Art. 41 AI Act", url: "https://artificialintelligenceact.eu/article/41/" } ],
+    related: ["harmonisierte-normen", "konformitaetsbewertung"] }
 
 ];
