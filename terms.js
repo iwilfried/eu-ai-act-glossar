@@ -1,7 +1,7 @@
 /* ==================================================================
    EU AI ACT GLOSSAR · DATENDATEI
    ------------------------------------------------------------------
-   103 Begriffe · bilingual DE/EN
+   139 Begriffe · bilingual DE/EN
    Schema: { id, category, risk, tags[], de{term,short,long},
             en{term,short,long}, links[], related[] }
    Kategorien: ai-act-core | ml | dl | llm | nlp | cv | ethics | governance | security
@@ -21,7 +21,7 @@ const TERMS = [
       short: "World's first comprehensive horizontal AI regulation (Regulation (EU) 2024/1689). Risk-based, phased application from February 2025.",
       long: "The EU AI Act establishes uniform rules for the development, placing on the market and use of AI systems in the EU single market. Four risk tiers (prohibited, high, limited, minimal) plus a dedicated chapter for GPAI with systemic risk. Applies to providers and deployers inside and outside the EU whenever the output is used in the EU (market location principle). In force since 1 Aug 2024, phased: prohibitions from 2 Feb 2025, GPAI from 2 Aug 2025, most high-risk from 2 Aug 2026, fully applicable from 2 Aug 2027." },
     links: [ { label: "EUR-Lex Volltext", url: "https://eur-lex.europa.eu/eli/reg/2024/1689/oj" }, { label: "AI Act Explorer", url: "https://artificialintelligenceact.eu/" } ],
-    related: ["ki-system", "hochrisiko-ki", "gpai", "fristen-anwendung"] },
+    related: ["ki-system", "hochrisiko-ki", "gpai", "fristen-anwendung", "extraterritorialitaet"] },
 
   { id: "ki-system", category: "ai-act-core", risk: null,
     tags: ["#KIVO", "#Definition", "#Art3", "#OECD"],
@@ -86,7 +86,7 @@ const TERMS = [
       short: "Eight practices fully banned in the EU from 2 Feb 2025 — social scoring, subliminal manipulation, real-time facial recognition in public spaces (Art. 5).",
       long: "Art. 5 AI Act sets the top risk tier: (a) subliminal manipulation, (b) exploitation of vulnerability, (c) public-authority social scoring, (d) predictive policing based solely on profiling, (e) untargeted facial-image scraping, (f) emotion recognition in workplaces and education (medical/safety exceptions), (g) biometric categorisation of sensitive traits, (h) real-time remote biometric identification in public for law enforcement (narrow exceptions with judicial authorisation). Sanctions: up to €35 million or 7% of global annual turnover." },
     links: [ { label: "Art. 5 AI Act", url: "https://artificialintelligenceact.eu/article/5/" } ],
-    related: ["hochrisiko-ki", "gesichtserkennung", "anhang-ii"] },
+    related: ["hochrisiko-ki", "gesichtserkennung", "anhang-ii", "biometrische-identifizierung", "biometrische-kategorisierung"] },
 
   { id: "hochrisiko-ki", category: "ai-act-core", risk: "high",
     tags: ["#HighRisk", "#AnnexIII", "#Art6", "#Compliance"],
@@ -138,7 +138,7 @@ const TERMS = [
       short: "Risk with significant impact on the EU internal market caused by high-impact GPAI. Threshold: training compute > 10^25 FLOPs (Art. 3(65)).",
       long: "Classification is automatic when the FLOP threshold is crossed but the Commission may also designate models on additional Annex XIII criteria: parameter count, dataset quality, reach, registered end users. Consequence: Art. 55 duties — model evaluation with standardised protocols, adversarial testing, incident reports, adequate cybersecurity. Providers notify the Commission within two weeks of meeting the threshold." },
     links: [ { label: "Art. 51 AI Act", url: "https://artificialintelligenceact.eu/article/51/" }, { label: "Art. 55 AI Act", url: "https://artificialintelligenceact.eu/article/55/" } ],
-    related: ["gpai", "ai-red-teaming", "bussgeld-gpai"] },
+    related: ["gpai", "ai-red-teaming", "bussgeld-gpai", "modellbewertung"] },
 
   { id: "konformitaetsbewertung", category: "ai-act-core", risk: null,
     tags: ["#Conformity", "#CE", "#Art43"],
@@ -164,7 +164,7 @@ const TERMS = [
       short: "Visible conformity mark on high-risk AI systems. Declares compliance with the AI Act and other Union acts (Art. 48).",
       long: "Before placing the system on the market, the provider must affix the CE mark — physically or digitally for software-only systems. Where a notified body is involved, its four-digit identification number is added. Precondition for free movement in the EU single market and for publication in the high-risk AI database." },
     links: [ { label: "Art. 48 AI Act", url: "https://artificialintelligenceact.eu/article/48/" } ],
-    related: ["konformitaetsbewertung", "eu-konformitaetserklaerung", "hochrisiko-ki", "notifizierte-stelle"] },
+    related: ["konformitaetsbewertung", "eu-konformitaetserklaerung", "hochrisiko-ki", "notifizierte-stelle", "inverkehrbringen"] },
 
   { id: "menschliche-aufsicht", category: "ai-act-core", risk: null,
     tags: ["#HumanOversight", "#Art14", "#HumanInTheLoop"],
@@ -177,7 +177,7 @@ const TERMS = [
       short: "High-risk AI must be designed so natural persons can effectively oversee it (Art. 14). Human in/on the loop or in command.",
       long: "Providers must build appropriate human-machine interfaces; deployers must actually exercise oversight. Overseers must understand capabilities and limits, detect automation bias, correctly interpret output, retain ability to intervene (\"stop\" function), ignore or override AI recommendations. For real-time remote biometric identification: two-person rule with two independent persons (Art. 14(5))." },
     links: [ { label: "Art. 14 AI Act", url: "https://artificialintelligenceact.eu/article/14/" } ],
-    related: ["betreiber", "hochrisiko-ki", "gebrauchsanweisung", "xai"] },
+    related: ["betreiber", "hochrisiko-ki", "gebrauchsanweisung", "xai", "proctoring"] },
 
   { id: "ki-kompetenz", category: "ai-act-core", risk: null,
     tags: ["#AILiteracy", "#Art4", "#Schulung"],
@@ -229,7 +229,7 @@ const TERMS = [
       short: "Controlled testing environment under regulatory supervision in which innovative AI systems can be developed and tested before market entry (Art. 57 et seq.).",
       long: "Each Member State must establish at least one national sandbox by 2 Aug 2026. Benefits: priority access for SMEs and start-ups, free participation, regulatory guidance, conditional use of personal data for public-interest AI (Art. 59). Spain's pilot sandbox (2022) served as a blueprint." },
     links: [ { label: "Art. 57 AI Act", url: "https://artificialintelligenceact.eu/article/57/" } ],
-    related: ["kmu", "ai-office"] },
+    related: ["kmu", "ai-office", "wissenschaftsausnahme", "test-realbedingungen"] },
 
   { id: "transparenzpflichten", category: "ai-act-core", risk: "limited",
     tags: ["#Transparency", "#Art13", "#Art50"],
@@ -554,7 +554,7 @@ const TERMS = [
       term: "Facial Recognition",
       short: "Biometric identification or verification of persons by their face. Heavily regulated or banned under the AI Act depending on mode.",
       long: "Three modes: (1) real-time remote identification in public spaces for law enforcement — generally prohibited (Art. 5(1)(h)), narrow exceptions with judicial authorisation. (2) Post-remote identification — high-risk under Annex III(1). (3) Verification (1:1, e.g. phone unlock) — mostly high-risk depending on context. Untargeted scraping to build facial databases (Clearview AI) is also prohibited." },
-    related: ["verbotene-praktiken", "computer-vision", "anhang-iii", "anhang-ii"] },
+    related: ["verbotene-praktiken", "computer-vision", "anhang-iii", "anhang-ii", "biometrische-identifizierung"] },
 
   { id: "image-generation", category: "cv", risk: "limited",
     tags: ["#ImageGen", "#Diffusion", "#Art50"],
@@ -578,7 +578,7 @@ const TERMS = [
       term: "Algorithmic Bias",
       short: "Systematic distortion in an AI system's predictions or decisions that disproportionately disadvantages specific groups.",
       long: "Sources: historical bias (data reflect discrimination), representation bias (subgroups underrepresented), measurement bias (mislabelled data), aggregation bias, evaluation bias, deployment bias. Notable cases: COMPAS (criminal justice), Amazon recruiting (penalising women), Apple Card (gender credit limits). Mitigations: diverse datasets, reweighting, adversarial debiasing, fairness constraints, audits, post-deployment monitoring." },
-    related: ["fairness", "daten-governance", "trainingsdaten"] },
+    related: ["fairness", "daten-governance", "trainingsdaten", "cv-screening", "versicherung-scoring"] },
 
   { id: "fairness", category: "ethics", risk: null,
     tags: ["#Fairness", "#Equity", "#Impossibility"],
@@ -591,7 +591,7 @@ const TERMS = [
       short: "Property of an AI system to decide without unjustified discrimination. Multiple mathematically incompatible definitions.",
       long: "Three main criteria: demographic parity (equal positive rate across groups), equalized odds (equal TPR/FPR), predictive parity (equal precision). Impossibility theorem (Chouldechova, Kleinberg): with different base rates the three cannot all hold simultaneously — the choice is normative. Tools: AIF360 (IBM), Fairlearn (Microsoft), What-If Tool. Legal frame: anti-discrimination law, AI Act Art. 10, EU Charter Art. 21." },
     links: [ { label: "Fairlearn", url: "https://fairlearn.org/" } ],
-    related: ["bias", "xai"] },
+    related: ["bias", "xai", "cv-screening", "trustworthy-ai"] },
 
   { id: "xai", category: "ethics", risk: null,
     tags: ["#XAI", "#Interpretability", "#SHAP"],
@@ -616,7 +616,7 @@ const TERMS = [
       short: "Synthetic image, audio, or video that appears real but was generated or manipulated by generative models (GAN, diffusion).",
       long: "Applications: film (de-aging, dubbing), satire, education — but also disinformation, election interference, non-consensual pornography, identity fraud. AI Act Art. 50(4): deployers must disclose deepfakes as artificially generated, with adapted disclosure for artistic/satirical works. Detection: forensic analysis, watermarking (C2PA, SynthID). Criminal law: e.g. German §§ 22, 33 KunstUrhG, § 201a StGB." },
     links: [ { label: "C2PA Standard", url: "https://c2pa.org/" } ],
-    related: ["generative-ai", "transparenzpflichten", "begrenztes-risiko", "dsa-schnittstelle"] },
+    related: ["generative-ai", "transparenzpflichten", "begrenztes-risiko", "dsa-schnittstelle", "ki-wahlen"] },
 
   { id: "dsgvo", category: "governance", risk: null,
     tags: ["#GDPR", "#DSGVO", "#Privacy", "#Art22"],
@@ -642,7 +642,7 @@ const TERMS = [
       short: "International standard for AI Management Systems (AIMS), published December 2023. Counterpart to ISO 9001 / 27001 for AI.",
       long: "Specifies requirements to establish, implement, maintain, and continually improve an AI management system. Certifiable. Contents: organisational context, leadership, planning, support, operation, evaluation, improvement. Likely foundation for harmonised standards under the AI Act (CEN/CENELEC JTC 21 standardisation request). A practical path to demonstrable AI Act compliance." },
     links: [ { label: "ISO/IEC 42001", url: "https://www.iso.org/standard/81230.html" } ],
-    related: ["harmonisierte-normen", "konformitaetsbewertung", "risikomanagementsystem"] },
+    related: ["harmonisierte-normen", "konformitaetsbewertung", "risikomanagementsystem", "verhaltenskodex"] },
 
   { id: "prompt-injection", category: "security", risk: null,
     tags: ["#PromptInjection", "#OWASP", "#Security"],
@@ -679,7 +679,7 @@ const TERMS = [
       term: "AI Red Teaming",
       short: "Structured adversarial testing of AI systems to surface vulnerabilities, misuse potential, and safety issues.",
       long: "Originating in cybersecurity, transferred to AI models. Methods: manual probing, automated jailbreaking, multi-turn attacks, data-extraction tests, capability evaluations. Mandatory for GPAI with systemic risk (Art. 55 AI Act). Established at OpenAI, Anthropic, Google DeepMind, Meta. External red teams (e.g. NIST, ARC, Apollo Research) complement internal testing." },
-    related: ["systemisches-risiko", "adversarial", "prompt-injection"] },
+    related: ["systemisches-risiko", "adversarial", "prompt-injection", "modellbewertung"] },
 
   { id: "einfuehrer", category: "ai-act-core", risk: null,
     tags: ["#Importer", "#Akteur", "#Art23", "#Wertschoepfungskette"],
@@ -718,7 +718,7 @@ const TERMS = [
       short: "Person established in the EU designated in writing by a third-country provider to carry out obligations under the AI Act (Art. 3(5), Art. 22).",
       long: "An authorised representative must be designated by non-EU providers before placing systems on the market. Tasks: verify EU declaration of conformity and technical documentation, keep records for 10 years, cooperate with authorities, terminate mandate if non-conformity is suspected. Comparable to the GDPR Art. 27 representative but with wider verification and reporting duties." },
     links: [ { label: "Art. 22 AI Act", url: "https://artificialintelligenceact.eu/article/22/" } ],
-    related: ["einfuehrer", "anbieter"] },
+    related: ["einfuehrer", "anbieter", "extraterritorialitaet"] },
 
   { id: "provider-flip", category: "ai-act-core", risk: null,
     tags: ["#ProviderFlip", "#Art25", "#Wertschoepfungskette", "#SubstantialModification"],
@@ -731,7 +731,7 @@ const TERMS = [
       short: "An actor becomes the provider when it substantially modifies a high-risk AI system, markets it under its own name, or changes its intended purpose (Art. 25).",
       long: "Three triggers: (a) marketing under own name or trademark; (b) substantial modification of a high-risk system already placed on the market; (c) change of intended purpose such that a system becomes high-risk. Consequence: all provider duties fall on the new provider. The original provider must cooperate and share relevant information (Art. 25(4)). A key compliance point for downstream developers and system integrators." },
     links: [ { label: "Art. 25 AI Act", url: "https://artificialintelligenceact.eu/article/25/" } ],
-    related: ["wesentliche-aenderung", "anbieter", "downstream-anbieter", "haendler"] },
+    related: ["wesentliche-aenderung", "anbieter", "downstream-anbieter", "haendler", "verwendungszweck"] },
 
   { id: "wesentliche-aenderung", category: "ai-act-core", risk: null,
     tags: ["#SubstantialModification", "#Art3", "#Requalification"],
@@ -848,7 +848,7 @@ const TERMS = [
       short: "List of 20 EU product laws whose safety components using AI automatically qualify as high-risk systems (Art. 6(1)).",
       long: "Annex I has two sections: Section A (12 New Legislative Framework acts) — including the Machinery Regulation, Toy Directive, recreational craft, lifts, ATEX, radio equipment, pressure equipment, cableways, PPE, gas appliances, MDR and IVDR. Section B (8 Old Approach acts) — aviation, motor vehicles, agricultural machinery, marine equipment, railways, motor vehicle type approval, civil aviation EASA. Where an AI system is a safety component of one of these products, the AI Act applies alongside the sectoral rules." },
     links: [ { label: "Anhang I", url: "https://artificialintelligenceact.eu/annex/1/" } ],
-    related: ["hochrisiko-ki", "mdr-schnittstelle", "anhang-iii"] },
+    related: ["hochrisiko-ki", "mdr-schnittstelle", "anhang-iii", "sicherheitsbauteil"] },
 
   { id: "anhang-iii", category: "ai-act-core", risk: "high",
     tags: ["#AnnexIII", "#HighRisk", "#UseCases"],
@@ -965,7 +965,7 @@ const TERMS = [
       short: "Providers must include digital or printed instructions with high-risk systems providing deployers with clear, comprehensive and accessible information (Art. 13).",
       long: "Minimum content: identity and contact details of the provider, system characteristics, capabilities and performance limitations (purpose, accuracy, robustness, known circumstances leading to risks), changes envisaged by the provider, technical measures for human oversight, required computational resources, expected maintenance, description of logging mechanisms. Language: Member States may require use of national language. A prerequisite for proper operation by the deployer (Art. 26(1))." },
     links: [ { label: "Art. 13 AI Act", url: "https://artificialintelligenceact.eu/article/13/" } ],
-    related: ["menschliche-aufsicht", "betreiber", "transparenzpflichten"] },
+    related: ["menschliche-aufsicht", "betreiber", "transparenzpflichten", "verwendungszweck"] },
 
   { id: "post-market-monitoring", category: "ai-act-core", risk: null,
     tags: ["#PostMarket", "#Monitoring", "#Art72"],
@@ -1173,7 +1173,7 @@ const TERMS = [
       short: "The AI Act and DSA regulate different objects — AI systems vs. intermediary services — but overlap on algorithmic recommender systems, deepfakes and generative AI.",
       long: "Overlaps: (1) recommender systems of large platforms are subject to DSA transparency duties (Art. 27 DSA) and potentially high-risk AI under Annex III AI Act; (2) systemic risks of Very Large Online Platforms (VLOPs) under Art. 34 DSA include AI-generated disinformation; (3) deepfake labelling: Art. 50 AI Act at the AI system level, DSA Code of Practice on Disinformation at platform level; (4) competencies: Digital Services Coordinators vs. market surveillance authorities — coordination required. Both acts share a philosophy of risk-based, proportionate regulation." },
     links: [ { label: "DSA (VO 2022/2065)", url: "https://eur-lex.europa.eu/eli/reg/2022/2065/oj" } ],
-    related: ["dma-schnittstelle", "deepfake", "transparenzpflichten", "verbraucherschutz-schnittstelle"] },
+    related: ["dma-schnittstelle", "deepfake", "transparenzpflichten", "verbraucherschutz-schnittstelle", "ki-wahlen"] },
 
   { id: "dma-schnittstelle", category: "governance", risk: null,
     tags: ["#DMA", "#DigitalMarketsAct", "#Gatekeeper"],
@@ -1199,7 +1199,7 @@ const TERMS = [
       short: "AI-based medical devices are subject to both the MDR/IVDR and the AI Act — conformity assessment is conducted in an integrated manner.",
       long: "The MDR (Regulation 2017/745) and IVDR (Regulation 2017/746) are listed in Annex I Section A of the AI Act; AI safety components thus automatically qualify as high-risk AI. Practical consequences: (1) integrated conformity assessment following MDR/IVDR modules (typically class IIa and above: notified body); (2) Chapter III AI Act requirements (risk management, data quality, oversight) must additionally be met — often integrable into existing QMS; (3) notified bodies need AI-specific competence; (4) clinical evaluation under MDR covers AI-specific aspects such as accuracy, robustness, bias. Transition until 2 Aug 2027 (Art. 111(2))." },
     links: [ { label: "MDR (VO 2017/745)", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" } ],
-    related: ["anhang-i", "konformitaetsbewertung", "hochrisiko-ki"] },
+    related: ["anhang-i", "konformitaetsbewertung", "hochrisiko-ki", "notruf-triage", "sicherheitsbauteil"] },
 
   { id: "nis2-schnittstelle", category: "security", risk: null,
     tags: ["#NIS2", "#Cybersecurity", "#KritischeInfrastruktur"],
@@ -1212,7 +1212,7 @@ const TERMS = [
       short: "The NIS 2 Cybersecurity Directive complements AI Act requirements on accuracy, robustness and cybersecurity for high-risk AI in critical infrastructure.",
       long: "NIS 2 (Directive 2022/2555) obliges operators of essential and important entities to cybersecurity measures. Overlap with the AI Act notably at: (1) high-risk AI in critical infrastructure (Annex III(2)); (2) incident reporting: NIS 2 requires early warning within 24 h, initial report within 72 h — in addition to AI Act incident reporting under Art. 73; (3) risk management measures: NIS 2 Art. 21 overlaps with AI Act Art. 15. Transposed in Germany via NIS2UmsuCG (2025). Recommendation: integrated management system rather than parallel silos." },
     links: [ { label: "NIS-2 (RL 2022/2555)", url: "https://eur-lex.europa.eu/eli/dir/2022/2555/oj" } ],
-    related: ["cra-schnittstelle", "genauigkeit-robustheit"] },
+    related: ["cra-schnittstelle", "genauigkeit-robustheit", "kritische-infrastruktur"] },
 
   { id: "cra-schnittstelle", category: "security", risk: null,
     tags: ["#CRA", "#CyberResilienceAct", "#Software"],
@@ -1251,7 +1251,7 @@ const TERMS = [
       short: "The AI Act obliges GPAI providers to copyright compliance (Art. 53(1)(c)) and to publish a summary of training data (Art. 53(1)(d)).",
       long: "Key touch points: (1) text and data mining exception (TDM) under Arts. 3, 4 DSM Directive 2019/790 — commercial use only permitted if rightholders have not made a machine-readable reservation (\"robots.txt\", \"noai\"); (2) training data summary (Annex XI) must be sufficiently detailed to allow rightholders to exercise their rights; Commission template pending; (3) GPAI providers must implement a compliance strategy including respect for opt-outs. Case law in Germany (LAION judgment of the Hamburg Regional Court 2024) and internationally reveals significant legal uncertainty." },
     links: [ { label: "DSM-RL (RL 2019/790)", url: "https://eur-lex.europa.eu/eli/dir/2019/790/oj" } ],
-    related: ["gpai", "generative-ai"] },
+    related: ["gpai", "generative-ai", "trainingsdaten-zusammenfassung"] },
 
   { id: "verbraucherschutz-schnittstelle", category: "governance", risk: null,
     tags: ["#ConsumerProtection", "#UCPD", "#Verbraucher"],
@@ -1277,7 +1277,7 @@ const TERMS = [
       short: "AI in employment contexts is generally high-risk under Annex III(4) and is complemented by national and European employment law.",
       long: "Relevant acts: (1) GDPR — processing of employee data, Art. 88 GDPR and §26 BDSG (Germany); (2) Platform Work Directive (Directive 2024/2831) — transparency and human oversight of algorithmic management; (3) works council law: §87 BetrVG (co-determination on technical monitoring), §90 (consultation on AI-supported HR planning); (4) anti-discrimination law (AGG, Directive 2000/78/EC); (5) OSH Framework Directive 89/391/EEC extended to psychosocial risks from algorithmic management. Practice: works agreements on AI use are often mandatory, FRIA under Art. 27 AI Act recommended." },
     links: [ { label: "Plattformarbeits-RL", url: "https://eur-lex.europa.eu/eli/dir/2024/2831/oj" } ],
-    related: ["anhang-iii", "dsgvo-schnittstelle", "fria"] },
+    related: ["anhang-iii", "dsgvo-schnittstelle", "fria", "emotionserkennung", "ki-beschaeftigung"] },
 
   { id: "wettbewerbsrecht-schnittstelle", category: "governance", risk: null,
     tags: ["#CompetitionLaw", "#Antitrust", "#Kartellrecht"],
@@ -1329,6 +1329,474 @@ const TERMS = [
       short: "Technical specifications adopted by the Commission via implementing act as an alternative to harmonised standards (Art. 41).",
       long: "Trigger: where harmonised standards for the AI Act are not timely, adequate or sufficient, the Commission may adopt common specifications. Prior consultation of AI Board, affected Member States, stakeholders. Legal effect: providers meeting the specifications also benefit from a presumption of conformity. Withdrawal by the Commission is possible once harmonised standards become available. Practical relevance: a safety net in case CEN/CENELEC JTC 21 does not deliver in time — with an eye on first application on 2 Aug 2026 (high-risk rules)." },
     links: [ { label: "Art. 41 AI Act", url: "https://artificialintelligenceact.eu/article/41/" } ],
-    related: ["harmonisierte-normen", "konformitaetsbewertung"] }
+    related: ["harmonisierte-normen", "konformitaetsbewertung"] },
+
+  { id: "biometrische-identifizierung", category: "cv", risk: "high",
+    tags: ["#Biometrie", "#AnnexIII", "#Identifizierung", "#Art3"],
+    de: {
+      term: "Biometrische Fernidentifizierung",
+      short: "Automatisierte Erkennung natürlicher Personen anhand biometrischer Merkmale auf Distanz, ohne aktive Mitwirkung – Hochrisiko nach Anhang III Nr. 1 lit. a.",
+      long: "Unterschieden wird zwischen Echtzeit-Fernidentifizierung (Erfassung, Abgleich und Identifizierung ohne wesentliche Verzögerung, teils sofort) und nachträglicher Fernidentifizierung (zeitlich versetzt). Echtzeit-Nutzung im öffentlichen Raum für Strafverfolgung ist grundsätzlich verboten (Art. 5 Abs. 1 lit. h), mit eng begrenzten Ausnahmen. Nachträgliche Fernidentifizierung gilt als Hochrisiko-System und erfordert richterliche oder behördliche Genehmigung. Abzugrenzen von biometrischer Verifizierung (1:1-Abgleich, z. B. Entsperren eines Geräts), die nicht als Fernidentifizierung gilt." },
+    en: {
+      term: "Remote Biometric Identification",
+      short: "Automated recognition of natural persons based on biometric features at a distance, without active involvement — high-risk under Annex III(1)(a).",
+      long: "A distinction is drawn between real-time remote identification (capture, matching and identification without significant delay, sometimes instantaneous) and post-remote identification (with a time lag). Real-time use in public spaces for law enforcement is generally prohibited (Art. 5(1)(h)), with narrowly limited exceptions. Post-remote identification is a high-risk system and requires judicial or administrative authorisation. To be distinguished from biometric verification (1:1 matching, e.g. unlocking a device), which does not count as remote identification." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["gesichtserkennung", "biometrische-verifizierung", "verbotene-praktiken", "anhang-iii", "biometrische-kategorisierung"] },
+
+  { id: "biometrische-kategorisierung", category: "cv", risk: "high",
+    tags: ["#Biometrie", "#AnnexIII", "#Kategorisierung", "#Art5"],
+    de: {
+      term: "Biometrische Kategorisierung",
+      short: "Zuordnung natürlicher Personen zu Kategorien anhand biometrischer Daten (z. B. Alter, Geschlecht) – teils Hochrisiko, teils verboten.",
+      long: "Hochrisiko nach Anhang III Nr. 1 lit. b, sofern nicht ohnehin verboten. Verboten (Art. 5 Abs. 1 lit. g) ist die Kategorisierung, die sensible Merkmale ableitet oder erschließt: Rasse, politische Meinung, Gewerkschaftszugehörigkeit, religiöse/weltanschauliche Überzeugung, Sexualleben oder sexuelle Orientierung. Ausnahme: rechtmäßig erworbene Datensätze im Strafverfolgungskontext. Nicht erfasst: rein technische Kategorisierung zur Bildbearbeitung. Zusätzlich greift die DSGVO (Art. 9 – besondere Kategorien personenbezogener Daten)." },
+    en: {
+      term: "Biometric Categorisation",
+      short: "Assigning natural persons to categories based on biometric data (e.g. age, sex) — partly high-risk, partly prohibited.",
+      long: "High-risk under Annex III(1)(b) unless already prohibited. Prohibited (Art. 5(1)(g)) is categorisation that deduces or infers sensitive attributes: race, political opinion, trade union membership, religious or philosophical belief, sex life or sexual orientation. Exception: lawfully acquired datasets in the law enforcement context. Not covered: purely technical categorisation for image processing. The GDPR also applies (Art. 9 — special categories of personal data)." },
+    links: [ { label: "Art. 5 AI Act", url: "https://artificialintelligenceact.eu/article/5/" } ],
+    related: ["biometrische-identifizierung", "verbotene-praktiken", "emotionserkennung"] },
+
+  { id: "emotionserkennung", category: "cv", risk: "high",
+    tags: ["#Emotion", "#AnnexIII", "#Art5", "#Arbeitsplatz"],
+    de: {
+      term: "Emotionserkennungssystem",
+      short: "KI-System zur Erkennung oder Ableitung von Emotionen oder Absichten natürlicher Personen anhand biometrischer Daten (Art. 3 Nr. 39).",
+      long: "Am Arbeitsplatz und in Bildungseinrichtungen grundsätzlich verboten (Art. 5 Abs. 1 lit. f), außer aus medizinischen oder sicherheitsbezogenen Gründen (z. B. Müdigkeitserkennung bei Piloten). In anderen Kontexten Hochrisiko nach Anhang III Nr. 1 lit. c mit Transparenzpflicht nach Art. 50 Abs. 3. Wissenschaftlich umstritten: Die Ableitung innerer Zustände aus Mimik, Stimme oder Körperhaltung gilt als methodisch unzuverlässig. Nicht erfasst: reine Erkennung offensichtlicher Ausdrücke wie Lächeln ohne Ableitung emotionaler Zustände." },
+    en: {
+      term: "Emotion Recognition System",
+      short: "AI system for identifying or inferring emotions or intentions of natural persons based on biometric data (Art. 3(39)).",
+      long: "Generally prohibited in workplaces and educational institutions (Art. 5(1)(f)), except for medical or safety reasons (e.g. fatigue detection for pilots). In other contexts high-risk under Annex III(1)(c) with transparency duty under Art. 50(3). Scientifically contested: inferring internal states from facial expression, voice or posture is considered methodologically unreliable. Not covered: mere detection of obvious expressions such as a smile without inferring emotional states." },
+    links: [ { label: "Art. 5 AI Act", url: "https://artificialintelligenceact.eu/article/5/" } ],
+    related: ["biometrische-kategorisierung", "verbotene-praktiken", "arbeitsrecht-schnittstelle", "ki-bildung", "proctoring"] },
+
+  { id: "biometrische-verifizierung", category: "cv", risk: null,
+    tags: ["#Biometrie", "#Verifizierung", "#1zu1"],
+    de: {
+      term: "Biometrische Verifizierung",
+      short: "Abgleich der biometrischen Daten einer Person mit einem einzelnen gespeicherten Referenzdatensatz zur Bestätigung der Identität (1:1-Abgleich).",
+      long: "Anders als die Fernidentifizierung (1:n-Abgleich gegen eine Datenbank) ist die Verifizierung typischerweise kein Hochrisiko-System, da sie aktive Mitwirkung und Einwilligung voraussetzt. Beispiele: Entsperren des Smartphones per Gesicht oder Fingerabdruck, Zugangskontrolle mit bewusster Vorlage. Der AI Act nimmt die reine Verifizierung ausdrücklich vom Hochrisiko-Bereich aus (Erwägungsgrund 15/54). DSGVO bleibt anwendbar: biometrische Daten sind besondere Kategorien (Art. 9)." },
+    en: {
+      term: "Biometric Verification",
+      short: "Matching a person's biometric data against a single stored reference record to confirm identity (1:1 matching).",
+      long: "Unlike remote identification (1:n matching against a database), verification is typically not a high-risk system, as it presupposes active involvement and consent. Examples: unlocking a smartphone by face or fingerprint, access control with deliberate presentation. The AI Act expressly excludes pure verification from the high-risk area (Recitals 15/54). The GDPR still applies: biometric data are special categories (Art. 9)." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["biometrische-identifizierung", "gesichtserkennung"] },
+
+  { id: "kritische-infrastruktur", category: "ai-act-core", risk: "high",
+    tags: ["#KritischeInfrastruktur", "#AnnexIII", "#Sicherheit"],
+    de: {
+      term: "KI in kritischer Infrastruktur",
+      short: "Sicherheitskomponenten von KI-Systemen im Management und Betrieb kritischer Infrastruktur – Hochrisiko nach Anhang III Nr. 2.",
+      long: "Erfasst sind Sicherheitsbauteile in der Verwaltung und im Betrieb kritischer digitaler Infrastruktur, des Straßenverkehrs sowie der Versorgung mit Wasser, Gas, Wärme und Strom. Zweck: Ausfälle oder Fehlfunktionen können Leben und Gesundheit vieler Menschen gefährden. Abgrenzung: reine Verwaltungs-KI ohne Sicherheitsrelevanz fällt nicht darunter. Enger Bezug zur NIS-2-Richtlinie (Cybersicherheit kritischer Einrichtungen) und zur CER-Richtlinie (Resilienz kritischer Einrichtungen). Sonderregel für das Erklärungsrecht: bei Anhang III Nr. 2 kein individueller Erklärungsanspruch (Art. 86 Abs. 3)." },
+    en: {
+      term: "AI in Critical Infrastructure",
+      short: "Safety components of AI systems in the management and operation of critical infrastructure — high-risk under Annex III(2).",
+      long: "Covered are safety components in the management and operation of critical digital infrastructure, road traffic, and the supply of water, gas, heating and electricity. Purpose: failures or malfunctions can endanger the life and health of many people. Delimitation: purely administrative AI without safety relevance is not covered. Close links to the NIS 2 Directive (cybersecurity of critical entities) and the CER Directive (resilience of critical entities). Special rule for the right to explanation: no individual explanation claim for Annex III(2) (Art. 86(3))." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["anhang-iii", "nis2-schnittstelle", "sicherheitsbauteil", "notruf-triage"] },
+
+  { id: "ki-bildung", category: "ai-act-core", risk: "high",
+    tags: ["#Bildung", "#AnnexIII", "#Education"],
+    de: {
+      term: "KI in allgemeiner und beruflicher Bildung",
+      short: "KI-Systeme für Zugang, Bewertung und Steuerung in Bildungseinrichtungen – Hochrisiko nach Anhang III Nr. 3.",
+      long: "Vier erfasste Anwendungsfälle: (a) Entscheidung über Zugang oder Zuweisung zu Bildungseinrichtungen; (b) Bewertung von Lernergebnissen, auch zur Steuerung des Lernprozesses; (c) Bewertung des angemessenen Bildungsniveaus einer Person; (d) Überwachung und Erkennung unzulässigen Verhaltens bei Prüfungen (Proctoring). Begründung: Bildungsentscheidungen prägen Lebenswege und Zugangschancen. Häufig Überschneidung mit DSGVO (Minderjährigenschutz) und Emotionserkennungsverbot (Art. 5). FRIA für öffentliche Bildungseinrichtungen verpflichtend (Art. 27)." },
+    en: {
+      term: "AI in Education and Vocational Training",
+      short: "AI systems for access, assessment and steering in educational institutions — high-risk under Annex III(3).",
+      long: "Four covered use cases: (a) deciding on access or admission to educational institutions; (b) evaluating learning outcomes, including to steer the learning process; (c) assessing the appropriate level of education for a person; (d) monitoring and detecting prohibited behaviour during tests (proctoring). Rationale: educational decisions shape life paths and access opportunities. Frequent overlap with GDPR (protection of minors) and the emotion recognition ban (Art. 5). FRIA mandatory for public educational institutions (Art. 27)." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["proctoring", "anhang-iii", "emotionserkennung", "vulnerable-gruppen"] },
+
+  { id: "proctoring", category: "ai-act-core", risk: "high",
+    tags: ["#Proctoring", "#Bildung", "#AnnexIII", "#Ueberwachung"],
+    de: {
+      term: "Prüfungsüberwachung (Proctoring)",
+      short: "KI-gestützte Überwachung von Prüfungen zur Erkennung von Täuschungsversuchen – Hochrisiko nach Anhang III Nr. 3 lit. d.",
+      long: "Proctoring-Systeme analysieren Video, Audio, Blickrichtung, Tastatureingaben und Umgebung, um unzulässiges Verhalten zu erkennen. Rechtlich heikel: Kombination aus Überwachung, oft biometrischer Analyse und potenzieller Emotionserkennung (verboten in Bildung nach Art. 5). Datenschutzrechtlich problematisch (Videoüberwachung im Privatraum der Prüflinge), diskriminierungsanfällig (Fehlerkennung bei dunkler Haut, neurodivergentem Verhalten). Mehrere europäische Gerichte haben Proctoring-Einsatz eingeschränkt. Menschliche Aufsicht (Art. 14) und FRIA besonders relevant." },
+    en: {
+      term: "Exam Proctoring",
+      short: "AI-supported monitoring of exams to detect cheating attempts — high-risk under Annex III(3)(d).",
+      long: "Proctoring systems analyse video, audio, gaze direction, keystrokes and environment to detect prohibited behaviour. Legally sensitive: a combination of surveillance, often biometric analysis and potential emotion recognition (prohibited in education under Art. 5). Problematic under data protection law (video surveillance in the candidates' private space), prone to discrimination (misrecognition of dark skin, neurodivergent behaviour). Several European courts have restricted proctoring. Human oversight (Art. 14) and FRIA are particularly relevant." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["ki-bildung", "emotionserkennung", "menschliche-aufsicht"] },
+
+  { id: "ki-beschaeftigung", category: "ai-act-core", risk: "high",
+    tags: ["#Beschaeftigung", "#HR", "#AnnexIII", "#Employment"],
+    de: {
+      term: "KI in Beschäftigung und Personalmanagement",
+      short: "KI-Systeme für Personalauswahl und Personalführung – Hochrisiko nach Anhang III Nr. 4.",
+      long: "Zwei erfasste Kategorien: (a) Einstellung und Auswahl – gezielte Stellenanzeigen, Analyse und Filterung von Bewerbungen, Bewertung von Bewerbern; (b) Entscheidungen über Arbeitsbedingungen, Beförderung, Kündigung, Aufgabenzuweisung anhand von Verhalten oder persönlichen Eigenschaften, sowie Leistungs- und Verhaltensüberwachung. Begründung: erhebliche Auswirkungen auf Berufschancen und Existenzgrundlage. Enge Verzahnung mit Arbeitsrecht, Mitbestimmung (§ 87 BetrVG), Antidiskriminierungsrecht (AGG) und Plattformarbeits-Richtlinie. FRIA für viele Betreiber verpflichtend." },
+    en: {
+      term: "AI in Employment and Workforce Management",
+      short: "AI systems for recruitment and personnel management — high-risk under Annex III(4).",
+      long: "Two covered categories: (a) recruitment and selection — targeted job ads, analysis and filtering of applications, evaluation of candidates; (b) decisions on working conditions, promotion, termination, task allocation based on behaviour or personal traits, and performance and behaviour monitoring. Rationale: significant impact on career opportunities and livelihood. Closely intertwined with employment law, co-determination, anti-discrimination law, and the Platform Work Directive. FRIA mandatory for many deployers." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["cv-screening", "algorithmisches-management", "arbeitsrecht-schnittstelle", "anhang-iii"] },
+
+  { id: "cv-screening", category: "ai-act-core", risk: "high",
+    tags: ["#Recruiting", "#CVScreening", "#Bias", "#AnnexIII"],
+    de: {
+      term: "Automatisiertes Bewerber-Screening",
+      short: "KI-gestützte Analyse, Filterung und Rangordnung von Bewerbungen – Hochrisiko nach Anhang III Nr. 4 lit. a.",
+      long: "Systeme scannen Lebensläufe, extrahieren Merkmale, gleichen sie mit Anforderungsprofilen ab und erstellen Ranglisten. Berühmtes Negativbeispiel: Amazons Recruiting-KI benachteiligte Frauen, weil sie aus historischen Einstellungsdaten lernte. Zentrale Risiken: Proxy-Diskriminierung (scheinbar neutrale Merkmale korrelieren mit geschützten Eigenschaften), fehlende Nachvollziehbarkeit, Automatisierungsbias der Recruiter. Pflichten: Daten-Governance (Art. 10), Bias-Prüfung, menschliche Aufsicht (Art. 14), Transparenz gegenüber Bewerbern, FRIA." },
+    en: {
+      term: "Automated Applicant Screening",
+      short: "AI-supported analysis, filtering and ranking of job applications — high-risk under Annex III(4)(a).",
+      long: "Systems scan CVs, extract features, match them against requirement profiles and produce rankings. Famous cautionary example: Amazon's recruiting AI disadvantaged women because it learned from historical hiring data. Key risks: proxy discrimination (seemingly neutral features correlate with protected attributes), lack of explainability, recruiters' automation bias. Duties: data governance (Art. 10), bias examination, human oversight (Art. 14), transparency towards applicants, FRIA." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["ki-beschaeftigung", "bias", "fairness"] },
+
+  { id: "algorithmisches-management", category: "ai-act-core", risk: "high",
+    tags: ["#AlgorithmicManagement", "#PlatformWork", "#AnnexIII"],
+    de: {
+      term: "Algorithmisches Management",
+      short: "Steuerung, Bewertung und Überwachung von Beschäftigten durch KI-Systeme, insbesondere in der Plattformarbeit – Hochrisiko nach Anhang III Nr. 4 lit. b.",
+      long: "Umfasst automatisierte Aufgabenzuweisung, Leistungsbewertung in Echtzeit, dynamische Bezahlung, Kündigungsentscheidungen und Verhaltensüberwachung. Typisch bei Liefer- und Fahrdiensten (Gig Economy). Ergänzend zur AI-Act-Einstufung greift die Plattformarbeits-Richtlinie (RL 2024/2831): Transparenzpflichten über eingesetzte Systeme, Recht auf menschliche Überprüfung wichtiger Entscheidungen, Verbot der Verarbeitung bestimmter Daten (emotionaler Zustand, private Gespräche). Menschliche Aufsicht und Mitbestimmung sind zentrale Compliance-Hebel." },
+    en: {
+      term: "Algorithmic Management",
+      short: "Steering, evaluating and monitoring workers through AI systems, especially in platform work — high-risk under Annex III(4)(b).",
+      long: "Covers automated task allocation, real-time performance evaluation, dynamic pay, termination decisions and behaviour monitoring. Typical in delivery and ride-hailing services (gig economy). Alongside AI Act classification, the Platform Work Directive (Directive 2024/2831) applies: transparency duties on the systems used, right to human review of important decisions, prohibition of processing certain data (emotional state, private conversations). Human oversight and co-determination are key compliance levers." },
+    links: [ { label: "Plattformarbeits-RL", url: "https://eur-lex.europa.eu/eli/dir/2024/2831/oj" } ],
+    related: ["ki-beschaeftigung", "arbeitsrecht-schnittstelle"] },
+
+  { id: "kreditwuerdigkeit", category: "ai-act-core", risk: "high",
+    tags: ["#CreditScoring", "#AnnexIII", "#Finanzen"],
+    de: {
+      term: "Kreditwürdigkeitsprüfung (Credit Scoring)",
+      short: "KI-Systeme zur Bewertung der Kreditwürdigkeit oder Bonität natürlicher Personen – Hochrisiko nach Anhang III Nr. 5 lit. b.",
+      long: "Erfasst die Bewertung der Kreditwürdigkeit und die Erstellung von Bonitäts-Scores, mit Ausnahme der Betrugserkennung bei Finanzdienstleistungen. Betrifft Banken, Kreditvermittler, teils Telekommunikations- und Versorgungsunternehmen. Berühmte Fälle diskriminierender Scores (Apple Card, SCHUFA-Verfahren vor dem EuGH 2023). Enge Verzahnung mit DSGVO Art. 22 (automatisierte Einzelentscheidung), Verbraucherkreditrichtlinie und Antidiskriminierungsrecht. Betroffene haben Anspruch auf Erklärung (Art. 86). Daten-Governance und Bias-Prüfung besonders kritisch." },
+    en: {
+      term: "Creditworthiness Assessment (Credit Scoring)",
+      short: "AI systems for evaluating the creditworthiness or credit scores of natural persons — high-risk under Annex III(5)(b).",
+      long: "Covers assessment of creditworthiness and creation of credit scores, except fraud detection in financial services. Affects banks, credit intermediaries, sometimes telecom and utility companies. Famous cases of discriminatory scores (Apple Card, the SCHUFA case before the CJEU in 2023). Closely intertwined with GDPR Art. 22 (automated individual decision), Consumer Credit Directive and anti-discrimination law. Affected persons are entitled to an explanation (Art. 86). Data governance and bias examination are particularly critical." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["versicherung-scoring", "sozialleistungen", "erklaerungsrecht", "anhang-iii", "profiling"] },
+
+  { id: "versicherung-scoring", category: "ai-act-core", risk: "high",
+    tags: ["#Versicherung", "#AnnexIII", "#Insurance"],
+    de: {
+      term: "Risikobewertung in der Versicherung",
+      short: "KI-Systeme für Risikobewertung und Preisgestaltung in der Lebens- und Krankenversicherung – Hochrisiko nach Anhang III Nr. 5 lit. c.",
+      long: "Ausdrücklich erfasst sind Lebens- und Krankenversicherung, weil fehlerhafte oder diskriminierende Bewertungen den Zugang zu existenziell wichtigem Schutz verwehren können. Risiken: Nutzung sensibler Gesundheits- oder Verhaltensdaten, Proxy-Diskriminierung, Entsolidarisierung durch hochgranulare Individualtarife. Verzahnung mit DSGVO (Gesundheitsdaten, Art. 9), Versicherungsvertragsrecht, Antidiskriminierungsrecht (Verbot der Geschlechtsdifferenzierung nach EuGH Test-Achats). Andere Versicherungssparten (Kfz, Haftpflicht) sind nicht per se hochrisikorelevant." },
+    en: {
+      term: "Insurance Risk Assessment",
+      short: "AI systems for risk assessment and pricing in life and health insurance — high-risk under Annex III(5)(c).",
+      long: "Life and health insurance are expressly covered because faulty or discriminatory assessments can deny access to existentially important protection. Risks: use of sensitive health or behavioural data, proxy discrimination, erosion of solidarity through highly granular individual tariffs. Intertwined with GDPR (health data, Art. 9), insurance contract law, anti-discrimination law (prohibition of gender differentiation per the CJEU Test-Achats ruling). Other insurance lines (motor, liability) are not per se high-risk." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["kreditwuerdigkeit", "bias"] },
+
+  { id: "sozialleistungen", category: "ai-act-core", risk: "high",
+    tags: ["#Sozialleistungen", "#AnnexIII", "#PublicSector"],
+    de: {
+      term: "KI bei öffentlichen Sozialleistungen",
+      short: "KI-Systeme für Bewilligung, Kürzung oder Rückforderung wesentlicher öffentlicher Unterstützungsleistungen – Hochrisiko nach Anhang III Nr. 5 lit. a.",
+      long: "Erfasst Entscheidungen über Anspruch, Gewährung, Reduzierung, Widerruf oder Rückforderung von Sozialleistungen und -diensten, einschließlich Gesundheitsdiensten. Warnendes Beispiel: der niederländische SyRI-Skandal und die Kindergeld-Affäre (toeslagenaffaire), bei der ein Betrugserkennungssystem Tausende Familien zu Unrecht ruinierte. Betrifft Behörden im öffentlichen Sektor mit verpflichtender FRIA (Art. 27). Grundrechtssensibel: Zugang zu existenzsichernden Leistungen. Erklärungsrecht (Art. 86) und Beschwerderecht (Art. 85) besonders relevant." },
+    en: {
+      term: "AI in Public Social Benefits",
+      short: "AI systems for granting, reducing or reclaiming essential public assistance benefits — high-risk under Annex III(5)(a).",
+      long: "Covers decisions on eligibility, granting, reduction, revocation or reclaiming of social benefits and services, including healthcare services. Cautionary example: the Dutch SyRI scandal and the childcare benefits affair (toeslagenaffaire), where a fraud-detection system wrongfully ruined thousands of families. Affects public-sector bodies with mandatory FRIA (Art. 27). Fundamental-rights sensitive: access to subsistence benefits. Right to explanation (Art. 86) and right to complain (Art. 85) are particularly relevant." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["kreditwuerdigkeit", "fria", "erklaerungsrecht"] },
+
+  { id: "notruf-triage", category: "ai-act-core", risk: "high",
+    tags: ["#Notruf", "#Triage", "#AnnexIII", "#Emergency"],
+    de: {
+      term: "KI in Notdiensten und Triage",
+      short: "KI-Systeme zur Disposition von Notdiensten und zur Priorisierung von Hilfeleistungen – Hochrisiko nach Anhang III Nr. 5 lit. d.",
+      long: "Erfasst sind KI-Systeme, die den Einsatz von Notfall- und Rettungsdiensten steuern oder bei der Priorisierung von Notrufen (Triage) eingesetzt werden – Feuerwehr, Rettungsdienst, medizinische Erstversorgung. Fehlfunktionen können unmittelbar lebensbedrohlich sein. Besondere Anforderungen an Genauigkeit, Robustheit (Art. 15) und menschliche Aufsicht. Häufig Überschneidung mit Medizinprodukterecht (MDR), wenn die KI als Medizinprodukt eingestuft wird. Zusätzliche Sensibilität durch Priorisierungsentscheidungen über Menschenleben." },
+    en: {
+      term: "AI in Emergency Services and Triage",
+      short: "AI systems for dispatching emergency services and prioritising assistance — high-risk under Annex III(5)(d).",
+      long: "Covers AI systems that steer the deployment of emergency and rescue services or are used in prioritising emergency calls (triage) — fire brigade, ambulance, first medical response. Malfunctions can be immediately life-threatening. Special requirements on accuracy, robustness (Art. 15) and human oversight. Frequent overlap with medical device law (MDR) where the AI qualifies as a medical device. Additional sensitivity from prioritisation decisions over human lives." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["kritische-infrastruktur", "mdr-schnittstelle"] },
+
+  { id: "ki-strafverfolgung", category: "ai-act-core", risk: "high",
+    tags: ["#Strafverfolgung", "#AnnexIII", "#LawEnforcement"],
+    de: {
+      term: "KI in der Strafverfolgung",
+      short: "KI-Systeme, die von Strafverfolgungsbehörden zur Risikobewertung, Beweisauswertung und Profilerstellung eingesetzt werden – Hochrisiko nach Anhang III Nr. 6.",
+      long: "Erfasst sind u. a.: Risikobewertung natürlicher Personen als potenzielle Opfer oder Täter, Lügendetektoren, Beweismittelbewertung, Bewertung der Zuverlässigkeit von Beweisen, Rückfallprognosen und Profiling im Rahmen von Aufklärung und Verfolgung. Grundrechtssensibelster Bereich neben Biometrie. Zusätzliche Schutzmaßnahmen und teils eingeschränkte Registrierungspflichten (nicht-öffentlicher Teil der EU-Datenbank). Enge Grenzen durch die Grundrechtecharta, EMRK und die Datenschutz-Richtlinie für Justiz und Inneres (RL 2016/680, JI-Richtlinie)." },
+    en: {
+      term: "AI in Law Enforcement",
+      short: "AI systems used by law enforcement for risk assessment, evidence evaluation and profiling — high-risk under Annex III(6).",
+      long: "Covered include: risk assessment of natural persons as potential victims or offenders, polygraphs, evaluation of evidence, assessment of the reliability of evidence, recidivism prediction and profiling in the course of detection and prosecution. The most fundamental-rights-sensitive area alongside biometrics. Additional safeguards and partly restricted registration duties (non-public part of the EU database). Tight limits from the Charter of Fundamental Rights, the ECHR and the Law Enforcement Directive (Directive 2016/680)." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["predictive-policing", "biometrische-identifizierung", "anhang-iii", "profiling", "ki-migration"] },
+
+  { id: "predictive-policing", category: "ai-act-core", risk: "prohibited",
+    tags: ["#PredictivePolicing", "#Art5", "#Profiling"],
+    de: {
+      term: "Predictive Policing (vorhersagende Polizeiarbeit)",
+      short: "Vorhersage von Straftaten – rein profilbasiert gegenüber Einzelpersonen verboten (Art. 5 Abs. 1 lit. d), ortsbezogen teils als Hochrisiko zulässig.",
+      long: "Verboten ist die Risikobewertung natürlicher Personen ausschließlich auf Basis von Profiling oder Persönlichkeitsmerkmalen, um die Wahrscheinlichkeit einer Straftat vorherzusagen (Art. 5 Abs. 1 lit. d). Ausnahme: Systeme, die menschliche Bewertungen auf Basis objektiver, überprüfbarer und mit der Straftat zusammenhängender Fakten unterstützen. Ortsbezogene Vorhersage (Hotspot-Mapping) ist nicht per se verboten, kann aber als Hochrisiko-System der Strafverfolgung gelten. Kritik: Rückkopplungseffekte verstärken bestehende Diskriminierung in Polizeidaten (over-policing)." },
+    en: {
+      term: "Predictive Policing",
+      short: "Predicting crime — prohibited when based solely on profiling of individuals (Art. 5(1)(d)); location-based forms partly permitted as high-risk.",
+      long: "Prohibited is risk assessment of natural persons based solely on profiling or personality traits to predict the likelihood of an offence (Art. 5(1)(d)). Exception: systems supporting human assessment based on objective, verifiable facts directly linked to a criminal activity. Location-based prediction (hotspot mapping) is not prohibited per se but may qualify as high-risk law-enforcement AI. Criticism: feedback loops reinforce existing discrimination in police data (over-policing)." },
+    links: [ { label: "Art. 5 AI Act", url: "https://artificialintelligenceact.eu/article/5/" } ],
+    related: ["ki-strafverfolgung", "verbotene-praktiken", "profiling"] },
+
+  { id: "ki-migration", category: "ai-act-core", risk: "high",
+    tags: ["#Migration", "#Grenzkontrolle", "#AnnexIII", "#Asyl"],
+    de: {
+      term: "KI in Migration, Asyl und Grenzkontrolle",
+      short: "KI-Systeme in der Migrations-, Asyl- und Grenzverwaltung – Hochrisiko nach Anhang III Nr. 7.",
+      long: "Erfasst sind u. a.: Lügendetektoren und ähnliche Werkzeuge, Risikobewertung von Personen, die einreisen wollen, Prüfung von Anträgen auf Asyl, Visum und Aufenthaltstitel einschließlich Bewertung der Beweismittel, Erkennung und Identifizierung im Migrationskontext. Grundrechtssensibel wegen vulnerabler Betroffener und existenzieller Folgen. Umstritten: Einsatz an EU-Außengrenzen (z. B. das iBorderCtrl-Pilotprojekt). Enge Grenzen durch Asyl- und Migrationsrecht, Grundrechtecharta und Non-Refoulement-Prinzip. Teils reduzierte Registrierungspflichten." },
+    en: {
+      term: "AI in Migration, Asylum and Border Control",
+      short: "AI systems in migration, asylum and border management — high-risk under Annex III(7).",
+      long: "Covered include: polygraphs and similar tools, risk assessment of persons seeking to enter, examination of applications for asylum, visa and residence permits including assessment of evidence, detection and identification in the migration context. Fundamental-rights sensitive because of vulnerable persons and existential consequences. Controversial: use at EU external borders (e.g. the iBorderCtrl pilot project). Tight limits from asylum and migration law, the Charter of Fundamental Rights and the non-refoulement principle. Partly reduced registration duties." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["ki-strafverfolgung", "anhang-iii", "biometrische-identifizierung"] },
+
+  { id: "ki-justiz", category: "ai-act-core", risk: "high",
+    tags: ["#Justiz", "#AnnexIII", "#Judiciary"],
+    de: {
+      term: "KI in der Rechtspflege",
+      short: "KI-Systeme, die Justizbehörden bei der Auslegung von Fakten und Recht unterstützen – Hochrisiko nach Anhang III Nr. 8 lit. a.",
+      long: "Erfasst sind Systeme, die eine Justizbehörde bei der Recherche, Auslegung von Sachverhalten und Rechtsnormen sowie der Anwendung des Rechts auf konkrete Sachverhalte unterstützen, sowie vergleichbarer Einsatz in der alternativen Streitbeilegung. Ziel: Schutz der richterlichen Unabhängigkeit und des Anspruchs auf ein faires Verfahren (Art. 47 GRC). Nicht erfasst: rein administrative Hilfstätigkeiten wie Anonymisierung oder Aktenverwaltung. Warnendes Beispiel: das COMPAS-System in den USA (rassistische Verzerrung bei Rückfallprognosen). Menschliche Letztentscheidung bleibt zwingend." },
+    en: {
+      term: "AI in the Administration of Justice",
+      short: "AI systems assisting judicial authorities in interpreting facts and law — high-risk under Annex III(8)(a).",
+      long: "Covered are systems assisting a judicial authority in researching and interpreting facts and legal norms and applying the law to concrete facts, as well as comparable use in alternative dispute resolution. Aim: protecting judicial independence and the right to a fair trial (Art. 47 Charter). Not covered: purely administrative support such as anonymisation or file management. Cautionary example: the COMPAS system in the US (racial bias in recidivism prediction). Final human decision remains mandatory." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["ki-strafverfolgung", "menschliche-aufsicht", "anhang-iii"] },
+
+  { id: "ki-wahlen", category: "ai-act-core", risk: "high",
+    tags: ["#Wahlen", "#Demokratie", "#AnnexIII", "#Elections"],
+    de: {
+      term: "KI zur Wahlbeeinflussung",
+      short: "KI-Systeme, die das Wahlverhalten oder den Ausgang von Wahlen und Referenden beeinflussen können – Hochrisiko nach Anhang III Nr. 8 lit. b.",
+      long: "Erfasst sind Systeme, die eingesetzt werden, um das Ergebnis einer Wahl oder eines Referendums oder das Wahlverhalten natürlicher Personen zu beeinflussen. Ausnahme: Systeme, deren Output natürliche Personen nicht direkt ausgesetzt sind (z. B. reine Kampagnen-Organisationstools). Hintergrund: Cambridge-Analytica-Skandal, Mikrotargeting, KI-generierte Desinformation und Deepfakes im Wahlkampf. Verzahnung mit DSA (systemische Risiken von Plattformen), der Verordnung über politische Werbung und dem Verbot manipulativer Praktiken (Art. 5)." },
+    en: {
+      term: "AI Influencing Elections",
+      short: "AI systems capable of influencing voting behaviour or the outcome of elections and referendums — high-risk under Annex III(8)(b).",
+      long: "Covered are systems used to influence the outcome of an election or referendum or the voting behaviour of natural persons. Exception: systems whose output natural persons are not directly exposed to (e.g. pure campaign organisation tools). Background: the Cambridge Analytica scandal, microtargeting, AI-generated disinformation and deepfakes in campaigns. Intertwined with the DSA (systemic platform risks), the Regulation on political advertising and the prohibition of manipulative practices (Art. 5)." },
+    links: [ { label: "Anhang III", url: "https://artificialintelligenceact.eu/annex/3/" } ],
+    related: ["deepfake", "dsa-schnittstelle", "manipulative-praktiken"] },
+
+  { id: "hochrisiko-ausnahme", category: "ai-act-core", risk: null,
+    tags: ["#Art6", "#Ausnahme", "#Filterregel"],
+    de: {
+      term: "Ausnahme von der Hochrisiko-Einstufung (Art. 6 Abs. 3)",
+      short: "Ein System aus Anhang III gilt nicht als hochrisikorelevant, wenn es kein erhebliches Risiko für Gesundheit, Sicherheit oder Grundrechte darstellt.",
+      long: "Vier Fallgruppen, in denen die Hochrisiko-Vermutung entfällt: (a) das System führt nur eine eng begrenzte Verfahrensaufgabe aus; (b) es verbessert lediglich das Ergebnis einer zuvor abgeschlossenen menschlichen Tätigkeit; (c) es erkennt Entscheidungsmuster oder Abweichungen, ohne die menschliche Bewertung ohne angemessene Überprüfung zu ersetzen; (d) es bereitet eine Bewertung nur vor. Wichtig: Profiling natürlicher Personen gilt immer als Hochrisiko. Wer die Ausnahme nutzt, muss dies dokumentieren und registrieren – die Behörde kann widersprechen. Kommissionsleitlinien konkretisieren die Anwendung." },
+    en: {
+      term: "Exception from High-Risk Classification (Art. 6(3))",
+      short: "A system from Annex III is not high-risk if it does not pose a significant risk to health, safety or fundamental rights.",
+      long: "Four case groups where the high-risk presumption falls away: (a) the system performs only a narrow procedural task; (b) it merely improves the result of a previously completed human activity; (c) it detects decision patterns or deviations without replacing human assessment absent adequate review; (d) it only prepares an assessment. Important: profiling of natural persons is always high-risk. Those relying on the exception must document and register it — the authority may object. Commission guidelines specify application." },
+    links: [ { label: "Art. 6 AI Act", url: "https://artificialintelligenceact.eu/article/6/" } ],
+    related: ["hochrisiko-ki", "profiling", "anhang-iii"] },
+
+  { id: "profiling", category: "ai-act-core", risk: "high",
+    tags: ["#Profiling", "#Art6", "#DSGVO"],
+    de: {
+      term: "Profiling",
+      short: "Automatisierte Verarbeitung personenbezogener Daten zur Bewertung persönlicher Aspekte einer natürlichen Person – stets hochrisikorelevant im Anhang-III-Kontext.",
+      long: "Der Begriff folgt Art. 4 Nr. 4 DSGVO: automatisierte Auswertung, um Aspekte wie Arbeitsleistung, wirtschaftliche Lage, Gesundheit, Vorlieben, Verhalten, Aufenthaltsort oder Bewegungen zu analysieren oder vorherzusagen. Im AI Act zentral: Führt ein Anhang-III-System Profiling durch, kann es die Hochrisiko-Ausnahme nach Art. 6 Abs. 3 nicht in Anspruch nehmen – es bleibt immer hochrisikorelevant. Enge Verzahnung mit DSGVO Art. 22 (automatisierte Einzelentscheidung) und dem Erklärungsrecht (Art. 86 AI Act)." },
+    en: {
+      term: "Profiling",
+      short: "Automated processing of personal data to evaluate personal aspects of a natural person — always high-risk in the Annex III context.",
+      long: "The term follows Art. 4(4) GDPR: automated evaluation to analyse or predict aspects such as work performance, economic situation, health, preferences, behaviour, location or movements. Central in the AI Act: where an Annex III system performs profiling, it cannot rely on the high-risk exception under Art. 6(3) — it always remains high-risk. Closely intertwined with GDPR Art. 22 (automated individual decision) and the right to explanation (Art. 86 AI Act)." },
+    links: [ { label: "Art. 6 AI Act", url: "https://artificialintelligenceact.eu/article/6/" } ],
+    related: ["hochrisiko-ausnahme", "kreditwuerdigkeit", "dsgvo-schnittstelle", "ki-strafverfolgung", "predictive-policing"] },
+
+  { id: "sicherheitsbauteil", category: "ai-act-core", risk: "high",
+    tags: ["#SafetyComponent", "#Art3", "#AnnexI"],
+    de: {
+      term: "Sicherheitsbauteil",
+      short: "Bestandteil eines Produkts oder Systems, dessen Ausfall die Gesundheit oder Sicherheit von Personen gefährdet (Art. 3 Nr. 14).",
+      long: "Ist ein KI-System ein Sicherheitsbauteil eines Produkts, das unter die Unionsharmonisierungsrechtsakte in Anhang I fällt (z. B. Maschine, Medizinprodukt, Aufzug), oder ist es selbst ein solches Produkt, gilt es als Hochrisiko-System (Art. 6 Abs. 1). Beispiele: KI-Bremsassistent im Fahrzeug, KI-Steuerung eines Operationsroboters, KI-Kollisionsschutz einer Maschine. Die Konformitätsbewertung erfolgt integriert nach dem jeweiligen Sektorrecht. Abgrenzung: rein komfort- oder effizienzorientierte KI ohne Sicherheitsrelevanz ist kein Sicherheitsbauteil." },
+    en: {
+      term: "Safety Component",
+      short: "A component of a product or system whose failure endangers the health or safety of persons (Art. 3(14)).",
+      long: "Where an AI system is a safety component of a product falling under the Union harmonisation legislation in Annex I (e.g. machine, medical device, lift), or is itself such a product, it qualifies as a high-risk system (Art. 6(1)). Examples: an AI braking assistant in a vehicle, AI control of a surgical robot, AI collision protection of a machine. Conformity assessment is conducted in an integrated manner under the respective sectoral law. Delimitation: purely comfort- or efficiency-oriented AI without safety relevance is not a safety component." },
+    links: [ { label: "Art. 6 AI Act", url: "https://artificialintelligenceact.eu/article/6/" } ],
+    related: ["anhang-i", "mdr-schnittstelle", "hochrisiko-ki", "kritische-infrastruktur"] },
+
+  { id: "verwendungszweck", category: "ai-act-core", risk: null,
+    tags: ["#IntendedPurpose", "#Art3", "#Zweckbindung"],
+    de: {
+      term: "Zweckbestimmung (Intended Purpose)",
+      short: "Die vom Anbieter festgelegte bestimmungsgemäße Verwendung eines KI-Systems, einschließlich Kontext und Bedingungen (Art. 3 Nr. 12).",
+      long: "Die Zweckbestimmung ist Angelpunkt der Risikoklassifizierung: Ob ein System hochrisikorelevant ist, hängt maßgeblich vom vorgesehenen Verwendungszweck ab. Der Anbieter legt ihn in der Gebrauchsanweisung fest. Ändert ein Betreiber den Zweck so, dass daraus ein Hochrisiko-System wird, wird er selbst zum Anbieter (Provider Flip, Art. 25). Abzugrenzen von der vernünftigerweise vorhersehbaren Fehlanwendung (Art. 3 Nr. 13), die im Risikomanagement (Art. 9) ebenfalls berücksichtigt werden muss." },
+    en: {
+      term: "Intended Purpose",
+      short: "The use for which an AI system is intended by the provider, including context and conditions (Art. 3(12)).",
+      long: "The intended purpose is the linchpin of risk classification: whether a system is high-risk depends decisively on its intended use. The provider sets it out in the instructions for use. If a deployer changes the purpose such that a high-risk system results, the deployer becomes a provider (provider flip, Art. 25). To be distinguished from reasonably foreseeable misuse (Art. 3(13)), which must also be considered in risk management (Art. 9)." },
+    links: [ { label: "Art. 3 AI Act", url: "https://artificialintelligenceact.eu/article/3/" } ],
+    related: ["provider-flip", "gebrauchsanweisung", "hochrisiko-ki"] },
+
+  { id: "vulnerable-gruppen", category: "ethics", risk: null,
+    tags: ["#Vulnerabilitaet", "#Art5", "#Grundrechte"],
+    de: {
+      term: "Schutz vulnerabler Gruppen",
+      short: "Der AI Act schützt besonders schutzbedürftige Personen vor Ausnutzung durch KI-Systeme – Kinder, ältere Menschen, Menschen mit Behinderung, wirtschaftlich Schwache.",
+      long: "Verboten ist die Ausnutzung der Vulnerabilität aufgrund von Alter, Behinderung oder sozialer/wirtschaftlicher Lage, um das Verhalten so zu beeinflussen, dass erheblicher Schaden entsteht (Art. 5 Abs. 1 lit. b). Ergänzend: Das Risikomanagement für Hochrisiko-KI muss besonders die Auswirkungen auf Kinder und vulnerable Gruppen berücksichtigen (Art. 9 Abs. 9), und die Datenqualität (Art. 10) muss gruppenspezifische Verzerrungen adressieren. Verzahnung mit der Barrierefreiheitsrichtlinie (European Accessibility Act) und Minderjährigenschutz in der DSGVO." },
+    en: {
+      term: "Protection of Vulnerable Groups",
+      short: "The AI Act protects particularly vulnerable persons from exploitation by AI systems — children, older people, people with disabilities, the economically weak.",
+      long: "Prohibited is the exploitation of vulnerabilities due to age, disability or social/economic situation to distort behaviour in a way that causes significant harm (Art. 5(1)(b)). In addition: risk management for high-risk AI must specifically consider impacts on children and vulnerable groups (Art. 9(9)), and data quality (Art. 10) must address group-specific bias. Intertwined with the European Accessibility Act and protection of minors in the GDPR." },
+    links: [ { label: "Art. 5 AI Act", url: "https://artificialintelligenceact.eu/article/5/" } ],
+    related: ["manipulative-praktiken", "verbotene-praktiken", "ki-bildung"] },
+
+  { id: "manipulative-praktiken", category: "ai-act-core", risk: "prohibited",
+    tags: ["#Manipulation", "#Art5", "#DarkPatterns"],
+    de: {
+      term: "Manipulative und täuschende Techniken",
+      short: "KI-Systeme, die unterschwellige, manipulative oder täuschende Techniken einsetzen, um das Verhalten erheblich zu verzerren – verboten nach Art. 5 Abs. 1 lit. a.",
+      long: "Verboten ist der Einsatz von Techniken, die außerhalb des Bewusstseins wirken oder gezielt manipulieren oder täuschen, mit dem Ergebnis oder dem Ziel, das Verhalten wesentlich zu beeinflussen und dadurch erheblichen Schaden zu verursachen. Umfasst z. B. subliminale Reize oder KI-gestützte Dark Patterns, die informierte Entscheidungen untergraben. Abgrenzung: übliche, rechtmäßige Werbung und Überzeugung bleiben zulässig. Verzahnung mit Verbraucherschutzrecht (UGP-Richtlinie), DSA und dem geplanten Digital Fairness Act." },
+    en: {
+      term: "Manipulative and Deceptive Techniques",
+      short: "AI systems using subliminal, manipulative or deceptive techniques to materially distort behaviour — prohibited under Art. 5(1)(a).",
+      long: "Prohibited is the use of techniques that operate beyond awareness or purposefully manipulate or deceive, with the effect or objective of materially distorting behaviour and thereby causing significant harm. Covers e.g. subliminal stimuli or AI-supported dark patterns that undermine informed decisions. Delimitation: ordinary lawful advertising and persuasion remain permitted. Intertwined with consumer protection law (UCPD), the DSA and the planned Digital Fairness Act." },
+    links: [ { label: "Art. 5 AI Act", url: "https://artificialintelligenceact.eu/article/5/" } ],
+    related: ["verbotene-praktiken", "vulnerable-gruppen", "ki-wahlen"] },
+
+  { id: "scraping-gesichtsbilder", category: "cv", risk: "prohibited",
+    tags: ["#Scraping", "#Art5", "#Clearview"],
+    de: {
+      term: "Ungezieltes Auslesen von Gesichtsbildern",
+      short: "Aufbau oder Erweiterung von Gesichtserkennungsdatenbanken durch ungezieltes Auslesen von Bildern aus dem Internet oder Videoüberwachung – verboten nach Art. 5 Abs. 1 lit. e.",
+      long: "Das Verbot zielt direkt auf Praktiken wie die von Clearview AI, das Milliarden Gesichtsbilder ohne Einwilligung aus sozialen Netzwerken und dem Web gesammelt hat. Untersagt ist das ungezielte (\"untargeted\") Scraping zur Erstellung oder Erweiterung von Gesichtserkennungsdatenbanken. Mehrere europäische Datenschutzbehörden hatten Clearview bereits mit Millionenbußgeldern belegt (Italien, Griechenland, Frankreich, Niederlande). Ergänzt das DSGVO-Verbot und stärkt es durch eine ausdrückliche KI-spezifische Regel." },
+    en: {
+      term: "Untargeted Scraping of Facial Images",
+      short: "Building or expanding facial-recognition databases through untargeted scraping of images from the internet or CCTV — prohibited under Art. 5(1)(e).",
+      long: "The prohibition directly targets practices such as those of Clearview AI, which collected billions of facial images without consent from social networks and the web. Untargeted scraping to create or expand facial-recognition databases is prohibited. Several European data protection authorities had already fined Clearview millions (Italy, Greece, France, Netherlands). Complements the GDPR prohibition and strengthens it with an explicit AI-specific rule." },
+    links: [ { label: "Art. 5 AI Act", url: "https://artificialintelligenceact.eu/article/5/" } ],
+    related: ["gesichtserkennung", "verbotene-praktiken", "biometrische-identifizierung"] },
+
+  { id: "trainingsdaten-zusammenfassung", category: "ai-act-core", risk: null,
+    tags: ["#GPAI", "#Art53", "#Transparenz", "#Urheberrecht"],
+    de: {
+      term: "Trainingsdaten-Zusammenfassung",
+      short: "GPAI-Anbieter müssen eine hinreichend detaillierte öffentliche Zusammenfassung der für das Training verwendeten Inhalte bereitstellen (Art. 53 Abs. 1 lit. d).",
+      long: "Ziel: Rechteinhabern und der Öffentlichkeit Transparenz über die Datengrundlage großer Modelle geben und die Wahrnehmung von Rechten (insbesondere Urheberrecht) ermöglichen. Das AI Office stellt eine verbindliche Vorlage bereit. Die Zusammenfassung soll den Umfang der Daten beschreiben (wichtige Datensammlungen, große Datenbanken, allgemeine Beschreibung sonstiger Quellen) – ohne Geschäftsgeheimnisse vollständig offenzulegen. Umstritten ist der geforderte Detailgrad. Zentraler Baustein der Urheberrechts-Compliance nach Art. 53 Abs. 1 lit. c." },
+    en: {
+      term: "Training Data Summary",
+      short: "GPAI providers must provide a sufficiently detailed public summary of the content used for training (Art. 53(1)(d)).",
+      long: "Aim: to give rightholders and the public transparency about the data basis of large models and to enable the exercise of rights (especially copyright). The AI Office provides a binding template. The summary should describe the scope of data (main data collections, large databases, general description of other sources) — without fully disclosing trade secrets. The required level of detail is contested. A central building block of copyright compliance under Art. 53(1)(c)." },
+    links: [ { label: "Art. 53 AI Act", url: "https://artificialintelligenceact.eu/article/53/" } ],
+    related: ["gpai", "urheberrecht-schnittstelle", "daten-governance"] },
+
+  { id: "modellbewertung", category: "ai-act-core", risk: "systemic",
+    tags: ["#GPAI", "#Art55", "#Evaluation", "#SystemicRisk"],
+    de: {
+      term: "Modellbewertung (Model Evaluation)",
+      short: "Anbieter von GPAI mit systemischem Risiko müssen ihre Modelle mit standardisierten Protokollen bewerten, einschließlich adversarialer Tests (Art. 55 Abs. 1 lit. a).",
+      long: "Pflicht zur systematischen Evaluierung, um systemische Risiken zu identifizieren und zu mindern. Umfasst standardisierte Benchmarks und adversariales Testing (AI Red Teaming), um gefährliche Fähigkeiten aufzudecken – etwa in den Bereichen Cyberangriffe, chemische/biologische Risiken, Verlust menschlicher Kontrolle, Manipulation. Ergebnisse fließen in Risikominderung, Dokumentation und ggf. Vorfallmeldungen ein. Der GPAI Code of Practice konkretisiert Methodik und Berichtsformate. Verzahnung mit AI-Red-Teaming und Vorfallmeldung." },
+    en: {
+      term: "Model Evaluation",
+      short: "Providers of GPAI with systemic risk must evaluate their models using standardised protocols, including adversarial testing (Art. 55(1)(a)).",
+      long: "Duty to systematically evaluate in order to identify and mitigate systemic risks. Covers standardised benchmarks and adversarial testing (AI red teaming) to uncover dangerous capabilities — e.g. in cyberattacks, chemical/biological risks, loss of human control, manipulation. Results feed into risk mitigation, documentation and, where applicable, incident reporting. The GPAI Code of Practice specifies methodology and reporting formats. Intertwined with AI red teaming and incident reporting." },
+    links: [ { label: "Art. 55 AI Act", url: "https://artificialintelligenceact.eu/article/55/" } ],
+    related: ["systemisches-risiko", "ai-red-teaming", "gpai"] },
+
+  { id: "inverkehrbringen", category: "ai-act-core", risk: null,
+    tags: ["#PlacingOnMarket", "#Art3", "#Inbetriebnahme"],
+    de: {
+      term: "Inverkehrbringen und Inbetriebnahme",
+      short: "Zwei zentrale Anknüpfungspunkte des AI Act: die erstmalige Bereitstellung auf dem Unionsmarkt bzw. die erstmalige Nutzung für den bestimmungsgemäßen Zweck (Art. 3 Nr. 9–11).",
+      long: "Inverkehrbringen (\"placing on the market\") bezeichnet die erstmalige Bereitstellung eines KI-Systems auf dem Unionsmarkt. Bereitstellung auf dem Markt ist jede Lieferung zum Vertrieb oder zur Nutzung im Rahmen einer Geschäftstätigkeit. Inbetriebnahme (\"putting into service\") ist die erstmalige Nutzung durch den Betreiber für den bestimmungsgemäßen Zweck. An diese Zeitpunkte knüpfen die meisten Pflichten an – insbesondere die Konformitätsbewertung, die vor dem Inverkehrbringen abgeschlossen sein muss. Maßgeblich auch für die zeitliche Anwendbarkeit und die Übergangsvorschriften." },
+    en: {
+      term: "Placing on the Market and Putting into Service",
+      short: "Two central connecting factors of the AI Act: first making available on the Union market, and first use for the intended purpose (Art. 3(9)–(11)).",
+      long: "Placing on the market means the first making available of an AI system on the Union market. Making available on the market is any supply for distribution or use in the course of a commercial activity. Putting into service is the first use by the deployer for the intended purpose. Most duties attach to these moments — in particular conformity assessment, which must be completed before placing on the market. Also decisive for temporal applicability and transitional provisions." },
+    links: [ { label: "Art. 3 AI Act", url: "https://artificialintelligenceact.eu/article/3/" } ],
+    related: ["konformitaetsbewertung", "ce-kennzeichnung", "extraterritorialitaet"] },
+
+  { id: "extraterritorialitaet", category: "ai-act-core", risk: null,
+    tags: ["#Marktortprinzip", "#Art2", "#Extraterritorial"],
+    de: {
+      term: "Räumlicher Anwendungsbereich (Marktortprinzip)",
+      short: "Der AI Act gilt auch für Akteure außerhalb der EU, sofern das KI-System in der Union in Verkehr gebracht wird oder sein Output in der EU verwendet wird (Art. 2).",
+      long: "Erfasst werden: Anbieter, die in der EU KI-Systeme in Verkehr bringen (unabhängig vom Sitz); Betreiber mit Sitz in der EU; sowie – besonders weitreichend – Anbieter und Betreiber aus Drittländern, wenn der vom KI-System erzeugte Output in der Union verwendet wird. Damit wirkt der AI Act ähnlich extraterritorial wie die DSGVO. Drittland-Anbieter müssen einen Bevollmächtigten in der EU benennen. Ausnahmen: militärische/verteidigungsbezogene Zwecke, reine Forschung und Entwicklung, persönliche nicht-berufliche Nutzung." },
+    en: {
+      term: "Territorial Scope (Market Location Principle)",
+      short: "The AI Act also applies to actors outside the EU where the AI system is placed on the market in the Union or its output is used in the EU (Art. 2).",
+      long: "Covered are: providers placing AI systems on the market in the EU (regardless of establishment); deployers established in the EU; and — particularly far-reaching — providers and deployers from third countries where the output produced by the AI system is used in the Union. The AI Act thus has an extraterritorial reach similar to the GDPR. Third-country providers must designate an authorised representative in the EU. Exceptions: military/defence purposes, pure research and development, personal non-professional use." },
+    links: [ { label: "Art. 2 AI Act", url: "https://artificialintelligenceact.eu/article/2/" } ],
+    related: ["inverkehrbringen", "bevollmaechtigter", "eu-ai-act"] },
+
+  { id: "open-source-ausnahme", category: "ai-act-core", risk: null,
+    tags: ["#OpenSource", "#Art2", "#FreieLizenz"],
+    de: {
+      term: "Open-Source-Ausnahme",
+      short: "Unter freien und quelloffenen Lizenzen bereitgestellte KI-Systeme und -Modelle sind teilweise von den Pflichten des AI Act ausgenommen (Art. 2, Art. 53).",
+      long: "Der AI Act privilegiert Open-Source-KI, um Innovation und Forschung nicht zu behindern. Ausgenommen sind KI-Systeme unter freier und quelloffener Lizenz – jedoch nicht, wenn sie als Hochrisiko-System, verbotene Praktik oder unter Transparenzpflichten (Art. 50) in Verkehr gebracht werden. Für GPAI-Modelle gilt: Open-Source-Modelle sind von einigen Dokumentationspflichten befreit (Art. 53 Abs. 2), nicht aber von der Urheberrechts-Compliance und der Trainingsdaten-Zusammenfassung. Keine Privilegierung bei GPAI mit systemischem Risiko. Die Abgrenzung, was als echte Open-Source-Lizenz gilt, ist umstritten." },
+    en: {
+      term: "Open-Source Exception",
+      short: "AI systems and models provided under free and open-source licences are partly exempt from AI Act duties (Art. 2, Art. 53).",
+      long: "The AI Act privileges open-source AI so as not to hinder innovation and research. Exempt are AI systems under a free and open-source licence — but not where placed on the market as high-risk systems, prohibited practices, or under transparency duties (Art. 50). For GPAI models: open-source models are relieved of some documentation duties (Art. 53(2)), but not of copyright compliance and the training data summary. No privilege for GPAI with systemic risk. What counts as a genuine open-source licence is contested." },
+    links: [ { label: "Art. 2 AI Act", url: "https://artificialintelligenceact.eu/article/2/" } ],
+    related: ["gpai", "wissenschaftsausnahme", "foundation-model"] },
+
+  { id: "wissenschaftsausnahme", category: "ai-act-core", risk: null,
+    tags: ["#Forschung", "#Art2", "#RnD"],
+    de: {
+      term: "Forschungs- und Entwicklungsausnahme",
+      short: "KI-Systeme und -Modelle, die ausschließlich zu Forschungs-, Test- und Entwicklungszwecken entwickelt werden, sind vom AI Act ausgenommen (Art. 2 Abs. 6, 8).",
+      long: "Die Ausnahme gilt für Forschungs-, Test- und Entwicklungstätigkeiten vor dem Inverkehrbringen oder der Inbetriebnahme. Sobald ein System diese Phase verlässt und auf den Markt gebracht oder real eingesetzt wird, greifen die Pflichten. Tests unter Realbedingungen (Art. 60) sind gesondert geregelt und nicht generell ausgenommen. Ziel: Innovation und Grundlagenforschung nicht behindern. Die DSGVO und andere Rechtsakte bleiben auch in der Forschungsphase anwendbar. Abzugrenzen vom Reallabor (Art. 57), das ein strukturiertes behördliches Testumfeld bietet." },
+    en: {
+      term: "Research and Development Exception",
+      short: "AI systems and models developed solely for research, testing and development purposes are exempt from the AI Act (Art. 2(6), (8)).",
+      long: "The exception applies to research, testing and development activities prior to placing on the market or putting into service. Once a system leaves this phase and is placed on the market or deployed in the real world, the duties apply. Testing in real-world conditions (Art. 60) is separately regulated and not generally exempt. Aim: not to hinder innovation and basic research. The GDPR and other acts remain applicable even in the research phase. To be distinguished from the regulatory sandbox (Art. 57), which offers a structured supervised testing environment." },
+    links: [ { label: "Art. 2 AI Act", url: "https://artificialintelligenceact.eu/article/2/" } ],
+    related: ["open-source-ausnahme", "reallabor", "test-realbedingungen"] },
+
+  { id: "wasserzeichen", category: "ai-act-core", risk: "limited",
+    tags: ["#Watermarking", "#Art50", "#C2PA", "#SynthID"],
+    de: {
+      term: "Kennzeichnung KI-generierter Inhalte (Watermarking)",
+      short: "Anbieter generativer KI müssen synthetische Inhalte maschinenlesbar als künstlich erzeugt kennzeichnen (Art. 50 Abs. 2).",
+      long: "Die Kennzeichnung muss maschinenlesbar und robust sein, sodass Inhalte als KI-generiert oder -manipuliert erkennbar bleiben. Technische Ansätze: unsichtbare Wasserzeichen (Google SynthID), Herkunfts-Metadaten nach dem C2PA-Standard (Content Credentials), kryptografische Signaturen. Ergänzend müssen Betreiber Deepfakes offenlegen (Art. 50 Abs. 4). Herausforderungen: Wasserzeichen lassen sich teils entfernen, Interoperabilität der Standards ist noch unvollständig. Das AI Office fördert harmonisierte technische Lösungen. Verzahnung mit DSA-Maßnahmen gegen Desinformation." },
+    en: {
+      term: "Labelling of AI-Generated Content (Watermarking)",
+      short: "Providers of generative AI must mark synthetic content as artificially generated in a machine-readable way (Art. 50(2)).",
+      long: "The marking must be machine-readable and robust so that content remains identifiable as AI-generated or manipulated. Technical approaches: invisible watermarks (Google SynthID), provenance metadata under the C2PA standard (Content Credentials), cryptographic signatures. In addition, deployers must disclose deepfakes (Art. 50(4)). Challenges: watermarks can sometimes be removed, standard interoperability is still incomplete. The AI Office promotes harmonised technical solutions. Intertwined with DSA measures against disinformation." },
+    links: [ { label: "Art. 50 AI Act", url: "https://artificialintelligenceact.eu/article/50/" }, { label: "C2PA", url: "https://c2pa.org/" } ],
+    related: ["deepfake", "transparenzpflichten", "generative-ai"] },
+
+  { id: "test-realbedingungen", category: "ai-act-core", risk: null,
+    tags: ["#RealWorldTesting", "#Art60", "#Erprobung"],
+    de: {
+      term: "Tests unter Realbedingungen",
+      short: "Erprobung von Hochrisiko-KI außerhalb eines Reallabors unter realen Bedingungen vor dem Inverkehrbringen – unter strengen Auflagen zulässig (Art. 60).",
+      long: "Anbieter dürfen Hochrisiko-Systeme unter Realbedingungen testen, sofern sie einen genehmigten Testplan haben, sich bei der Marktüberwachungsbehörde registrieren und strenge Schutzvorkehrungen einhalten. Kernvoraussetzung: informierte Einwilligung der Testteilnehmer (Art. 61), Widerrufsrecht, zeitliche Begrenzung (grundsätzlich sechs Monate, verlängerbar), menschliche Aufsicht, Rückgängigmachung von Entscheidungen. Betroffene behalten alle Rechte aus DSGVO und AI Act. Abzugrenzen vom Reallabor (Art. 57), das ein behördlich begleitetes, geschlossenes Umfeld bietet." },
+    en: {
+      term: "Testing in Real-World Conditions",
+      short: "Trialling high-risk AI outside a sandbox under real-world conditions before placing on the market — permitted under strict conditions (Art. 60).",
+      long: "Providers may test high-risk systems in real-world conditions provided they have an approved testing plan, register with the market surveillance authority and observe strict safeguards. Core requirement: informed consent of test subjects (Art. 61), right of withdrawal, time limit (generally six months, extendable), human oversight, reversibility of decisions. Affected persons retain all rights under the GDPR and AI Act. To be distinguished from the regulatory sandbox (Art. 57), which offers a supervised, closed environment." },
+    links: [ { label: "Art. 60 AI Act", url: "https://artificialintelligenceact.eu/article/60/" } ],
+    related: ["reallabor", "wissenschaftsausnahme"] },
+
+  { id: "trustworthy-ai", category: "ethics", risk: null,
+    tags: ["#TrustworthyAI", "#HLEG", "#Ethik"],
+    de: {
+      term: "Vertrauenswürdige KI (Trustworthy AI)",
+      short: "Leitkonzept hinter dem AI Act: KI soll rechtmäßig, ethisch und robust sein. Zurückgehend auf die Ethik-Leitlinien der EU-Expertengruppe (HLEG, 2019).",
+      long: "Die von der High-Level Expert Group on AI 2019 formulierten sieben Anforderungen bilden das ethische Fundament des AI Act: (1) menschliches Handeln und Aufsicht, (2) technische Robustheit und Sicherheit, (3) Privatsphäre und Datenqualität, (4) Transparenz, (5) Vielfalt, Nichtdiskriminierung und Fairness, (6) gesellschaftliches und ökologisches Wohlergehen, (7) Rechenschaftspflicht. Der AI Act überführt viele dieser Prinzipien in verbindliche Pflichten für Hochrisiko-KI. Freiwillige Verhaltenskodizes (Art. 95) sollen die Prinzipien auch für Nicht-Hochrisiko-Systeme fördern." },
+    en: {
+      term: "Trustworthy AI",
+      short: "The guiding concept behind the AI Act: AI should be lawful, ethical and robust. Rooted in the EU expert group's ethics guidelines (HLEG, 2019).",
+      long: "The seven requirements formulated by the High-Level Expert Group on AI in 2019 form the ethical foundation of the AI Act: (1) human agency and oversight, (2) technical robustness and safety, (3) privacy and data quality, (4) transparency, (5) diversity, non-discrimination and fairness, (6) societal and environmental well-being, (7) accountability. The AI Act translates many of these principles into binding duties for high-risk AI. Voluntary codes of conduct (Art. 95) aim to promote the principles for non-high-risk systems too." },
+    links: [ { label: "Ethics Guidelines for Trustworthy AI", url: "https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai" } ],
+    related: ["fairness", "menschliche-aufsicht", "verhaltenskodex"] },
+
+  { id: "verhaltenskodex", category: "governance", risk: null,
+    tags: ["#CodeOfConduct", "#Art95", "#Freiwillig"],
+    de: {
+      term: "Freiwillige Verhaltenskodizes (Art. 95)",
+      short: "Der AI Act fördert freiwillige Verhaltenskodizes, mit denen auch Nicht-Hochrisiko-Systeme Anforderungen der vertrauenswürdigen KI übernehmen können.",
+      long: "Die Kommission und das AI Board unterstützen die Ausarbeitung von Kodizes, die Betreibern und Anbietern die freiwillige Anwendung von Hochrisiko-Anforderungen oder weitergehender Ziele ermöglichen: Umweltverträglichkeit, Barrierefreiheit, Beteiligung von Stakeholdern, Diversität der Entwicklungsteams. Abzugrenzen vom GPAI Code of Practice (Art. 56), der spezifisch die GPAI-Pflichten konkretisiert. Verhaltenskodizes sind ein Instrument der Ko-Regulierung und können Reputations- und Vertrauensvorteile schaffen, ohne rechtlich verpflichtend zu sein." },
+    en: {
+      term: "Voluntary Codes of Conduct (Art. 95)",
+      short: "The AI Act promotes voluntary codes of conduct through which non-high-risk systems can also adopt trustworthy-AI requirements.",
+      long: "The Commission and AI Board support the drawing up of codes enabling deployers and providers to voluntarily apply high-risk requirements or more ambitious goals: environmental sustainability, accessibility, stakeholder participation, diversity of development teams. To be distinguished from the GPAI Code of Practice (Art. 56), which specifically operationalises GPAI duties. Codes of conduct are a co-regulation instrument and can create reputational and trust advantages without being legally binding." },
+    links: [ { label: "Art. 95 AI Act", url: "https://artificialintelligenceact.eu/article/95/" } ],
+    related: ["trustworthy-ai", "iso-42001"] }
 
 ];
